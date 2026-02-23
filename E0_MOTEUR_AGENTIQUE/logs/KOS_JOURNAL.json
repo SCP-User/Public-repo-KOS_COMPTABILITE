@@ -158,6 +158,17 @@
     "ergo_ids_impactes": ["COMPLIANCE_AGENT", "CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER"]
   },
   {
+    "id": "J_0014",
+    "timestamp": "2026-02-23T17:30:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Test a blanc agent_compliance.py — pipeline valide jusqu'a API key",
+    "detail": "Execution de agent_compliance.py sans ANTHROPIC_API_KEY. Resultat : demarrage OK, scan E3.1 OK (facture_A102.md detectee), lire_facture() OK, charger_normes() OK (RAG E1 execute), crash attendu sur KeyError ANTHROPIC_API_KEY dans analyser_avec_claude(). L'usine est operationnelle — seule la cle API manque pour un run complet. Shadow clone confirme actif (SHADOW_20260223_143622_d022). Chemin miroir .shadow_clone/ confirme normal (snapshot V1 avant refactoring JSON). Mention future : test comparatif avec Gemini API envisage.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
     "id": "J_0007",
     "timestamp": "2026-02-23T14:37:00",
     "session": "Claude Code",
