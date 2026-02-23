@@ -1,0 +1,95 @@
+{
+  "generated_at": "2026-02-23T17:00:36.590196",
+  "generateur": "DOC_GENERATOR",
+  "total_docs": 8,
+  "docs": [
+    {
+      "doc_id": "DOC_0001",
+      "ergo_id": "COMPLIANCE_AGENT",
+      "fichier_source": "agent_compliance.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+      "sha256_source": "9458b7f8",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.553459",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.553459"
+    },
+    {
+      "doc_id": "DOC_0002",
+      "ergo_id": "DETECT_DOCUMENT",
+      "fichier_source": "detect_document_type.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/DETECT_DOCUMENT.md",
+      "sha256_source": "cf510afe",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.566460",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.566460"
+    },
+    {
+      "doc_id": "DOC_0003",
+      "ergo_id": "DOC_GENERATOR",
+      "fichier_source": "doc_generator.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/DOC_GENERATOR.md",
+      "sha256_source": "bae0625c",
+      "source_version": "1.1.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.569630",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.569630"
+    },
+    {
+      "doc_id": "DOC_0004",
+      "ergo_id": "CORE_BOOTSTRAP",
+      "fichier_source": "ergo_core_system.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/CORE_BOOTSTRAP.md",
+      "sha256_source": "77fb7563",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.574931",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.574931"
+    },
+    {
+      "doc_id": "DOC_0005",
+      "ergo_id": "KOS_REGISTRAR",
+      "fichier_source": "kos_registrar.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/KOS_REGISTRAR.md",
+      "sha256_source": "79d8fe6d",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.576684",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.576684"
+    },
+    {
+      "doc_id": "DOC_0006",
+      "ergo_id": "PUBLISH_REPORT",
+      "fichier_source": "publish_report.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/PUBLISH_REPORT.md",
+      "sha256_source": "dfaee3ca",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.580664",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.580664"
+    },
+    {
+      "doc_id": "DOC_0007",
+      "ergo_id": "SHADOW_CLONE",
+      "fichier_source": "shadow_clone.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/SHADOW_CLONE.md",
+      "sha256_source": "99a1fa4d",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.584685",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.584685"
+    },
+    {
+      "doc_id": "DOC_0008",
+      "ergo_id": "CODE_REGISTER",
+      "fichier_source": "system_code_register.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/CODE_REGISTER.md",
+      "sha256_source": "45937ea0",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-23T17:00:36.588578",
+      "derniere_mise_a_jour": "2026-02-23T17:00:36.588578"
+    }
+  ]
+}

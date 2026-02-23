@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv_compta/
+.venv/
+venv/
+dist/
+build/
+
+# ChromaDB
+chroma_db_storage/
+
+# Secrets
+.env
+*.env.local
+secrets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs générés automatiquement (gardés en git pour la démo)
+# E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json
+# E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json
+
+# Cache pip
+.cache/

@@ -1,0 +1,177 @@
+[
+  {
+    "id": "J_0001",
+    "timestamp": "2026-02-23T14:00:00",
+    "session": "Claude.ai",
+    "type": "DECISION",
+    "statut": "DONE",
+    "sujet": "Architecture KOS_COMPTA définie",
+    "detail": "Conception de l'arborescence E0→E4, du pipeline 5 étapes, du format verdict JSON, et du système KOS constitutionnel. Fichier BRIEF_CLAUDE_CODE.md produit pour handoff.",
+    "fichiers_impactes": ["BRIEF_CLAUDE_CODE.md", "README.md", "ERGO_CORE_SYSTEM_Architecture.md"],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0002",
+    "timestamp": "2026-02-23T14:02:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Init repo - arborescence E0 a E4 créée",
+    "detail": "Création de toute l'arborescence dans Public-repo-KOS_COMPTABILITE. Extraction des fichiers depuis les zips : agent_compliance.py, KOS JSONs constitutionnels, ergo_core_system.py, system_code_register.py, requirements.txt, normes E1, cas de test E3.1.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/ergo_core_system.py",
+      "E0_MOTEUR_AGENTIQUE/system_code_register.py",
+      "E1_CORPUS_LEGAL_ETAT/loi_tva_cadeaux.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_A102.md"
+    ],
+    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "COMPLIANCE_AGENT", "CODE_REGISTER"]
+  },
+  {
+    "id": "J_0003",
+    "timestamp": "2026-02-23T14:10:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Fichiers manquants créés - PRIORITES 2/3/4",
+    "detail": "Création de detect_document_type.py (PRIORITE 2), publish_report.py (PRIORITE 4), .gitlab-ci.yml complet 4 stages. Création de 3 normes E1 : mentions_obligatoires_facture.md, tva_regles_generales.md, pcg_classes_1_a_4.md. Création de 4 cas de test : B001, C001, D001, E001.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      ".gitlab-ci.yml",
+      "E1_CORPUS_LEGAL_ETAT/mentions_obligatoires_facture.md",
+      "E1_CORPUS_LEGAL_ETAT/tva_regles_generales.md",
+      "E1_CORPUS_LEGAL_ETAT/pcg_classes_1_a_4.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_B001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_C001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/note_frais_D001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/note_frais_E001.md"
+    ],
+    "ergo_ids_impactes": ["DETECT_DOCUMENT", "PUBLISH_REPORT"]
+  },
+  {
+    "id": "J_0004",
+    "timestamp": "2026-02-23T14:20:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Shadow Clone System créé",
+    "detail": "Création de shadow_clone.py (ERGO_ID: SHADOW_CLONE). Snapshots immuables du code à chaque run CI/CD. Actions : create, list, diff, restore. Stockage dans .shadow_clone/ avec SHADOW_INDEX.json et CLONE_MANIFEST.json par snapshot.",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/shadow_clone.py"],
+    "ergo_ids_impactes": ["SHADOW_CLONE"]
+  },
+  {
+    "id": "J_0005",
+    "timestamp": "2026-02-23T14:30:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme tracabilite complet - documentation pro",
+    "detail": "Réécriture complète de agent_compliance.py : ERGO_ID, type annotations, docstrings Google-style (0 commentaires inline), iteration log enrichi schema pipeline-level (ITER_XXXX). Création kos_registrar.py : scanne ERGO_IDs, génère KOS_ERGO_REGISTRY.json via AST. Nettoyage detect_document_type.py, publish_report.py, shadow_clone.py. Création CLAUDE.md (mémoire projet). Création KOS_JOURNAL.json (journal constitutionnel).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "DETECT_DOCUMENT", "PUBLISH_REPORT", "SHADOW_CLONE", "KOS_REGISTRAR"]
+  },
+  {
+    "id": "J_0006",
+    "timestamp": "2026-02-23T14:36:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme mis en place localement - bootstrap execute",
+    "detail": "Exécution locale de ergo_core_system.py (venv .venv_compta créé, dépendances installées). kos_registrar.py lancé - 7 composants enregistrés dans KOS_ERGO_REGISTRY.json. Shadow clone initial créé : SHADOW_20260223_143622_d022. system_code_register.py : ERGO_0006 à ERGO_0012 enregistrés (7 fichiers CREATED).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json",
+      ".shadow_clone/SHADOW_INDEX.json"
+    ],
+    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER"]
+  },
+  {
+    "id": "J_0011",
+    "timestamp": "2026-02-23T17:00:36",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme documentation .md versionné opérationnel - DOC_INDEX.json créé",
+    "detail": "Réécriture doc_generator.py v1.1.0 : ajout versioning SHA-256 (8 chars), identifiants DOC_XXXX séquentiels, doc_revision auto-incrémentée si SHA source change. Fonctions ajoutées : sha256_fichier(), charger_doc_index(), sauvegarder_doc_index(), prochain_doc_id(), mettre_a_jour_index(). Génération initiale : 8 .md versionnés (DOC_0001→DOC_0008) + DOC_INDEX.json. Frontmatter .md enrichi : doc_id, doc_revision, sha256_source. Pipeline .gitlab-ci.yml mis à jour : doc_generator.py dans stage setup, artifacts docs/ exposés. CLAUDE.md : arborescence maj, règles 9+10, section DOC_INDEX schema, commandes bash doc.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/doc_generator.py",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json",
+      "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DETECT_DOCUMENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_GENERATOR.md",
+      "E0_MOTEUR_AGENTIQUE/docs/CORE_BOOTSTRAP.md",
+      "E0_MOTEUR_AGENTIQUE/docs/KOS_REGISTRAR.md",
+      "E0_MOTEUR_AGENTIQUE/docs/PUBLISH_REPORT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/SHADOW_CLONE.md",
+      "E0_MOTEUR_AGENTIQUE/docs/CODE_REGISTER.md",
+      ".gitlab-ci.yml",
+      "CLAUDE.md"
+    ],
+    "ergo_ids_impactes": ["DOC_GENERATOR"]
+  },
+  {
+    "id": "J_0007",
+    "timestamp": "2026-02-23T14:37:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Push sur GitLab - hackathon",
+    "detail": "Créer repo public sur gitlab.com, configurer remote, premier commit complet, push sur main. Configurer variables CI/CD : ANTHROPIC_API_KEY et GITLAB_TOKEN. Tester le pipeline sur une MR avec facture_A102.md.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0008",
+    "timestamp": "2026-02-23T14:37:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Test pipeline bout en bout avec ANTHROPIC_API_KEY",
+    "detail": "Poser la clé ANTHROPIC_API_KEY en variable d'env, lancer agent_compliance.py localement, vérifier que facture_A102.md produit un RAPPORT_*.json dans E4.1 avec verdict REJET, vérifier ITERATIONS_LOG.json créé.",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json", "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0009",
+    "timestamp": "2026-02-23T14:37:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Demo video 2 minutes - script a ecrire",
+    "detail": "Écrire le script de la démo vidéo (ce qu'on dit + ce qu'on montre à chaque seconde). Enregistrement : dépôt facture A102 → pipeline GitLab → verdict REJET. Upload YouTube/Vimeo non listé.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0010",
+    "timestamp": "2026-02-23T14:45:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme mis en place et opérationnel localement",
+    "detail": "Execution de ergo_core_system.py OK (venv + deps). kos_registrar.py : 7 composants ACTIVE dans KOS_ERGO_REGISTRY.json. Shadow clone initial SHADOW_20260223_143622_d022 (11 fichiers). SYSTEM_LOG : ERGO_0001 a ERGO_0015. ITERATIONS_LOG.json initialisé à []. Bug parser listes kos_registrar.py fixé. Champ 'role' ajouté dans les 4 docstrings ERGO_REGISTRY. Protocole demarrage session + regle mise a jour journal ajoutés dans CLAUDE.md.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "CLAUDE.md",
+      ".shadow_clone/SHADOW_INDEX.json"
+    ],
+    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER", "COMPLIANCE_AGENT"]
+  }
+]
