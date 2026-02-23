@@ -21,7 +21,7 @@ BASE_DIR       = Path(__file__).parent.parent
 VENV_DIR       = BASE_DIR / ".venv_compta"
 REQUIREMENTS   = BASE_DIR / "requirements.txt"
 CHROMA_STORAGE = BASE_DIR / "chroma_db_storage"
-SYSTEM_LOG     = BASE_DIR / "E0_MOTEUR_AGENTIQUE" / "logs" / "SYSTEM_LOG.json"
+SYSTEM_LOG     = BASE_DIR / "E0_MOTEUR_AGENTIQUE" / "SYSTEM_LOG.json"
 
 DOSSIERS_REQUIS = [
     BASE_DIR / "E1_CORPUS_LEGAL_ETAT",

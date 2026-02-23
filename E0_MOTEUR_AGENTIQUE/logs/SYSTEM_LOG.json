@@ -132,5 +132,14 @@
     "detail": "J_0010 ajoute - session cloturee - systeme operationnel",
     "auteur": "Claude Code",
     "ergo_id": "ERGO_0016"
+  },
+  {
+    "iteration": 17,
+    "timestamp": "2026-02-23T17:20:17.579207",
+    "fichier": "reorganisation.json",
+    "action": "UPDATED",
+    "detail": "JSON classes en kos/ logs/ registry/",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0017"
   }
 ]

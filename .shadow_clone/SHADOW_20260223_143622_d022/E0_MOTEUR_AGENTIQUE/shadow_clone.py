@@ -18,7 +18,6 @@ Structure produite :
             └── ...
 
 ERGO_REGISTRY:
-    role         : Snapshots immuables et versionnés du code a chaque run CI/CD
     version      : 1.0.0
     auteur       : ERGO Capital / Adam
     dependances  : (aucune — stdlib uniquement)
@@ -50,8 +49,8 @@ FICHIERS_CIBLES: list[str] = [
     "E0_MOTEUR_AGENTIQUE/ergo_core_system.py",
     "E0_MOTEUR_AGENTIQUE/system_code_register.py",
     "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
-    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json",
-    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Agentique.json",
+    "E0_MOTEUR_AGENTIQUE/KOS_COMPTA_Taxonomie.json",
+    "E0_MOTEUR_AGENTIQUE/KOS_COMPTA_Agentique.json",
     ".gitlab-ci.yml",
     "requirements.txt",
 ]

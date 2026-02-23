@@ -13,14 +13,13 @@ Pipeline d'audit de conformité comptable en 5 étapes :
     5. log_iteration        : journal structuré dans ITERATIONS_LOG.json
 
 ERGO_REGISTRY:
-    role         : Pipeline principal d'audit de conformite comptable (5 etapes)
     version      : 1.0.0
     auteur       : ERGO Capital / Adam
     dependances  : KOS_COMPTA_Taxonomie.json, KOS_COMPTA_Agentique.json, E1_CORPUS_LEGAL_ETAT
     entrees      : E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/*.md
     sorties      : E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_*.json
                    E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/PAYLOAD_*.json
-                   E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json
+                   E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json
     variable_env : ANTHROPIC_API_KEY (obligatoire)
 """
 
@@ -41,7 +40,7 @@ E2_SOP          = BASE_DIR / "E2_SOP_INTERNE_ET_ERP"
 E3_DROPZONE     = BASE_DIR / "E3_INTERFACES_ACTEURS" / "E3.1_Dropzone_Factures"
 E4_RAPPORTS     = BASE_DIR / "E4_AUDIT_ET_ROUTAGE" / "E4.1_Rapports_Conformite"
 E4_PAYLOADS     = BASE_DIR / "E4_AUDIT_ET_ROUTAGE" / "E4.2_Payloads_ERP"
-ITERATIONS_LOG  = BASE_DIR / "E0_MOTEUR_AGENTIQUE" / "logs" / "ITERATIONS_LOG.json"
+ITERATIONS_LOG  = BASE_DIR / "E0_MOTEUR_AGENTIQUE" / "ITERATIONS_LOG.json"
 
 
 def lire_facture(chemin: Path) -> dict:

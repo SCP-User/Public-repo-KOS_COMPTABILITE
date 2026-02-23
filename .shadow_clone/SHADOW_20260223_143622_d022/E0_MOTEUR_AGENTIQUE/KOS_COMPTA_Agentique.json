@@ -1,0 +1,183 @@
+{
+  "KOS_COMPTA_AGENTIQUE": {
+    "version": "1.0.0",
+    "date_creation": "2026-02-23",
+    "auteur": "ERGO Capital",
+    "statut": "ACTIF",
+    "role": "Règles agentiques générales du système KOS_COMPTA. Définit le comportement, le raisonnement, les protocoles de communication ERGO, et les procédures de mise à jour. Lire après KOS_COMPTA_Taxonomie.json."
+  },
+
+  "PROTOCOLE_RAISONNEMENT": {
+    "description": "Ordre strict de raisonnement pour tout agent opérant dans KOS_COMPTA",
+    "etapes_obligatoires": [
+      {
+        "ordre": 1,
+        "action": "Lire KOS_COMPTA_Taxonomie.json",
+        "pourquoi": "Comprendre la carte complète du système avant toute action"
+      },
+      {
+        "ordre": 2,
+        "action": "Lire KOS_COMPTA_Agentique.json (CE FICHIER)",
+        "pourquoi": "Charger les règles de comportement"
+      },
+      {
+        "ordre": 3,
+        "action": "Lire KOS_COMPTA_Client_Log.json",
+        "pourquoi": "Connaître le contexte opérationnel actuel de l'entreprise cliente"
+      },
+      {
+        "ordre": 4,
+        "action": "Identifier le type de document ou la requête entrant",
+        "pourquoi": "Choisir le bon chemin de traitement"
+      },
+      {
+        "ordre": 5,
+        "action": "Recherche RAG dans E1 puis E2",
+        "pourquoi": "Charger les normes applicables — E1 prime toujours sur E2"
+      },
+      {
+        "ordre": 6,
+        "action": "Construire le contexte LLM complet",
+        "pourquoi": "Normes + procédures internes + document = contexte minimal pour un verdict fiable"
+      },
+      {
+        "ordre": 7,
+        "action": "Produire le verdict en JSON strict",
+        "pourquoi": "Format machine exploitable par le pipeline CI/CD"
+      },
+      {
+        "ordre": 8,
+        "action": "Router vers E4.1 ou E4.2 selon verdict",
+        "pourquoi": "Séparer rejets et payloads ERP"
+      },
+      {
+        "ordre": 9,
+        "action": "Mettre à jour ITERATIONS_LOG.json",
+        "pourquoi": "Traçabilité technique complète"
+      },
+      {
+        "ordre": 10,
+        "action": "Mettre à jour KOS_COMPTA_Client_Log.json",
+        "pourquoi": "Informer le contexte client de l'état de traitement"
+      }
+    ]
+  },
+
+  "REGLES_VERDICT": {
+    "CONFORME": {
+      "condition": "Document respecte régularité + sincérité + image fidèle — aucune violation détectée",
+      "action_erp": "INJECTER",
+      "output": "E4.2 — Payload ERP normalisé généré",
+      "log_client": "statut: traite, action: injecte_ERP"
+    },
+    "AVERTISSEMENT": {
+      "condition": "Écart mineur détecté — non bloquant mais à corriger",
+      "exemples": [
+        "Montant cadeau proche du seuil 73€ sans dépasser",
+        "Justificatif présent mais libellé imprécis",
+        "Compte PCG suggéré différent de celui utilisé"
+      ],
+      "action_erp": "REVUE_HUMAINE",
+      "output": "E4.1 — Rapport avec corrections recommandées",
+      "log_client": "statut: en_attente_validation_humaine"
+    },
+    "REJET": {
+      "condition": "Violation légale ou procédurale significative",
+      "exemples": [
+        "TVA réclamée sur cadeaux > 73€ TTC",
+        "Facture sans numéro TVA fournisseur",
+        "Écriture déséquilibrée débit ≠ crédit",
+        "Document hors délai légal de conservation"
+      ],
+      "action_erp": "BLOQUER",
+      "output": "E4.1 — Rapport de rejet avec articles légaux cités",
+      "log_client": "statut: rejete, motif: [motif_exact]"
+    }
+  },
+
+  "REGLES_BLOCAGE_ABSOLUES": [
+    "Ne JAMAIS injecter un document en ERP sans verdict CONFORME explicite",
+    "Ne JAMAIS ignorer une norme E1 même si E2 la contredit — E1 prime toujours",
+    "Ne JAMAIS produire un verdict sans citer au moins un article légal applicable",
+    "Ne JAMAIS modifier les fichiers de E1 — corpus légal en lecture seule permanente",
+    "Ne JAMAIS exposer les données client en dehors du système (logs, debug, etc.)",
+    "Toujours logger dans ITERATIONS_LOG.json ET KOS_COMPTA_Client_Log.json",
+    "En cas de doute sur le verdict → AVERTISSEMENT + REVUE_HUMAINE obligatoire",
+    "En cas de montant aberrant (> 10× la moyenne historique) → flag NIVEAU_RISQUE: ELEVE automatique"
+  ],
+
+  "GESTION_ERREURS": {
+    "norme_introuvable_E1": {
+      "action": "Appliquer règles générales PCG",
+      "mention_rapport": "Aucune norme spécifique identifiée — règles générales appliquées",
+      "verdict_par_defaut": "AVERTISSEMENT"
+    },
+    "document_illisible": {
+      "action": "REJET automatique",
+      "mention_rapport": "Document non parseable — format ou encodage non supporté",
+      "log": "erreur_technique"
+    },
+    "llm_indisponible": {
+      "action": "Basculer sur LLM fallback dans l'ordre : gemini → ollama → mistral",
+      "mention_rapport": "LLM principal indisponible — analyse réalisée par [llm_fallback]"
+    },
+    "json_invalide_retour_llm": {
+      "action": "Retry 1 fois avec prompt renforcé",
+      "si_echec_retry": "AVERTISSEMENT + REVUE_HUMAINE + log erreur parsing"
+    },
+    "conflit_E1_E2": {
+      "action": "E1 prime toujours — appliquer norme légale",
+      "mention_rapport": "Conflit détecté entre norme légale E1 et procédure interne E2 — norme légale appliquée"
+    }
+  },
+
+  "PROTOCOLE_MISE_A_JOUR_ERGO": {
+    "description": "Comment l'agent communique avec ERGO Capital pour signaler les évolutions du système",
+    "declencheurs_mise_a_jour": [
+      {
+        "evenement": "Nouvelle norme légale détectée dans un document E1",
+        "action": "Créer entrée dans ITERATIONS_LOG avec flag: NOUVELLE_NORME_DETECTEE",
+        "destinataire": "ERGO Capital — mise à jour E1 requise"
+      },
+      {
+        "evenement": "Outil externe client non référencé dans Taxonomie E2",
+        "action": "Log dans KOS_COMPTA_Client_Log avec flag: OUTIL_EXTERNE_INCONNU",
+        "destinataire": "ERGO Capital — connector à développer"
+      },
+      {
+        "evenement": "Taux de rejet > 30% sur un type de document",
+        "action": "Alerte dans Client_Log + recommandation formation utilisateur",
+        "destinataire": "Administrateur client + ERGO Capital"
+      },
+      {
+        "evenement": "LLM principal indisponible > 3 analyses consécutives",
+        "action": "Flag critique dans ITERATIONS_LOG",
+        "destinataire": "ERGO Capital — vérification API"
+      }
+    ],
+    "format_communication_ergo": {
+      "type": "entrée ITERATIONS_LOG avec champ ergo_alert: true",
+      "champs_obligatoires": ["timestamp", "type_alerte", "description", "action_requise", "priorite"]
+    }
+  },
+
+  "PROTOCOLE_CICD": {
+    "triggers": {
+      "principal": "Merge Request contenant fichier dans E3.1_Dropzone_Factures/",
+      "secondaire": "Push direct sur branche documents/",
+      "periodique": "Cron quotidien 08h00 — analyse batch documents en attente"
+    },
+    "stages": {
+      "detect": { "ordre": 1, "script": "detect_document_type.py", "duree_max": "20s" },
+      "load_kos": { "ordre": 2, "script": "load_kos.py", "duree_max": "15s" },
+      "analyse": { "ordre": 3, "script": "agent_compliance.py", "llm": "claude-sonnet-4-6", "duree_max": "60s" },
+      "report": { "ordre": 4, "script": "publish_report.py", "action": "commentaire MR GitLab", "duree_max": "10s" }
+    },
+    "duree_totale_demo": "< 2 minutes"
+  },
+
+  "METADONNEES": {
+    "auteur": "ERGO Capital",
+    "tags": ["agentique", "regles", "protocole", "ci-cd", "ergo-capital", "kos-compta"]
+  }
+}

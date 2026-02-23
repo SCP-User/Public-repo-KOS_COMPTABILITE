@@ -2,9 +2,9 @@
   "_meta": {
     "schema": "KOS_ERGO_REGISTRY_v1",
     "generated_by": "kos_registrar.py",
-    "last_updated": "2026-02-23T14:45:10.433125",
+    "last_updated": "2026-02-23T17:20:17.492020",
     "project": "KOS_COMPTA",
-    "nb_composants": 7
+    "nb_composants": 8
   },
   "composants": [
     {
@@ -21,10 +21,10 @@
       "entrees": "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/*.md",
       "sorties": "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_*.json",
       "variable_env": "ANTHROPIC_API_KEY (obligatoire)",
-      "derniere_scan": "2026-02-23T14:45:10.431119",
+      "derniere_scan": "2026-02-23T17:20:17.490450",
       "enregistre_le": "2026-02-23T14:36:13.903698",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     },
     {
       "ergo_id": "DETECT_DOCUMENT",
@@ -36,10 +36,33 @@
       "entrees": "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/*.md",
       "sorties": "document_type.env (dotenv GitLab CI/CD)",
       "variable_env": [],
-      "derniere_scan": "2026-02-23T14:45:10.431119",
+      "derniere_scan": "2026-02-23T17:20:17.490450",
       "enregistre_le": "2026-02-23T14:36:13.903698",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
+    },
+    {
+      "ergo_id": "DOC_GENERATOR",
+      "fichier": "E0_MOTEUR_AGENTIQUE/doc_generator.py",
+      "role": "Genere la documentation Markdown versionnee des composants ERGO_ID",
+      "version": "1.1.0",
+      "auteur": "ERGO Capital / Adam",
+      "dependances": [
+        "(stdlib uniquement — ast",
+        "re",
+        "hashlib",
+        "json)"
+      ],
+      "entrees": "E0_MOTEUR_AGENTIQUE/*.py avec header ERGO_ID",
+      "sorties": [
+        "E0_MOTEUR_AGENTIQUE/docs/<ergo_id>.md",
+        "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json"
+      ],
+      "variable_env": [],
+      "derniere_scan": "2026-02-23T17:20:17.490450",
+      "enregistre_le": "2026-02-23T17:20:17.490450",
+      "statut": "ACTIVE",
+      "nb_deployments": 1
     },
     {
       "ergo_id": "CORE_BOOTSTRAP",
@@ -51,10 +74,10 @@
       "entrees": [],
       "sorties": [],
       "variable_env": [],
-      "derniere_scan": "2026-02-23T14:45:10.431119",
+      "derniere_scan": "2026-02-23T17:20:17.490450",
       "enregistre_le": "2026-02-23T14:36:13.905071",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     },
     {
       "ergo_id": "KOS_REGISTRAR",
@@ -64,12 +87,12 @@
       "auteur": "ERGO Capital / Adam",
       "dependances": "(stdlib uniquement)",
       "entrees": "tous les fichiers .py avec header # ERGO_ID:",
-      "sorties": "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "sorties": "E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json",
       "variable_env": [],
-      "derniere_scan": "2026-02-23T14:45:10.432122",
+      "derniere_scan": "2026-02-23T17:20:17.491460",
       "enregistre_le": "2026-02-23T14:36:13.905071",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     },
     {
       "ergo_id": "PUBLISH_REPORT",
@@ -85,10 +108,10 @@
         "CI_MERGE_REQUEST_IID",
         "CI_PROJECT_ID"
       ],
-      "derniere_scan": "2026-02-23T14:45:10.432122",
+      "derniere_scan": "2026-02-23T17:20:17.491460",
       "enregistre_le": "2026-02-23T14:36:13.905071",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     },
     {
       "ergo_id": "SHADOW_CLONE",
@@ -100,10 +123,10 @@
       "entrees": "fichiers listés dans FICHIERS_CIBLES",
       "sorties": ".shadow_clone/SHADOW_INDEX.json",
       "variable_env": [],
-      "derniere_scan": "2026-02-23T14:45:10.432122",
+      "derniere_scan": "2026-02-23T17:20:17.491460",
       "enregistre_le": "2026-02-23T14:36:13.905071",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     },
     {
       "ergo_id": "CODE_REGISTER",
@@ -115,10 +138,10 @@
       "entrees": [],
       "sorties": [],
       "variable_env": [],
-      "derniere_scan": "2026-02-23T14:45:10.432122",
+      "derniere_scan": "2026-02-23T17:20:17.492020",
       "enregistre_le": "2026-02-23T14:36:13.905071",
       "statut": "ACTIVE",
-      "nb_deployments": 2
+      "nb_deployments": 3
     }
   ]
 }

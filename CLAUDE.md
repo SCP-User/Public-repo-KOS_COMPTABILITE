@@ -7,9 +7,9 @@
 
 **À chaque session, Claude Code doit dans cet ordre :**
 
-1. Lire `E0_MOTEUR_AGENTIQUE/KOS_JOURNAL.json` — voir les tâches `TODO` et `IN_PROGRESS`
-2. Lire `E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json` — voir le dernier état de l'infrastructure
-3. Lire `E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json` — connaître les composants actifs
+1. Lire `E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json` — voir les tâches `TODO` et `IN_PROGRESS`
+2. Lire `E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json` — voir le dernier état de l'infrastructure
+3. Lire `E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json` — connaître les composants actifs
 4. Informer Adam : "Session démarrée — X tâches en attente : [liste des TODO]"
 
 **Quand Adam dit "okay on met à jour le log" :**
@@ -73,15 +73,19 @@ Public-repo-KOS_COMPTABILITE/
 │   ├── system_code_register.py          ← ERGO_ID: CODE_REGISTER
 │   ├── kos_registrar.py                 ← ERGO_ID: KOS_REGISTRAR
 │   ├── doc_generator.py                 ← ERGO_ID: DOC_GENERATOR
-│   ├── docs/                            ← documentation .md auto-générée
-│   │   ├── DOC_INDEX.json               ← index versionné (DOC_XXXX, SHA-256, révisions)
-│   │   └── <ERGO_ID>.md                 ← un fichier par composant
-│   ├── KOS_COMPTA_Taxonomie.json        ← carte constitutionnelle
-│   ├── KOS_COMPTA_Agentique.json        ← règles de comportement agent
-│   ├── KOS_COMPTA_Client_Log.json       ← journal client
-│   ├── KOS_ERGO_REGISTRY.json           ← registre auto-généré par kos_registrar.py
-│   ├── ITERATIONS_LOG.json              ← log cumulatif des runs (auto-généré)
-│   └── SYSTEM_LOG.json                  ← log infrastructure (auto-généré)
+│   ├── kos/                             ← JSONs constitutionnels (quasi-statiques)
+│   │   ├── KOS_COMPTA_Taxonomie.json    ← carte constitutionnelle
+│   │   ├── KOS_COMPTA_Agentique.json    ← règles de comportement agent
+│   │   └── KOS_COMPTA_Client_Log.json   ← journal client
+│   ├── logs/                            ← logs opérationnels (écriture fréquente)
+│   │   ├── SYSTEM_LOG.json              ← log infrastructure (ERGO_XXXX)
+│   │   ├── ITERATIONS_LOG.json          ← log cumulatif des runs (ITER_XXXX)
+│   │   └── KOS_JOURNAL.json             ← journal constitutionnel (J_XXXX)
+│   ├── registry/                        ← registre auto-généré des composants
+│   │   └── KOS_ERGO_REGISTRY.json       ← généré par kos_registrar.py
+│   └── docs/                            ← documentation .md auto-générée
+│       ├── DOC_INDEX.json               ← index versionné (DOC_XXXX, SHA-256, révisions)
+│       └── <ERGO_ID>.md                 ← un fichier par composant
 │
 ├── E1_CORPUS_LEGAL_ETAT/                ← normes légales françaises (READ-ONLY)
 │   ├── loi_tva_cadeaux.md               ← CGI Art.236 — seuil 73€ TTC

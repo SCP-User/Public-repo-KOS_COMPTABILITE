@@ -22,7 +22,7 @@ from datetime import datetime
 # ─────────────────────────────────────────────
 
 BASE_DIR   = Path(__file__).parent.parent
-SYSTEM_LOG = Path(__file__).parent / "logs" / "SYSTEM_LOG.json"
+SYSTEM_LOG = Path(__file__).parent / "SYSTEM_LOG.json"
 
 ACTIONS_VALIDES = [
     "CREATED",      # fichier créé pour la première fois
@@ -88,11 +88,8 @@ def afficher_log(n: int = None):
     print(f"  SYSTEM_LOG — {len(entrees)} entrées totales")
     print(f"{'─'*60}")
     for e in affichees:
-        ergo_id = e.get('ergo_id', 'SYSTEM')
-        action  = e.get('action', 'INFO')
-        fichier = e.get('fichier', e.get('action', '?'))
-        print(f"  [{ergo_id}] {e['timestamp'][:19]}")
-        print(f"  {action:12} → {fichier}")
+        print(f"  [{e['ergo_id']}] {e['timestamp'][:19]}")
+        print(f"  {e['action']:12} → {e['fichier']}")
         if e.get('detail'):
             print(f"  {'':12}   {e['detail']}")
         print()

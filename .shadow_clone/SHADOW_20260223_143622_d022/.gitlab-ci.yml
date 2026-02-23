@@ -36,8 +36,6 @@ bootstrap:
         --pipeline-id "$CI_PIPELINE_ID"
     # Traçabilité
     - python E0_MOTEUR_AGENTIQUE/kos_registrar.py
-    # Documentation — génère/met à jour les .md versionnés + DOC_INDEX.json
-    - python E0_MOTEUR_AGENTIQUE/doc_generator.py
     - python E0_MOTEUR_AGENTIQUE/system_code_register.py
         --fichier "ergo_core_system.py"
         --action DEPLOYED
@@ -45,9 +43,8 @@ bootstrap:
         --auteur "gitlab-ci"
   artifacts:
     paths:
-      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
-      - E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json
-      - E0_MOTEUR_AGENTIQUE/docs/
+      - E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json
+      - E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json
       - .shadow_clone/
       - E4_AUDIT_ET_ROUTAGE/
     expire_in: 30 days
@@ -80,7 +77,7 @@ detect_document:
       dotenv: document_type.env
     paths:
       - document_type.env
-      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
+      - E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json
     expire_in: 1 day
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -110,8 +107,8 @@ compliance_audit:
     paths:
       - E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/
       - E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/
-      - E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json
-      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
+      - E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json
+      - E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json
     expire_in: 30 days
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

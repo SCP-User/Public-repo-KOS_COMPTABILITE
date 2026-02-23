@@ -13,12 +13,11 @@ Appelé automatiquement en stage `setup` du pipeline GitLab CI/CD.
 Peut aussi être exécuté localement pour inspecter ou documenter le projet.
 
 ERGO_REGISTRY:
-    role         : Registre des composants ERGO_ID - scan + generation KOS_ERGO_REGISTRY.json
     version      : 1.0.0
     auteur       : ERGO Capital / Adam
     dependances  : (stdlib uniquement)
     entrees      : tous les fichiers .py avec header # ERGO_ID:
-    sorties      : E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json
+    sorties      : E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json
 
 Usage :
     python kos_registrar.py                         # scan + mise à jour registre
@@ -36,7 +35,7 @@ from datetime import datetime
 
 BASE_DIR   = Path(__file__).parent.parent
 E0_DIR     = Path(__file__).parent
-REGISTRY   = E0_DIR / "registry" / "KOS_ERGO_REGISTRY.json"
+REGISTRY   = E0_DIR / "KOS_ERGO_REGISTRY.json"
 
 ERGO_ID_PATTERN    = re.compile(r"^#\s*ERGO_ID:\s*(\w+)", re.MULTILINE)
 REGISTRY_PATTERN   = re.compile(r"ERGO_REGISTRY:(.*?)(?:\n\n|\Z)", re.DOTALL)
@@ -78,11 +77,9 @@ def extraire_registry_section(contenu: str) -> dict:
     for kv in REGISTRY_KV.finditer(section):
         cle = kv.group(1).strip()
         val = kv.group(2).strip()
-        CHAMPS_LISTE = {"dependances", "entrees", "sorties", "variable_env", "applicable_a"}
         if val.startswith("[") and val.endswith("]"):
-            resultat[cle] = [v.strip().strip("'\"") for v in val[1:-1].split(",") if v.strip()]
-        elif cle in CHAMPS_LISTE and "," in val:
-            resultat[cle] = [v.strip() for v in val.split(",") if v.strip()]
+            items = [v.strip().strip("'\"") for v in val[1:-1].split(",") if v.strip()]
+            resultat[cle] = items
         else:
             resultat[cle] = val
     return resultat
@@ -218,14 +215,10 @@ def afficher_registre(registre: dict, ergo_id: str | None = None) -> None:
         print(f"  [{c['ergo_id']}]  v{c.get('version', '?')}  statut={statut}  deployments={deployments}")
         print(f"  Fichier  : {c['fichier']}")
         print(f"  Rôle     : {c.get('role', '—')}")
-        dep = c.get("dependances", [])
-        env = c.get("variable_env", [])
-        if dep:
-            dep_str = ", ".join(dep) if isinstance(dep, list) else dep
-            print(f"  Dépend.  : {dep_str}")
-        if env:
-            env_str = ", ".join(env) if isinstance(env, list) else env
-            print(f"  Env vars : {env_str}")
+        if c.get("dependances"):
+            print(f"  Dépend.  : {', '.join(c['dependances'])}")
+        if c.get("variable_env"):
+            print(f"  Env vars : {', '.join(c['variable_env'])}")
         print()
 
 
