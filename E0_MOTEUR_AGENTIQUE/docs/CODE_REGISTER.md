@@ -3,8 +3,8 @@ ergo_id: CODE_REGISTER
 doc_id: DOC_0008
 fichier: system_code_register.py
 version: 1.0.0
-doc_revision: 1
-sha256_source: 45937ea0
+doc_revision: 2
+sha256_source: f9e3b415
 auteur: ERGO Capital / Adam
 derniere_mise_a_jour: 2026-02-23
 ---
@@ -81,8 +81,8 @@ python system_code_register.py --list
 |---|---|
 | ERGO_ID | `CODE_REGISTER` |
 | DOC_ID | `DOC_0008` |
-| Révision doc | `1` |
-| SHA-256 source | `45937ea0` |
+| Révision doc | `2` |
+| SHA-256 source | `f9e3b415` |
 | Fichier source | `system_code_register.py` |
 | Généré le | 2026-02-23 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |

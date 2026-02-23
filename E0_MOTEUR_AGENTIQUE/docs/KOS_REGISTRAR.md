@@ -3,8 +3,8 @@ ergo_id: KOS_REGISTRAR
 doc_id: DOC_0005
 fichier: kos_registrar.py
 version: 1.0.0
-doc_revision: 1
-sha256_source: 79d8fe6d
+doc_revision: 2
+sha256_source: 17ce95bc
 auteur: ERGO Capital / Adam
 derniere_mise_a_jour: 2026-02-23
 ---
@@ -40,7 +40,7 @@ Peut aussi être exécuté localement pour inspecter ou documenter le projet.
 
 **Sorties :**
 
-`E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json`
+`E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json`
 
 **Dépendances :**
 
@@ -162,8 +162,8 @@ Point d'entrée CLI du registre KOS.
 |---|---|
 | ERGO_ID | `KOS_REGISTRAR` |
 | DOC_ID | `DOC_0005` |
-| Révision doc | `1` |
-| SHA-256 source | `79d8fe6d` |
+| Révision doc | `2` |
+| SHA-256 source | `17ce95bc` |
 | Fichier source | `kos_registrar.py` |
 | Généré le | 2026-02-23 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |

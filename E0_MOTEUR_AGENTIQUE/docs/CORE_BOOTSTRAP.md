@@ -3,8 +3,8 @@ ergo_id: CORE_BOOTSTRAP
 doc_id: DOC_0004
 fichier: ergo_core_system.py
 version: 1.0.0
-doc_revision: 1
-sha256_source: 77fb7563
+doc_revision: 2
+sha256_source: cdd1f32f
 auteur: ERGO Capital / Adam
 derniere_mise_a_jour: 2026-02-23
 ---
@@ -88,8 +88,8 @@ Appelé en stage 'setup' du pipeline GitLab CI/CD.
 |---|---|
 | ERGO_ID | `CORE_BOOTSTRAP` |
 | DOC_ID | `DOC_0004` |
-| Révision doc | `1` |
-| SHA-256 source | `77fb7563` |
+| Révision doc | `2` |
+| SHA-256 source | `cdd1f32f` |
 | Fichier source | `ergo_core_system.py` |
 | Généré le | 2026-02-23 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |

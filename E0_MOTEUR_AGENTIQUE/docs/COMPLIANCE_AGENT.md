@@ -3,8 +3,8 @@ ergo_id: COMPLIANCE_AGENT
 doc_id: DOC_0001
 fichier: agent_compliance.py
 version: 1.0.0
-doc_revision: 1
-sha256_source: 9458b7f8
+doc_revision: 2
+sha256_source: 54c1a604
 auteur: ERGO Capital / Adam
 derniere_mise_a_jour: 2026-02-23
 ---
@@ -174,8 +174,8 @@ Point d'entrée du pipeline de conformité.
 |---|---|
 | ERGO_ID | `COMPLIANCE_AGENT` |
 | DOC_ID | `DOC_0001` |
-| Révision doc | `1` |
-| SHA-256 source | `9458b7f8` |
+| Révision doc | `2` |
+| SHA-256 source | `54c1a604` |
 | Fichier source | `agent_compliance.py` |
 | Généré le | 2026-02-23 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |

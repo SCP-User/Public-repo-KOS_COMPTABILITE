@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-23T17:00:36.590196",
+  "generated_at": "2026-02-23T17:21:20.791904",
   "generateur": "DOC_GENERATOR",
   "total_docs": 8,
   "docs": [
@@ -8,11 +8,11 @@
       "ergo_id": "COMPLIANCE_AGENT",
       "fichier_source": "agent_compliance.py",
       "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
-      "sha256_source": "9458b7f8",
+      "sha256_source": "54c1a604",
       "source_version": "1.0.0",
-      "doc_revision": 1,
+      "doc_revision": 2,
       "premiere_generation": "2026-02-23T17:00:36.553459",
-      "derniere_mise_a_jour": "2026-02-23T17:00:36.553459"
+      "derniere_mise_a_jour": "2026-02-23T17:21:20.758085"
     },
     {
       "doc_id": "DOC_0002",
@@ -41,22 +41,22 @@
       "ergo_id": "CORE_BOOTSTRAP",
       "fichier_source": "ergo_core_system.py",
       "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/CORE_BOOTSTRAP.md",
-      "sha256_source": "77fb7563",
+      "sha256_source": "cdd1f32f",
       "source_version": "1.0.0",
-      "doc_revision": 1,
+      "doc_revision": 2,
       "premiere_generation": "2026-02-23T17:00:36.574931",
-      "derniere_mise_a_jour": "2026-02-23T17:00:36.574931"
+      "derniere_mise_a_jour": "2026-02-23T17:21:20.779248"
     },
     {
       "doc_id": "DOC_0005",
       "ergo_id": "KOS_REGISTRAR",
       "fichier_source": "kos_registrar.py",
       "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/KOS_REGISTRAR.md",
-      "sha256_source": "79d8fe6d",
+      "sha256_source": "17ce95bc",
       "source_version": "1.0.0",
-      "doc_revision": 1,
+      "doc_revision": 2,
       "premiere_generation": "2026-02-23T17:00:36.576684",
-      "derniere_mise_a_jour": "2026-02-23T17:00:36.576684"
+      "derniere_mise_a_jour": "2026-02-23T17:21:20.781267"
     },
     {
       "doc_id": "DOC_0006",
@@ -74,22 +74,22 @@
       "ergo_id": "SHADOW_CLONE",
       "fichier_source": "shadow_clone.py",
       "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/SHADOW_CLONE.md",
-      "sha256_source": "99a1fa4d",
+      "sha256_source": "2e67acf9",
       "source_version": "1.0.0",
-      "doc_revision": 1,
+      "doc_revision": 2,
       "premiere_generation": "2026-02-23T17:00:36.584685",
-      "derniere_mise_a_jour": "2026-02-23T17:00:36.584685"
+      "derniere_mise_a_jour": "2026-02-23T17:21:20.787153"
     },
     {
       "doc_id": "DOC_0008",
       "ergo_id": "CODE_REGISTER",
       "fichier_source": "system_code_register.py",
       "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/CODE_REGISTER.md",
-      "sha256_source": "45937ea0",
+      "sha256_source": "f9e3b415",
       "source_version": "1.0.0",
-      "doc_revision": 1,
+      "doc_revision": 2,
       "premiere_generation": "2026-02-23T17:00:36.588578",
-      "derniere_mise_a_jour": "2026-02-23T17:00:36.588578"
+      "derniere_mise_a_jour": "2026-02-23T17:21:20.790311"
     }
   ]
 }
