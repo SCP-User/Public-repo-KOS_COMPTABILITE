@@ -141,5 +141,50 @@
     "detail": "JSON classes en kos/ logs/ registry/",
     "auteur": "Adam",
     "ergo_id": "ERGO_0017"
+  },
+  {
+    "iteration": 18,
+    "timestamp": "2026-02-24T12:11:47.224156",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix variable espaces API Key avec .strip()",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0018"
+  },
+  {
+    "iteration": 19,
+    "timestamp": "2026-02-24T12:13:54.663811",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix variable espaces API Key avec .strip()",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0019"
+  },
+  {
+    "iteration": 20,
+    "timestamp": "2026-02-24T12:16:16.064018",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix write_text encoding utf-8 pour outputs Windows",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0020"
+  },
+  {
+    "iteration": 21,
+    "timestamp": "2026-02-24T12:18:03.114120",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix UnicodeEncodeError print emojis via sys.stdout.reconfigure(encoding='utf-8')",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0021"
+  },
+  {
+    "iteration": 22,
+    "timestamp": "2026-02-24T12:32:58.705183",
+    "fichier": "publish_report.py",
+    "action": "UPDATED",
+    "detail": "Fix sys.stdout.reconfigure(utf-8) pour eviter crash flèche sur cmd windows",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0022"
   }
 ]

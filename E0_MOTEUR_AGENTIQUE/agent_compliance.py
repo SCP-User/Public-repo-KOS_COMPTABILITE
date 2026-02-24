@@ -32,6 +32,9 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional
 
+import sys
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 import anthropic
 
 
@@ -130,7 +133,7 @@ def analyser_avec_claude(facture: dict, normes: str) -> dict:
     Raises:
         KeyError: Si la variable d'environnement ANTHROPIC_API_KEY est absente.
     """
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"].strip())
 
     system_prompt = (
         "Tu es un agent de conformité comptable expert en droit fiscal français.\n\n"
@@ -216,7 +219,7 @@ def router_verdict(facture: dict, verdict: dict) -> Optional[str]:
             "verdict": verdict,
         }
         sortie = E4_RAPPORTS / f"RAPPORT_{nom_base}_{timestamp}.json"
-        sortie.write_text(json.dumps(rapport, ensure_ascii=False, indent=2))
+        sortie.write_text(json.dumps(rapport, ensure_ascii=False, indent=2), encoding="utf-8")
         fichier_sorti = sortie.name
         print(f"  → RAPPORT REJET  : {sortie.name}")
 
@@ -241,7 +244,7 @@ def router_verdict(facture: dict, verdict: dict) -> Optional[str]:
             }
         }
         sortie = E4_PAYLOADS / f"PAYLOAD_{nom_base}_{timestamp}.json"
-        sortie.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
+        sortie.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
         fichier_sorti = sortie.name
         print(f"  → PAYLOAD ERP    : {sortie.name}")
 

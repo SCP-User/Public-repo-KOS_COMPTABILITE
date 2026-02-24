@@ -133,7 +133,7 @@ def main():
         auteur=args.auteur
     )
 
-    print(f"[{entree['ergo_id']}] {entree['action']} → {entree['fichier']} — enregistré", flush=True)
+    print(f"[{entree['ergo_id']}] {entree['action']} -> {entree['fichier']} — enregistré", flush=True)
     sys.exit(0)
 
 

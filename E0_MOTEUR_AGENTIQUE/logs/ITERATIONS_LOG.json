@@ -1,1 +1,119 @@
-[]
+[
+  {
+    "iteration_id": "ITER_0001",
+    "pipeline_id": "local",
+    "timestamp_start": "2026-02-24T12:20:19.729560",
+    "timestamp_end": "2026-02-24T12:21:24.433373",
+    "duration_seconds": 64.7,
+    "documents_count": 5,
+    "resume": {
+      "CONFORME": 1,
+      "REJET": 2,
+      "AVERTISSEMENT": 2,
+      "ERREUR": 0
+    },
+    "cout_total_eur": 0.11751,
+    "tokens_total_input": 22605,
+    "tokens_total_output": 3313,
+    "documents": [
+      {
+        "fichier": "facture_A102.md",
+        "type": "soumission_facture",
+        "verdict": "REJET",
+        "motif": "Les coffrets champagne constituent des cadeaux d'entreprise dont la valeur unitaire TTC est de 120,00 € par bénéficiaire, soit supérieure au seuil de 73,00 € TTC fixé par le CGI Art. 236. La TVA de 100,00 € n'est donc pas déductible. La totalité du montant TTC doit être imputée en charge (compte 6230), sans séparation HT/TVA.",
+        "articles_appliques": [
+          "CGI Art. 236 — Exclusions du droit à déduction sur cadeaux ≥ 73 € TTC",
+          "CGI Art. 271 — Conditions générales de déductibilité de la TVA",
+          "BOFiP TVA-DED-30-30-20 — TVA sur cadeaux d'entreprise",
+          "PCG ANC 2014-03 — Règles d'imputation compte 6230"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 4353,
+        "tokens_output": 589,
+        "cout_eur": 0.02189,
+        "fichier_sorti": "RAPPORT_facture_A102_20260224_122031.json"
+      },
+      {
+        "fichier": "facture_B001.md",
+        "type": "facture_fournisseur",
+        "verdict": "CONFORME",
+        "motif": "La facture B001 comporte toutes les mentions obligatoires requises par le CGI Art. 289 (numéro de facture séquentiel, SIRET fournisseur, numéros de TVA intracommunautaire vendeur et acheteur, désignation précise, quantités, prix unitaires HT, taux et montant de TVA, totaux HT et TTC, dates de facture et de livraison). Les fournitures de bureau relèvent d'un usage exclusivement professionnel, la TVA au taux normal de 20% est pleinement déductible. Aucune exclusion du droit à déduction n'est applicable.",
+        "articles_appliques": [
+          "CGI Art. 289 — Mentions obligatoires sur les factures",
+          "CGI Art. 271 — Droit à déduction de la TVA",
+          "CGI Art. 256 à 283 — Champ d'application TVA",
+          "BOFiP TVA-DECLA-30-10-20",
+          "PCG ANC 2014-03 — Règles d'imputation comptable"
+        ],
+        "niveau_risque": "FAIBLE",
+        "action_erp": "INJECTER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 4632,
+        "tokens_output": 479,
+        "cout_eur": 0.02108,
+        "fichier_sorti": "PAYLOAD_facture_B001_20260224_122040.json"
+      },
+      {
+        "fichier": "facture_C001.md",
+        "type": "facture_fournisseur",
+        "verdict": "REJET",
+        "motif": "La facture est incomplète et juridiquement invalide : absence du numéro de TVA intracommunautaire du fournisseur, absence du numéro de facture séquentiel, et absence du numéro SIRET. Ces trois mentions sont obligatoires au titre du CGI Art. 289 II. En conséquence, la TVA de 160,00 € n'est pas déductible et la facture est nulle en tant que pièce justificative fiscale. La charge reste imputable en IS mais la TVA doit être intégrée au coût de revient.",
+        "articles_appliques": [
+          "CGI Art. 289 II — Mentions obligatoires sur les factures",
+          "CGI Art. 271 — Conditions de déductibilité de la TVA",
+          "BOFiP TVA-DECLA-30-10-20",
+          "Directive TVA 2006/112/CE Art. 226",
+          "Code de Commerce Art. L123-14"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 4532,
+        "tokens_output": 598,
+        "cout_eur": 0.02257,
+        "fichier_sorti": "RAPPORT_facture_C001_20260224_122052.json"
+      },
+      {
+        "fichier": "note_frais_D001.md",
+        "type": "note_de_frais",
+        "verdict": "AVERTISSEMENT",
+        "motif": "La note de frais est professionnellement justifiée et la TVA à 10% (restauration) est déductible selon les règles générales. Cependant, le document est un ticket de caisse et non une facture en bonne et due forme : plusieurs mentions obligatoires sont absentes (numéro de TVA intracommunautaire du vendeur, SIRET du fournisseur, nom et adresse de l'acheteur, numéro de facture séquentiel). La TVA reste techniquement déductible pour les repas d'affaires justifiés, mais l'absence de mentions obligatoires expose l'entreprise à un risque de redressement. Par ailleurs, la règle des 73 € TTC/bénéficiaire/an relative aux cadeaux n'est pas applicable ici (repas d'affaires, non cadeau).",
+        "articles_appliques": [
+          "CGI Art. 271 — Droit à déduction de TVA",
+          "CGI Art. 289 — Mentions obligatoires sur les factures",
+          "BOFiP TVA-DED — Déductibilité TVA repas d'affaires",
+          "BOFiP TVA-DECLA-30-10-20",
+          "Directive TVA 2006/112/CE Art. 226"
+        ],
+        "niveau_risque": "MOYEN",
+        "action_erp": "REVUE_HUMAINE",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 4510,
+        "tokens_output": 861,
+        "cout_eur": 0.02645,
+        "fichier_sorti": "RAPPORT_note_frais_D001_20260224_122109.json"
+      },
+      {
+        "fichier": "note_frais_E001.md",
+        "type": "note_de_frais",
+        "verdict": "AVERTISSEMENT",
+        "motif": "Repas d'affaires au montant élevé (110,00 € TTC) avec justificatif insuffisant : absence de ticket de caisse original, liste des participants non fournie et objet professionnel non documenté. La déductibilité de la TVA est contestable en l'état. Si le repas s'avère consommé en solo, il pourrait être requalifié en avantage personnel avec TVA non déductible. La règle des 73 € TTC (CGI Art. 236) ne s'applique pas stricto sensu aux repas d'affaires, mais la déductibilité TVA sur repas exige la justification de la finalité professionnelle (BOFiP TVA-DED).",
+        "articles_appliques": [
+          "CGI Art. 271 — Conditions de déductibilité de la TVA",
+          "CGI Art. 289 — Mentions obligatoires sur justificatifs",
+          "BOFiP TVA-DED — Déductibilité TVA repas d'affaires",
+          "CGI Art. 236 — Exclusions cadeaux (applicable par analogie si requalification)"
+        ],
+        "niveau_risque": "MOYEN",
+        "action_erp": "REVUE_HUMAINE",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 4578,
+        "tokens_output": 786,
+        "cout_eur": 0.02552,
+        "fichier_sorti": "RAPPORT_note_frais_E001_20260224_122124.json"
+      }
+    ]
+  }
+]

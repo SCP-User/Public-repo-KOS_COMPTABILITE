@@ -1,0 +1,36 @@
+{
+  "document_source": "note_frais_D001.md",
+  "date_audit": "20260224_122109",
+  "verdict": {
+    "verdict": "AVERTISSEMENT",
+    "motif": "La note de frais est professionnellement justifiée et la TVA à 10% (restauration) est déductible selon les règles générales. Cependant, le document est un ticket de caisse et non une facture en bonne et due forme : plusieurs mentions obligatoires sont absentes (numéro de TVA intracommunautaire du vendeur, SIRET du fournisseur, nom et adresse de l'acheteur, numéro de facture séquentiel). La TVA reste techniquement déductible pour les repas d'affaires justifiés, mais l'absence de mentions obligatoires expose l'entreprise à un risque de redressement. Par ailleurs, la règle des 73 € TTC/bénéficiaire/an relative aux cadeaux n'est pas applicable ici (repas d'affaires, non cadeau).",
+    "articles_appliques": [
+      "CGI Art. 271 — Droit à déduction de TVA",
+      "CGI Art. 289 — Mentions obligatoires sur les factures",
+      "BOFiP TVA-DED — Déductibilité TVA repas d'affaires",
+      "BOFiP TVA-DECLA-30-10-20",
+      "Directive TVA 2006/112/CE Art. 226"
+    ],
+    "corrections_requises": [
+      "Obtenir une facture en bonne et due forme auprès du restaurant Le Bistrot du Commerce (et non un simple ticket de caisse) mentionnant : numéro de TVA intracommunautaire du vendeur, SIRET du vendeur (14 chiffres), nom et adresse de l'acheteur (ERGO Capital), numéro de facture séquentiel, date de la prestation",
+      "Conserver impérativement la liste des participants (noms + qualité + objet de la réunion) en pièce justificative jointe conformément aux exigences BOFiP",
+      "En l'absence de facture conforme, la TVA de 1,50 € ne pourra pas être déduite et devra être imputée en charge (compte 6256 ou 6251 TTC)"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "6256",
+      "compte_credit": "401",
+      "montant_ht": 15.0,
+      "tva_deductible": 1.5,
+      "tva_non_deductible": 0.0,
+      "montant_ttc": 16.5
+    },
+    "niveau_risque": "MOYEN",
+    "action_erp": "REVUE_HUMAINE",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 4510,
+      "output_tokens": 861,
+      "cout_estime_eur": 0.02645
+    }
+  }
+}

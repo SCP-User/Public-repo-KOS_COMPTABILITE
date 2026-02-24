@@ -1,13 +1,13 @@
 # KOS_COMPTA — AI Agent with CI/CD in Accounting and Compliance
 
 > **GitLab AI Hackathon 2026**  
-> *The KOS is the legislator. The LLM is the executor. The CI/CD is the tribunal.*
+> _The KOS is the legislator. The LLM is the executor. The CI/CD is the tribunal._
 
 ---
 
 ## What is KOS_COMPTA ?
 
-KOS_COMPTA is a **Compliance ERP Middleware** — an AI agent integrated into a GitLab CI/CD pipeline that intercepts accounting documents before they enter any ERP system, audits them against French law (*régularité, sincérité, image fidèle* — Art. L123-14 Code de Commerce), and routes them accordingly.
+KOS_COMPTA is a **Compliance ERP Middleware** — an AI agent integrated into a GitLab CI/CD pipeline that intercepts accounting documents before they enter any ERP system, audits them against French law (_régularité, sincérité, image fidèle_ — Art. L123-14 Code de Commerce), and routes them accordingly.
 
 **No illegal document enters the books.**
 
@@ -92,6 +92,7 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 0 — GitLab Setup
+
 > Priorité : IMMÉDIATE
 
 - [ ] Créer compte sur gitlab.com
@@ -104,6 +105,7 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 1 — Agent Core (déjà produit, à valider)
+
 > Priorité : HAUTE
 
 - [x] `agent_compliance.py` — pipeline 5 étapes (lire → RAG → Claude → router → log)
@@ -112,19 +114,20 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 - [x] `KOS_COMPTA_Client_Log.json` — journal client
 - [x] `loi_tva_cadeaux.md` — première norme E1
 - [x] `brouillon_facture_A102.md` — cas de test
-- [ ] Tester `agent_compliance.py` localement avec `ANTHROPIC_API_KEY`
-- [ ] Vérifier que le rapport JSON sort bien dans E4.1
-- [ ] Vérifier que `ITERATIONS_LOG.json` se crée correctement
+- [x] Tester `agent_compliance.py` localement avec `ANTHROPIC_API_KEY`
+- [x] Vérifier que le rapport JSON sort bien dans E4.1
+- [x] Vérifier que `ITERATIONS_LOG.json` se crée correctement
 
 ---
 
 ### BLOC 2 — Pipeline CI/CD GitLab
+
 > Priorité : HAUTE — c'est le cœur du hackathon
 
-- [ ] Compléter `.gitlab-ci.yml` avec les 4 stages opérationnels
-- [ ] Créer `detect_document_type.py` — identifie le type de document
+- [x] Compléter `.gitlab-ci.yml` avec les 4 stages opérationnels
+- [x] Créer `detect_document_type.py` — identifie le type de document
 - [ ] Créer `load_kos.py` — charge les normes depuis E1+E2
-- [ ] Créer `publish_report.py` — poste le verdict en commentaire MR
+- [x] Créer `publish_report.py` — poste le verdict en commentaire MR
 - [ ] Tester un push → vérifier que le pipeline se déclenche sur GitLab
 - [ ] Tester une Merge Request → vérifier le commentaire automatique
 - [ ] Vérifier que le pipeline passe en moins de 2 minutes
@@ -132,6 +135,7 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 3 — Corpus Légal E1 (révision BTS = construction KOS)
+
 > Priorité : MOYENNE — minimum 3 normes pour la démo
 
 - [ ] `pcg_classes_1_a_4.md` — comptes capitaux, tiers, financiers
@@ -146,18 +150,20 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 4 — Tests & Cas Démo
+
 > Priorité : HAUTE — le jury doit voir le pipeline tourner
 
 - [x] Cas A102 — champagne 120€ TTC → REJET TVA (déjà fait)
-- [ ] Cas B001 — facture conforme → CONFORME + payload ERP
-- [ ] Cas C001 — facture sans numéro TVA → REJET mentions obligatoires
-- [ ] Cas D001 — note de frais repas 18€ → CONFORME
-- [ ] Cas E001 — note de frais repas 120€ sans justificatif → AVERTISSEMENT
-- [ ] Vérifier que chaque cas produit le bon verdict + le bon fichier dans E4
+- [x] Cas B001 — facture conforme → CONFORME + payload ERP
+- [x] Cas C001 — facture sans numéro TVA → REJET mentions obligatoires
+- [x] Cas D001 — note de frais repas 18€ → CONFORME
+- [x] Cas E001 — note de frais repas 120€ sans justificatif → AVERTISSEMENT
+- [x] Vérifier que chaque cas produit le bon verdict + le bon fichier dans E4
 
 ---
 
 ### BLOC 5 — Démo Vidéo 2 minutes
+
 > Priorité : HAUTE — livrable obligatoire Devpost
 
 - [ ] Script de démo écrit (ce qu'on dit + ce qu'on montre à chaque seconde)
@@ -169,6 +175,7 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 6 — Devpost Finalisation
+
 > Priorité : HAUTE — deadline 25 mars
 
 - [x] Project name : KOS_COMPTA
@@ -183,6 +190,7 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 ---
 
 ### BLOC 7 — Post-Hackathon (hors scope MVP)
+
 > À builder après le 25 mars dans le cadre d'ERGO Capital
 
 - [ ] Interface PME (Dash/FastAPI frontend)
@@ -200,13 +208,13 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 
 ## Legal Foundation
 
-| Principe | Référence | Portée |
-|---|---|---|
-| Régularité | Code de Commerce Art. L123-14 | Conformité aux règles en vigueur |
-| Sincérité | Code de Commerce Art. L123-14 | Bonne foi, réalité économique |
+| Principe     | Référence                     | Portée                                     |
+| ------------ | ----------------------------- | ------------------------------------------ |
+| Régularité   | Code de Commerce Art. L123-14 | Conformité aux règles en vigueur           |
+| Sincérité    | Code de Commerce Art. L123-14 | Bonne foi, réalité économique              |
 | Image fidèle | Code de Commerce Art. L123-14 | Patrimoine, situation financière, résultat |
 
-> *Note : Article L123-14 constitue le socle minimal — non exhaustif. Des prescriptions complémentaires s'appliquent selon le secteur et la forme juridique.*
+> _Note : Article L123-14 constitue le socle minimal — non exhaustif. Des prescriptions complémentaires s'appliquent selon le secteur et la forme juridique._
 
 ---
 
@@ -219,4 +227,4 @@ Autodidacte MLOps · KOS builder since GPT-3
 
 ---
 
-*KOS_COMPTA is part of the ERGO Capital project — an agent-native compliance infrastructure for French SMEs.*
+_KOS_COMPTA is part of the ERGO Capital project — an agent-native compliance infrastructure for French SMEs._

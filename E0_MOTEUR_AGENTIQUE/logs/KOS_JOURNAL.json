@@ -184,7 +184,7 @@
     "timestamp": "2026-02-23T14:37:00",
     "session": "Claude Code",
     "type": "TACHE",
-    "statut": "TODO",
+    "statut": "DONE",
     "sujet": "Test pipeline bout en bout avec ANTHROPIC_API_KEY",
     "detail": "Poser la clé ANTHROPIC_API_KEY en variable d'env, lancer agent_compliance.py localement, vérifier que facture_A102.md produit un RAPPORT_*.json dans E4.1 avec verdict REJET, vérifier ITERATIONS_LOG.json créé.",
     "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json", "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/"],
@@ -222,5 +222,61 @@
       ".shadow_clone/SHADOW_INDEX.json"
     ],
     "ergo_ids_impactes": ["CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER", "COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0015",
+    "timestamp": "2026-02-24T12:12:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction API Key espace httpx.LocalProtocolError",
+    "detail": "Ajout de la methode .strip() a la recuperation de la variable d'environnement ANTHROPIC_API_KEY dans agent_compliance.py pour eviter le crash lie aux espaces malencontreux.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0016",
+    "timestamp": "2026-02-24T12:16:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction UnicodeEncodeError Windows via encoding='utf-8'",
+    "detail": "Ajout explicite du parametre encoding='utf-8' sur les fonctions write_text() lors de l'enregistrement des payloads et rapports dans agent_compliance.py, pour eviter le crash lie a CP1252 sur Windows avec des elements speciaux (exemple : symbole superieur).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0017",
+    "timestamp": "2026-02-24T12:20:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction UnicodeEncodeError Windows Console via sys.stdout.reconfigure",
+    "detail": "Ajout de sys.stdout.reconfigure(encoding='utf-8') en haut de agent_compliance.py pour eviter le plantage cp1252 du terminal Windows lors de l'impression des caracteres speciaux (emojis de bordure, cases a cocher et fleches).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0018",
+    "timestamp": "2026-02-24T12:48:00",
+    "session": "Claude Code",
+    "type": "NOTE",
+    "statut": "DONE",
+    "sujet": "Clarification de l'Architecture — Separation des JSONs de sortie (E4 vs ITERATIONS)",
+    "detail": "Adam a demande si ITERATIONS_LOG.json devait contenir l'analyse formelle des documents. Reponse : NON. ITERATIONS_LOG.json est uniquement le 'Dashboard Token Economy' (log financier : quantite de tokens, cout Euro, resume du run). L'analyse comptable formelle generee par Claude est stockee dans les fichiers JSON du repertoire E4_AUDIT_ET_ROUTAGE (soit dans E4.1 pour publication par publish_report.py a destination de validants humains, soit dans E4.2 comme Payloads ERP destines a etre convertis ulterieurement en exports CSV ou lus par des APIs REST d'outils modernes type Pennylane).",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
   }
 ]

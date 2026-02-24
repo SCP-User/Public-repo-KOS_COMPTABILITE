@@ -32,6 +32,9 @@ except ImportError:
     print("[ERROR] Module 'requests' manquant — pip install requests", file=sys.stderr)
     sys.exit(1)
 
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+
 
 ICONE: dict[str, str] = {
     "REJET": "🔴",
