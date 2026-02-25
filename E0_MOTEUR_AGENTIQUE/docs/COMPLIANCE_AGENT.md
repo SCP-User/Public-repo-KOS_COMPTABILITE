@@ -2,11 +2,11 @@
 ergo_id: COMPLIANCE_AGENT
 doc_id: DOC_0001
 fichier: agent_compliance.py
-version: 1.0.0
-doc_revision: 2
-sha256_source: 54c1a604
+version: 1.1.0
+doc_revision: 4
+sha256_source: ac36e08c
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # COMPLIANCE_AGENT — `agent_compliance.py`
@@ -25,7 +25,7 @@ Hackathon GitLab AI 2026
 
 Pipeline d'audit de conformité comptable en 5 étapes :
 1. lire_facture         : lecture et extraction frontmatter YAML depuis E3.1
-2. charger_normes       : RAG sur E1 + E2 par correspondance de tags
+2. charger_normes       : RAG vectoriel ChromaDB (multilingual-e5-base) sur E1 + E2
 3. analyser_avec_claude : audit LLM via Anthropic API (claude-sonnet-4-6)
 4. router_verdict       : routage vers E4.1 (rejet/avert.) ou E4.2 (conforme)
 5. log_iteration        : journal structuré dans ITERATIONS_LOG.json
@@ -78,7 +78,7 @@ Dictionnaire contenant :
 
 ### `charger_normes(tags_facture: str) → str`
 
-Recherche les normes légales et SOP pertinentes par correspondance de tags (RAG simple).
+Recherche les normes légales et SOP pertinentes via ChromaDB (RAG vectoriel).
 
 **Paramètres :**
 
@@ -88,7 +88,7 @@ Recherche les normes légales et SOP pertinentes par correspondance de tags (RAG
 
 **Retourne :**
 
-Contexte concaténé des normes trouvées, ou message générique si aucune correspondance.
+Contexte structuré des normes les plus similaires (RAG) ou résultat du fallback substring.
 
 ---
 
@@ -174,10 +174,10 @@ Point d'entrée du pipeline de conformité.
 |---|---|
 | ERGO_ID | `COMPLIANCE_AGENT` |
 | DOC_ID | `DOC_0001` |
-| Révision doc | `2` |
-| SHA-256 source | `54c1a604` |
+| Révision doc | `4` |
+| SHA-256 source | `ac36e08c` |
 | Fichier source | `agent_compliance.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

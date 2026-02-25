@@ -6,7 +6,7 @@ version: 1.0.0
 doc_revision: 1
 sha256_source: cf510afe
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # DETECT_DOCUMENT — `detect_document_type.py`
@@ -127,7 +127,7 @@ Point d'entrée CLI du stage DETECT.
 | Révision doc | `1` |
 | SHA-256 source | `cf510afe` |
 | Fichier source | `detect_document_type.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

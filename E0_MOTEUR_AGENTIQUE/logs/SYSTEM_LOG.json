@@ -186,5 +186,14 @@
     "detail": "Fix sys.stdout.reconfigure(utf-8) pour eviter crash flèche sur cmd windows",
     "auteur": "CI/CD",
     "ergo_id": "ERGO_0022"
+  },
+  {
+    "iteration": 23,
+    "timestamp": "2026-02-25T02:20:26.817911",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "charger_normes() v1.1.0 : RAG ChromaDB n_results=3, prefixe query: E5, logging.warning fallback, format structuré NORME i",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0023"
   }
 ]

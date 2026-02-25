@@ -6,7 +6,7 @@ version: 1.0.0
 doc_revision: 2
 sha256_source: 2e67acf9
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # SHADOW_CLONE — `shadow_clone.py`
@@ -173,7 +173,7 @@ Point d'entrée CLI du système de shadow cloning.
 | Révision doc | `2` |
 | SHA-256 source | `2e67acf9` |
 | Fichier source | `shadow_clone.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

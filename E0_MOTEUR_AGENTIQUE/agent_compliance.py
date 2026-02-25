@@ -7,16 +7,17 @@ Hackathon GitLab AI 2026
 
 Pipeline d'audit de conformité comptable en 5 étapes :
     1. lire_facture         : lecture et extraction frontmatter YAML depuis E3.1
-    2. charger_normes       : RAG sur E1 + E2 par correspondance de tags
+    2. charger_normes       : RAG vectoriel ChromaDB (multilingual-e5-base) sur E1 + E2
     3. analyser_avec_claude : audit LLM via Anthropic API (claude-sonnet-4-6)
     4. router_verdict       : routage vers E4.1 (rejet/avert.) ou E4.2 (conforme)
     5. log_iteration        : journal structuré dans ITERATIONS_LOG.json
 
 ERGO_REGISTRY:
     role         : Pipeline principal d'audit de conformite comptable (5 etapes)
-    version      : 1.0.0
+    version      : 1.1.0
     auteur       : ERGO Capital / Adam
-    dependances  : KOS_COMPTA_Taxonomie.json, KOS_COMPTA_Agentique.json, E1_CORPUS_LEGAL_ETAT
+    dependances  : KOS_COMPTA_Taxonomie.json, KOS_COMPTA_Agentique.json, E1_CORPUS_LEGAL_ETAT,
+                   chromadb, sentence-transformers (intfloat/multilingual-e5-base), KOS_DB/
     entrees      : E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/*.md
     sorties      : E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_*.json
                    E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/PAYLOAD_*.json
@@ -27,6 +28,7 @@ ERGO_REGISTRY:
 import os
 import json
 import glob
+import logging
 import re
 from pathlib import Path
 from datetime import datetime
@@ -78,17 +80,64 @@ def lire_facture(chemin: Path) -> dict:
 
 
 def charger_normes(tags_facture: str) -> str:
-    """Recherche les normes légales et SOP pertinentes par correspondance de tags (RAG simple).
+    """Recherche les normes légales et SOP pertinentes via ChromaDB (RAG vectoriel).
 
-    Scanne E1_CORPUS_LEGAL_ETAT et E2_SOP_INTERNE_ET_ERP pour trouver les fichiers
-    dont le contenu contient au moins l'un des tags extraits du document.
+    Se connecte au client ChromaDB persistant (./KOS_DB) et interroge la collection
+    "kos_knowledge_base" par similarité cosinus. La requête est vectorisée avec le
+    modèle intfloat/multilingual-e5-base, préfixée "query: " conformément à
+    l'entraînement asymétrique E5. Retourne les 3 chunks les plus pertinents sous
+    forme de texte structuré pour le prompt LLM.
+
+    Mode dégradé : si KOS_DB est absent ou la collection inaccessible, bascule sur
+    la recherche substring dans les fichiers .md après logging.warning explicite.
 
     Args:
         tags_facture: Chaîne brute du champ 'tags' du frontmatter (ex: "[tva, cadeau, achat]").
 
     Returns:
-        Contexte concaténé des normes trouvées, ou message générique si aucune correspondance.
+        Contexte structuré des normes les plus similaires (RAG) ou résultat du fallback substring.
     """
+    kos_db = BASE_DIR / "KOS_DB"
+
+    if kos_db.exists():
+        try:
+            import chromadb
+            from sentence_transformers import SentenceTransformer
+
+            client     = chromadb.PersistentClient(path=str(kos_db))
+            collection = client.get_collection("kos_knowledge_base")
+            model      = SentenceTransformer("intfloat/multilingual-e5-base")
+            tags_str   = tags_facture.replace("[", "").replace("]", "").strip()
+            vecteur    = model.encode([f"query: {tags_str}"], normalize_embeddings=True).tolist()
+            resultats  = collection.query(query_embeddings=vecteur, n_results=3)
+            docs       = resultats.get("documents", [[]])[0]
+            metas      = resultats.get("metadatas", [[]])[0]
+            if docs:
+                blocs: list[str] = []
+                for i, (doc, meta) in enumerate(zip(docs, metas), start=1):
+                    blocs.append(
+                        f"\n\n### NORME {i} — {meta.get('source', 'N/A')} "
+                        f"[{meta.get('fichier', 'inconnu')}]\n"
+                        f"Type : {meta.get('type', '')} | "
+                        f"Tags : {meta.get('tags', '')} | "
+                        f"Applicable : {meta.get('applicable_a', '')}\n\n"
+                        f"{doc}"
+                    )
+                logging.info("charger_normes() — RAG ChromaDB : %d chunks retenus.", len(docs))
+                return "".join(blocs)
+        except Exception as exc:
+            logging.warning(
+                "charger_normes() — KOS_DB inaccessible (%s), bascule sur fallback substring.",
+                exc,
+            )
+    else:
+        logging.warning(
+            "charger_normes() — KOS_DB absent (%s). "
+            "Lancer ingest_kos.py pour initialiser la base vectorielle. "
+            "Bascule sur fallback substring.",
+            kos_db,
+        )
+
     normes_trouvees: list[dict] = []
     tags = [t.strip().strip("[]'\"") for t in tags_facture.split(",")]
 

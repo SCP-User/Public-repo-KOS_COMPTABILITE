@@ -6,7 +6,7 @@ version: 1.0.0
 doc_revision: 2
 sha256_source: 17ce95bc
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # KOS_REGISTRAR — `kos_registrar.py`
@@ -165,7 +165,7 @@ Point d'entrée CLI du registre KOS.
 | Révision doc | `2` |
 | SHA-256 source | `17ce95bc` |
 | Fichier source | `kos_registrar.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

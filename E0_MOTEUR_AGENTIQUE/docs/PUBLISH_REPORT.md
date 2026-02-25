@@ -3,10 +3,10 @@ ergo_id: PUBLISH_REPORT
 doc_id: DOC_0006
 fichier: publish_report.py
 version: 1.0.0
-doc_revision: 1
-sha256_source: dfaee3ca
+doc_revision: 2
+sha256_source: 4e20b455
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # PUBLISH_REPORT — `publish_report.py`
@@ -176,10 +176,10 @@ Point d'entrée CLI du stage REPORT.
 |---|---|
 | ERGO_ID | `PUBLISH_REPORT` |
 | DOC_ID | `DOC_0006` |
-| Révision doc | `1` |
-| SHA-256 source | `dfaee3ca` |
+| Révision doc | `2` |
+| SHA-256 source | `4e20b455` |
 | Fichier source | `publish_report.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

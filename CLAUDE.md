@@ -66,6 +66,7 @@ Public-repo-KOS_COMPTABILITE/
 │
 ├── E0_MOTEUR_AGENTIQUE/
 │   ├── agent_compliance.py              ← ERGO_ID: COMPLIANCE_AGENT
+│   ├── ingest_kos.py                    ← ERGO_ID: INGEST_KOS (RAG ChromaDB)
 │   ├── detect_document_type.py          ← ERGO_ID: DETECT_DOCUMENT
 │   ├── publish_report.py                ← ERGO_ID: PUBLISH_REPORT
 │   ├── shadow_clone.py                  ← ERGO_ID: SHADOW_CLONE
@@ -94,6 +95,8 @@ Public-repo-KOS_COMPTABILITE/
 │   └── pcg_classes_1_a_4.md             ← Plan Comptable Général classes 1 à 4
 │
 ├── E2_SOP_INTERNE_ET_ERP/               ← procédures internes client (à remplir)
+│
+├── KOS_DB/                              ← ChromaDB persistant (généré par ingest_kos.py)
 │
 ├── E3_INTERFACES_ACTEURS/
 │   ├── E3.1_Dropzone_Factures/          ← documents à auditer (entrée pipeline)
@@ -323,7 +326,7 @@ montant_ttc: 0.00
 |---|---|
 | LLM principal | claude-sonnet-4-6 (Anthropic API) |
 | CI/CD | GitLab CI/CD |
-| Vector DB | ChromaDB (local, post-hackathon) |
+| Vector DB | ChromaDB + multilingual-e5-base (RAG E1/E2) |
 | Backend | FastAPI (post-hackathon) |
 | ERP output | JSON / CSV (Sage, EBP, Cegid, Pennylane) |
 
@@ -331,6 +334,8 @@ montant_ttc: 0.00
 ```
 anthropic>=0.40.0
 chromadb>=0.5.0
+sentence-transformers>=3.0.0
+langchain-text-splitters>=0.3.0
 python-frontmatter>=1.1.0
 pyyaml>=6.0.0
 requests

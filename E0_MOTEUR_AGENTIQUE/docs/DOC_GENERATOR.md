@@ -6,7 +6,7 @@ version: 1.1.0
 doc_revision: 1
 sha256_source: bae0625c
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # DOC_GENERATOR — `doc_generator.py`
@@ -262,7 +262,7 @@ Point d'entrée CLI du générateur de documentation Markdown versionné.
 | Révision doc | `1` |
 | SHA-256 source | `bae0625c` |
 | Fichier source | `doc_generator.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*

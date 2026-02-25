@@ -278,5 +278,53 @@
     "detail": "Adam a demande si ITERATIONS_LOG.json devait contenir l'analyse formelle des documents. Reponse : NON. ITERATIONS_LOG.json est uniquement le 'Dashboard Token Economy' (log financier : quantite de tokens, cout Euro, resume du run). L'analyse comptable formelle generee par Claude est stockee dans les fichiers JSON du repertoire E4_AUDIT_ET_ROUTAGE (soit dans E4.1 pour publication par publish_report.py a destination de validants humains, soit dans E4.2 comme Payloads ERP destines a etre convertis ulterieurement en exports CSV ou lus par des APIs REST d'outils modernes type Pennylane).",
     "fichiers_impactes": [],
     "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0019",
+    "timestamp": "2026-02-25T00:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Implementation module RAG ChromaDB — ingest_kos.py",
+    "detail": "Creation de ingest_kos.py (ERGO_ID: INGEST_KOS) : pipeline complet d'ingestion vectorielle des normes E1/E2 dans ChromaDB. Modele intfloat/multilingual-e5-base avec prefixes E5 asymetriques ('passage: ' a l'ingestion, 'query: ' a la requete) pour precision maximale. Chunks 700/100. Modification de charger_normes() dans agent_compliance.py : requete ChromaDB par similarite cosinus avec fallback sur l'ancienne methode substring si KOS_DB absent. Mise a jour requirements.txt (sentence-transformers>=3.0.0, langchain-text-splitters>=0.3.0), .gitlab-ci.yml (ingest_kos.py dans stage setup, KOS_DB/ en artifact), CLAUDE.md (arborescence + stack technique).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/ingest_kos.py",
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "requirements.txt",
+      ".gitlab-ci.yml",
+      "CLAUDE.md"
+    ],
+    "ergo_ids_impactes": [
+      "INGEST_KOS",
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0020",
+    "timestamp": "2026-02-25T02:20:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Affinage charger_normes() v1.1.0 — n_results=3, logging.warning fallback, format NORME i structure",
+    "detail": "Mise a jour de charger_normes() dans agent_compliance.py (version 1.0.0 -> 1.1.0) : (1) n_results ajuste de 5 a 3 — les 3 chunks les plus pertinents suffisent pour le prompt LLM et reduisent le bruit. (2) logging.warning explicite sur les deux cas de fallback : KOS_DB absent (avec message 'Lancer ingest_kos.py') et collection inaccessible (avec exception loguee). (3) Format de retour enrichi : chaque chunk devient 'NORME i — source [fichier] | Type | Tags | Applicable | contenu' pour maximiser la lisibilite dans le prompt Claude. (4) import logging ajoute au bloc d'imports du module. (5) ERGO_REGISTRY version 1.1.0 + dependances chromadb/sentence-transformers documentees. Documentation regeneree (DOC_0001 rev 4).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0021",
+    "timestamp": "2026-02-25T02:30:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Module lecture PDF — ingestion documents PDF dans le pipeline",
+    "detail": "Ajouter la capacite de lire et parser des fichiers PDF en plus des .md. Objectif : permettre l'ingestion de factures PDF natives dans E3.1_Dropzone_Factures et leur traitement par agent_compliance.py. Pistes : pdfplumber ou pypdf pour extraction texte, detection automatique du type de fichier, integration dans lire_facture() ou nouveau module dedie (ERGO_ID: PDF_READER). A planifier apres le hackathon.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
   }
 ]

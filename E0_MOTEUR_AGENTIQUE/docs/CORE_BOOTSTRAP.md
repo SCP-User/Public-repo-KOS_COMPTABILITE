@@ -6,7 +6,7 @@ version: 1.0.0
 doc_revision: 2
 sha256_source: cdd1f32f
 auteur: ERGO Capital / Adam
-derniere_mise_a_jour: 2026-02-23
+derniere_mise_a_jour: 2026-02-25
 ---
 
 # CORE_BOOTSTRAP — `ergo_core_system.py`
@@ -91,7 +91,7 @@ Appelé en stage 'setup' du pipeline GitLab CI/CD.
 | Révision doc | `2` |
 | SHA-256 source | `cdd1f32f` |
 | Fichier source | `ergo_core_system.py` |
-| Généré le | 2026-02-23 |
+| Généré le | 2026-02-25 |
 | Générateur | `doc_generator.py` (ERGO_ID: DOC_GENERATOR) |
 
 *Documentation auto-générée par ERGO KOS_COMPTA — ne pas éditer manuellement.*
