@@ -26,7 +26,6 @@ bootstrap:
   script:
     - pip install --quiet --upgrade pip
     - pip install --quiet anthropic python-frontmatter pyyaml requests
-    - pip install --quiet sentence-transformers langchain-text-splitters
     # Infrastructure
     - python E0_MOTEUR_AGENTIQUE/ergo_core_system.py
     # Shadow Clone — snapshot immuable du code au démarrage du pipeline
@@ -35,8 +34,6 @@ bootstrap:
         --label "pipeline-start $CI_PIPELINE_ID"
         --auteur "gitlab-ci"
         --pipeline-id "$CI_PIPELINE_ID"
-    # RAG — ingestion vectorielle E1/E2 dans ChromaDB
-    - python E0_MOTEUR_AGENTIQUE/ingest_kos.py
     # Traçabilité
     - python E0_MOTEUR_AGENTIQUE/kos_registrar.py
     # Documentation — génère/met à jour les .md versionnés + DOC_INDEX.json
@@ -53,7 +50,6 @@ bootstrap:
       - E0_MOTEUR_AGENTIQUE/docs/
       - .shadow_clone/
       - E4_AUDIT_ET_ROUTAGE/
-      - KOS_DB/
     expire_in: 30 days
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
