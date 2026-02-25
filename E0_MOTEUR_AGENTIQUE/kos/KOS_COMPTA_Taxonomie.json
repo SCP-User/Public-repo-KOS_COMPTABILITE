@@ -1,6 +1,6 @@
 {
   "KOS_COMPTA_TAXONOMIE": {
-    "version": "1.1.0",
+    "version": "1.2.0",
     "date_creation": "2026-02-23",
     "auteur": "ERGO Capital",
     "statut": "ACTIF",
@@ -52,6 +52,14 @@
         "role": "Journal de suivi côté entreprise cliente — contexte opérationnel",
         "contenu": "Factures reçues, notes de frais, statuts, dépendances actives, historique client",
         "acces": "lecture + écriture par l'agent après chaque analyse"
+      },
+      "pdf_extractor.py": {
+        "role": "ETL sas d'entrée — convertit PDF natif / PDF scanné (OCR) / XML Factur-X en .md structuré pour la Dropzone",
+        "contenu": "pdfplumber (natif), pytesseract (OCR), lxml (Factur-X) — sortie frontmatter YAML + tableau Markdown",
+        "acces": "exécutable",
+        "entrees": "E3.1_Dropzone_Factures/input/*.pdf, *.xml, *.ubl",
+        "sorties": "E3.1_Dropzone_Factures/{stem}_{timestamp}.md",
+        "version": "1.0.0"
       },
       "agent_compliance.py": {
         "role": "Moteur exécutable Python — pipeline RAG + Claude API + routing E4",
@@ -205,8 +213,19 @@
         "formats_acceptes": ["md", "pdf", "csv", "xlsx", "json", "xml"],
         "convention_nommage": "{type}_{id}_{date}.{ext}",
         "exemples": ["facture_A102_20260310.md", "note_frais_NF045_20260310.csv"],
+        "sous_dossiers": {
+          "input": {
+            "role": "Dépôt des fichiers bruts (PDF/XML) — traités par pdf_extractor.py --batch",
+            "formats": ["pdf", "xml", "ubl"],
+            "note": "Les fichiers sont convertis en .md puis disponibles dans la Dropzone racine"
+          }
+        },
         "fichiers_existants": {
-          "brouillon_facture_A102.md": "Cas de test champagne 120€ TTC — TVA non déductible"
+          "facture_A102.md": "Cas de test champagne 120€ TTC — TVA non déductible — REJET attendu",
+          "facture_B001.md": "Fournitures bureau — CONFORME attendu",
+          "facture_C001.md": "Sans n° TVA — REJET attendu",
+          "note_frais_D001.md": "Repas 16€50 — CONFORME attendu",
+          "note_frais_E001.md": "Repas 110€ sans justif — AVERTISSEMENT attendu"
         }
       },
       "E3_2_Requetes_Assistants": {

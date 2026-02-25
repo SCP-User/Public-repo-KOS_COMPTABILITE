@@ -375,5 +375,21 @@
     "ergo_ids_impactes": [
       "PDF_EXTRACTOR"
     ]
+  },
+  {
+    "id": "J_0025",
+    "timestamp": "2026-02-25T14:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Mise à jour taxonomie v1.2.0 — pdf_extractor + dossier input/",
+    "detail": "KOS_COMPTA_Taxonomie.json passé en v1.2.0 : ajout de pdf_extractor.py dans CARTE_FICHIERS_JSON (rôle ETL, entrées/sorties, version 1.0.0), ajout du sous-dossier input/ dans E3_1_Dropzone_Factures (formats PDF/XML/UBL, note pdf_extractor --batch), mise à jour fichiers_existants avec les 5 cas de test réels.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": [
+      "PDF_EXTRACTOR"
+    ]
   }
 ]
