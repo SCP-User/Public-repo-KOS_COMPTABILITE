@@ -420,5 +420,16 @@
     "detail": "Créer veille_curative.py (ERGO_ID: VEILLE_CURATIVE) : récupération automatique des mises à jour légales via l'API Legifrance (DILA — gratuite, OAuth2). Objectif : maintenir E1_CORPUS_LEGAL_ETAT/ à jour sans intervention manuelle. Pistes : endpoint /consult/jorf pour les textes publiés au JO, filtrage par mots-clés (TVA, CGI, PCG, facturation). Sortie : mise à jour des .md E1 + ingest_kos.py relancé automatiquement.",
     "fichiers_impactes": [],
     "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0028",
+    "timestamp": "2026-02-25T17:00:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Duo Flow GitLab Hackathon — wrapper agent_compliance dans le groupe officiel",
+    "detail": "Créer un fichier .yml GitLab Duo Flow dans le repo du groupe hackathon (https://gitlab.com/gitlab-ai-hackathon) qui wrappe le pipeline KOS_COMPTA existant. Trigger : @ai-kos-compliance mentionné dans une issue ou MR. Flow appelle agent_compliance.py → verdict JSON → commentaire automatique. Lire le template participant fourni dans le projet hackathon. Supprimer l'extension .template, remplacer les placeholders, commiter, créer un tag pour publication dans le catalogue public. Tester le trigger @ai- dans une issue. Prérequis : lire doc GitLab Duo Flows sur https://gitlab.devpost.com/resources",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "PUBLISH_REPORT"]
   }
 ]
