@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-02-25T02:20:19.533270",
+  "generated_at": "2026-02-25T13:41:57.405277",
   "generateur": "DOC_GENERATOR",
-  "total_docs": 9,
+  "total_docs": 10,
   "docs": [
     {
       "doc_id": "DOC_0001",
@@ -101,6 +101,17 @@
       "doc_revision": 1,
       "premiere_generation": "2026-02-25T02:14:07.022709",
       "derniere_mise_a_jour": "2026-02-25T02:14:07.022709"
+    },
+    {
+      "doc_id": "DOC_0010",
+      "ergo_id": "PDF_EXTRACTOR",
+      "fichier_source": "pdf_extractor.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/PDF_EXTRACTOR.md",
+      "sha256_source": "18b26536",
+      "source_version": "1.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-25T13:41:57.389433",
+      "derniere_mise_a_jour": "2026-02-25T13:41:57.389433"
     }
   ]
 }

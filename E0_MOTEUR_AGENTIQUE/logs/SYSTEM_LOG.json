@@ -195,5 +195,14 @@
     "detail": "charger_normes() v1.1.0 : RAG ChromaDB n_results=3, prefixe query: E5, logging.warning fallback, format structuré NORME i",
     "auteur": "Claude Code",
     "ergo_id": "ERGO_0023"
+  },
+  {
+    "iteration": 24,
+    "timestamp": "2026-02-25T13:00:00",
+    "fichier": "pdf_extractor.py",
+    "action": "CREATED",
+    "detail": "ETL v1.0.0",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0024"
   }
 ]

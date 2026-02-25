@@ -74,6 +74,7 @@ Public-repo-KOS_COMPTABILITE/
 │   ├── system_code_register.py          ← ERGO_ID: CODE_REGISTER
 │   ├── kos_registrar.py                 ← ERGO_ID: KOS_REGISTRAR
 │   ├── doc_generator.py                 ← ERGO_ID: DOC_GENERATOR
+│   ├── pdf_extractor.py                 ← ERGO_ID: PDF_EXTRACTOR (ETL PDF/XML)
 │   ├── kos/                             ← JSONs constitutionnels (quasi-statiques)
 │   │   ├── KOS_COMPTA_Taxonomie.json    ← carte constitutionnelle
 │   │   ├── KOS_COMPTA_Agentique.json    ← règles de comportement agent
@@ -100,6 +101,7 @@ Public-repo-KOS_COMPTABILITE/
 │
 ├── E3_INTERFACES_ACTEURS/
 │   ├── E3.1_Dropzone_Factures/          ← documents à auditer (entrée pipeline)
+│   │   ├── input/                       ← PDF/XML bruts déposés ici
 │   │   ├── facture_A102.md              ← champagne 120€ → REJET attendu
 │   │   ├── facture_B001.md              ← fournitures bureau → CONFORME attendu
 │   │   ├── facture_C001.md              ← sans n° TVA → REJET attendu
@@ -239,6 +241,28 @@ python E0_MOTEUR_AGENTIQUE/shadow_clone.py --action diff --clone-id SHADOW_20260
 ```
 
 **Règle de révision :** `doc_revision` s'incrémente uniquement si le SHA-256 du `.py` source a changé depuis la dernière génération. Permet de détecter les dérives entre code et documentation.
+
+---
+
+## FLUX PIPELINE COMPLET — ETL → AUDIT → ROUTAGE
+
+```
+[input/]  facture.pdf / facture.xml
+    ↓  pdf_extractor.py --batch
+[Dropzone/]  facture_20260225_XXXX.md  (frontmatter YAML + tableau MD)
+    ↓  detect_document_type.py
+    ↓  agent_compliance.py  →  RAG ChromaDB / fallback
+[E4/]  RAPPORT_*.json  ou  PAYLOAD_*.json
+```
+
+**Commandes :**
+```bash
+# 1. Déposer PDF/XML dans input/
+# 2. Convertir en .md structuré
+python E0_MOTEUR_AGENTIQUE/pdf_extractor.py --batch
+# 3. Lancer l'audit complet
+python E0_MOTEUR_AGENTIQUE/agent_compliance.py
+```
 
 ---
 

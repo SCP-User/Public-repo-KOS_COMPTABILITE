@@ -321,10 +321,59 @@
     "timestamp": "2026-02-25T02:30:00",
     "session": "Claude Code",
     "type": "TACHE",
-    "statut": "TODO",
+    "statut": "DONE",
     "sujet": "Module lecture PDF — ingestion documents PDF dans le pipeline",
-    "detail": "Ajouter la capacite de lire et parser des fichiers PDF en plus des .md. Objectif : permettre l'ingestion de factures PDF natives dans E3.1_Dropzone_Factures et leur traitement par agent_compliance.py. Pistes : pdfplumber ou pypdf pour extraction texte, detection automatique du type de fichier, integration dans lire_facture() ou nouveau module dedie (ERGO_ID: PDF_READER). A planifier apres le hackathon.",
+    "detail": "Ajouter la capacite de lire et parser des fichiers PDF en plus des .md. Objectif : permettre l'ingestion de factures PDF natives dans E3.1_Dropzone_Factures et leur traitement par agent_compliance.py. Pistes : pdfplumber ou pypdf pour extraction texte, detection automatique du type de fichier, integration dans lire_facture() ou nouveau module dedie (ERGO_ID: PDF_READER). Implémenté via pdf_extractor.py v1.0.0 (ETL zéro API, PDF natif + OCR + XML Factur-X).",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/pdf_extractor.py"],
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
+  },
+  {
+    "id": "J_0022",
+    "timestamp": "2026-02-25T02:45:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Commit + push GitHub + GitLab — RAG ChromaDB complet (26 fichiers, +2028 lignes)",
+    "detail": "Premier push de la session RAG : commit 'feat: RAG ChromaDB complet' pushe sur origin (GitHub/SCP-User/Public-repo-KOS_COMPTABILITE) et gitlab (ergo363609). 26 fichiers changes dont ingest_kos.py, agent_compliance.py v1.1.0, 9 fichiers PCG ajoutes par Adam dans E1_CORPUS_LEGAL_ETAT/PGC-classes(RAG first)/, docs regenerees, KOS_JOURNAL J_0019-J_0021. Pipeline GitLab declenche automatiquement.",
     "fichiers_impactes": [],
-    "ergo_ids_impactes": []
+    "ergo_ids_impactes": [
+      "INGEST_KOS",
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0023",
+    "timestamp": "2026-02-25T03:00:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Fix CI pipeline — retrait sentence-transformers/torch du runner GitLab",
+    "detail": "Pipeline bootstrap a echoue : [Errno 28] No space left on device. Cause : ergo_core_system.py installe requirements.txt dans un venv, incluant sentence-transformers qui tire PyTorch (~1.5 Go) — trop lourd pour le runner saas-linux-small-amd64. Fix : retrait de sentence-transformers et langchain-text-splitters de requirements.txt et de .gitlab-ci.yml. Ces libs restent utilisables en local pour ingest_kos.py. En CI, charger_normes() bascule automatiquement sur le fallback substring (KOS_DB absent). Commit a pusher pour declencher le nouveau pipeline.",
+    "fichiers_impactes": [
+      "requirements.txt",
+      ".gitlab-ci.yml"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0024",
+    "timestamp": "2026-02-25T13:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Implémentation pdf_extractor.py v1.0.0 — ETL sas d'entrée factures",
+    "detail": "Création de pdf_extractor.py (ERGO_ID: PDF_EXTRACTOR) v1.0.0 : ETL zéro API capable de lire PDF natif (pdfplumber), PDF scanné OCR (pytesseract + pdf2image), et XML Factur-X (lxml). Génère des .md structurés (frontmatter YAML + tableau Markdown) dans E3.1_Dropzone_Factures/ prêts pour detect_document_type.py et agent_compliance.py. SYSTEM_LOG pointe vers E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json. Création du dossier input/ (avec .gitkeep) pour dépôt des fichiers bruts. Mise à jour requirements.txt (5 nouvelles dépendances ETL lazy-importées). Mise à jour CLAUDE.md : arborescence (pdf_extractor.py + input/) et nouvelle section flux pipeline complet ETL→AUDIT→ROUTAGE. J_0021 marqué DONE.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/pdf_extractor.py",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/input/.gitkeep",
+      "requirements.txt",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": [
+      "PDF_EXTRACTOR"
+    ]
   }
 ]
