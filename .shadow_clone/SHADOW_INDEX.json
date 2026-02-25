@@ -6,5 +6,13 @@
     "auteur": "Adam",
     "pipeline_id": "local-init",
     "nb_fichiers": 11
+  },
+  {
+    "clone_id": "SHADOW_20260225_141900_a3d1",
+    "timestamp": "2026-02-25T14:19:00.868619",
+    "label": "ETL      \n  v1.0.0",
+    "auteur": "CI/CD",
+    "pipeline_id": "",
+    "nb_fichiers": 11
   }
 ]

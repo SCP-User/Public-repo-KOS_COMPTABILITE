@@ -391,5 +391,34 @@
     "ergo_ids_impactes": [
       "PDF_EXTRACTOR"
     ]
+  },
+  {
+    "id": "J_0026",
+    "timestamp": "2026-02-25T16:53:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Test pipeline end-to-end — PDF réel + hallucination notée",
+    "detail": "Boucle complète validée : pdf_extractor.py (pdfplumber) → facture vétérinaire CVM-2025-012558 → .md Dropzone → agent_compliance.py (RAG ChromaDB + claude-sonnet-4-6) → RAPPORT JSON AVERTISSEMENT. Claude a correctement détecté : facture au nom d'un particulier, déductibilité professionnelle non démontrée, SIRET fournisseur manquant. Hallucination partielle : taux TVA 10% cité (CGI art.278-0 bis) — plausible légalement mais non applicable ici car facture personnelle, pas professionnelle. Piège intentionnel validé : le système signale bien le risque plutôt que de laisser passer. Coût analyse : 0,02€. RAG multilingual-e5-base opérationnel.",
+    "fichiers_impactes": [
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737_20260225_165258.json",
+      "E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json"
+    ],
+    "ergo_ids_impactes": [
+      "PDF_EXTRACTOR",
+      "COMPLIANCE_AGENT",
+      "INGEST_KOS"
+    ]
+  },
+  {
+    "id": "J_0027",
+    "timestamp": "2026-02-25T16:53:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Module veille_curative.py — API Legifrance (gratuite)",
+    "detail": "Créer veille_curative.py (ERGO_ID: VEILLE_CURATIVE) : récupération automatique des mises à jour légales via l'API Legifrance (DILA — gratuite, OAuth2). Objectif : maintenir E1_CORPUS_LEGAL_ETAT/ à jour sans intervention manuelle. Pistes : endpoint /consult/jorf pour les textes publiés au JO, filtrage par mots-clés (TVA, CGI, PCG, facturation). Sortie : mise à jour des .md E1 + ingest_kos.py relancé automatiquement.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
   }
 ]

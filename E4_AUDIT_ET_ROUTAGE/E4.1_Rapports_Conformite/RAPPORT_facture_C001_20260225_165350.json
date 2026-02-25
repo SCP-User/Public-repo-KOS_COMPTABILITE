@@ -1,0 +1,36 @@
+{
+  "document_source": "facture_C001.md",
+  "date_audit": "20260225_165350",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "La facture C001 est nulle en raison de l'absence simultanée de trois mentions obligatoires au sens du CGI Art. 289 : (1) numéro de facture séquentiel absent — entraînant la nullité de la facture, (2) numéro de TVA intracommunautaire du fournisseur absent — rendant la TVA non déductible, (3) numéro SIRET absent — empêchant l'identification légale du fournisseur. La TVA de 160,00 € ne peut pas être déduite. Les charges HT (800,00 €) restent déductibles à l'IS sous réserve de justification de la réalité de la prestation, mais la facture doit être corrigée avant tout paiement.",
+    "articles_appliques": [
+      "CGI Art. 289 — Mentions obligatoires des factures",
+      "CGI Art. 271 — Conditions de déductibilité de la TVA",
+      "PCG ANC 2014-03 — Classe 4, règles d'imputation fournisseurs"
+    ],
+    "corrections_requises": [
+      "Demander au fournisseur une facture rectificative comportant un numéro de facture séquentiel unique",
+      "Obtenir le numéro de TVA intracommunautaire du prestataire (format FR + 2 clés + SIREN)",
+      "Obtenir le numéro SIRET du prestataire (14 chiffres) pour identification légale",
+      "Vérifier si le prestataire est bien assujetti à la TVA (cas possible : franchise en base art. 293B CGI — mention obligatoire 'TVA non applicable' dans ce cas)",
+      "Bloquer le paiement jusqu'à réception de la facture rectificative conforme"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "60440 (Études et prestations de services — montant TTC entier car TVA non déductible)",
+      "compte_credit": "401 Fournisseurs",
+      "montant_ht": 800.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 160.0,
+      "montant_ttc": 960.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1660,
+      "output_tokens": 639,
+      "cout_estime_eur": 0.01456
+    }
+  }
+}

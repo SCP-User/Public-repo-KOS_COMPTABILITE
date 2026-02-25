@@ -1,0 +1,64 @@
+{
+  "clone_id": "SHADOW_20260225_141900_a3d1",
+  "timestamp": "2026-02-25T14:19:00.868619",
+  "label": "ETL      \n  v1.0.0",
+  "auteur": "CI/CD",
+  "pipeline_id": "",
+  "fichiers": {
+    "E0_MOTEUR_AGENTIQUE/agent_compliance.py": {
+      "statut": "CLONE",
+      "sha256": "ac36e08c159ed068",
+      "taille_bytes": 18931
+    },
+    "E0_MOTEUR_AGENTIQUE/detect_document_type.py": {
+      "statut": "CLONE",
+      "sha256": "cf510afeaeb3f39d",
+      "taille_bytes": 5829
+    },
+    "E0_MOTEUR_AGENTIQUE/publish_report.py": {
+      "statut": "CLONE",
+      "sha256": "4e20b45557f2fc8b",
+      "taille_bytes": 10544
+    },
+    "E0_MOTEUR_AGENTIQUE/shadow_clone.py": {
+      "statut": "CLONE",
+      "sha256": "2e67acf925f4b8c0",
+      "taille_bytes": 10655
+    },
+    "E0_MOTEUR_AGENTIQUE/ergo_core_system.py": {
+      "statut": "CLONE",
+      "sha256": "cdd1f32f40910a98",
+      "taille_bytes": 5591
+    },
+    "E0_MOTEUR_AGENTIQUE/system_code_register.py": {
+      "statut": "CLONE",
+      "sha256": "fd1d70f54d27a7c4",
+      "taille_bytes": 5331
+    },
+    "E0_MOTEUR_AGENTIQUE/kos_registrar.py": {
+      "statut": "CLONE",
+      "sha256": "17ce95bcf69ec101",
+      "taille_bytes": 9714
+    },
+    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json": {
+      "statut": "CLONE",
+      "sha256": "b175bd9da7a0f245",
+      "taille_bytes": 12744
+    },
+    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Agentique.json": {
+      "statut": "CLONE",
+      "sha256": "5fbfe800fe2a193c",
+      "taille_bytes": 7540
+    },
+    ".gitlab-ci.yml": {
+      "statut": "CLONE",
+      "sha256": "fa025c7828a0692b",
+      "taille_bytes": 5680
+    },
+    "requirements.txt": {
+      "statut": "CLONE",
+      "sha256": "c4a498acb12afa16",
+      "taille_bytes": 202
+    }
+  }
+}

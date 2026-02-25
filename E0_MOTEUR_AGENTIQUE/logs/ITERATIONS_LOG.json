@@ -115,5 +115,143 @@
         "fichier_sorti": "RAPPORT_note_frais_E001_20260224_122124.json"
       }
     ]
+  },
+  {
+    "iteration_id": "ITER_0002",
+    "pipeline_id": "local",
+    "timestamp_start": "2026-02-25T16:52:28.815822",
+    "timestamp_end": "2026-02-25T16:54:36.389513",
+    "duration_seconds": 127.57,
+    "documents_count": 6,
+    "resume": {
+      "CONFORME": 1,
+      "REJET": 3,
+      "AVERTISSEMENT": 2,
+      "ERREUR": 0
+    },
+    "cout_total_eur": 0.08993,
+    "tokens_total_input": 10255,
+    "tokens_total_output": 3945,
+    "documents": [
+      {
+        "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737.md",
+        "type": "facture_fournisseur",
+        "verdict": "AVERTISSEMENT",
+        "motif": "Facture de clinique vétérinaire (NAF 7500Z) au nom d'un particulier (M. PIERI Adam) pour des médicaments vétérinaires destinés à un animal non identifié à l'entreprise. La déductibilité fiscale et comptable est conditionnée à la démonstration du lien avec l'activité professionnelle de l'entreprise. Le taux de TVA appliqué (20%) sur les médicaments vétérinaires doit être vérifié : les médicaments vétérinaires sont en principe soumis à 10% en France (CGI art. 278-0 bis), sauf exceptions. Une anomalie de taux de TVA est détectée (20% appliqué au lieu de 10% attendu pour médicaments vétérinaires). Par ailleurs, le document présente des artefacts de double-impression (caractères doublés) suggérant une extraction PDF dégradée, et l'identité du fournisseur émetteur n'est pas clairement identifiable.",
+        "articles_appliques": [
+          "CGI art. 39-1 (charges déductibles — lien avec l'exploitation)",
+          "CGI art. 278-0 bis (taux réduit TVA — médicaments)",
+          "CGI art. 271 (TVA déductible — conditions)",
+          "CGI art. 206 (assujettissement TVA)",
+          "PCG ANC 2014-03 — Compte 606 (Achats non stockés de matières et fournitures)",
+          "PCG ANC 2014-03 — Compte 6288 (Divers autres charges)",
+          "Directive TVA 2006/112/CE art. 98 (taux réduits)"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "REVUE_HUMAINE",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 2089,
+        "tokens_output": 884,
+        "cout_eur": 0.01953,
+        "fichier_sorti": "RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737_20260225_165258.json"
+      },
+      {
+        "fichier": "facture_A102.md",
+        "type": "soumission_facture",
+        "verdict": "REJET",
+        "motif": "La TVA sur cadeaux d'entreprise n'est pas déductible lorsque la valeur unitaire TTC est supérieure ou égale à 73 € par bénéficiaire. Ici, chaque coffret champagne est facturé 120,00 € TTC, soit bien au-dessus du seuil légal de 73 € TTC. La déduction de 100,00 € sur le compte 44566 est donc refusée. L'intégralité du montant TTC doit être imputée en charge (compte 6230).",
+        "articles_appliques": [
+          "CGI Art. 236 — Exclusion du droit à déduction pour cadeaux ≥ 73 € TTC",
+          "CGI Art. 271 — Droit à déduction (non applicable ici)",
+          "CGI Art. 206 IV — Exclusions du droit à déduction",
+          "BOFiP TVA-DED-30-30-20"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1298,
+        "tokens_output": 579,
+        "cout_eur": 0.01258,
+        "fichier_sorti": "RAPPORT_facture_A102_20260225_165320.json"
+      },
+      {
+        "fichier": "facture_B001.md",
+        "type": "facture_fournisseur",
+        "verdict": "CONFORME",
+        "motif": "La facture FAC-2026-0892 respecte l'ensemble des exigences légales et comptables. Les mentions obligatoires sont présentes (numéros SIRET, TVA intracommunautaire, date, numéro de facture, désignation des biens, quantités, prix unitaires HT, taux de TVA). Les montants sont arithmétiquement corrects (10×5 + 5×12 + 8×17.50 = 50+60+140 = 250 HT ; TVA 20% = 50 ; TTC = 300). L'usage est exclusivement professionnel, la TVA est déductible. L'imputation en compte 60225 (Fournitures de bureau) est adaptée.",
+        "articles_appliques": [
+          "CGI Art. 256 — Opérations imposables à la TVA",
+          "CGI Art. 271 — Déductibilité de la TVA en amont",
+          "CGI Art. 289 — Mentions obligatoires sur les factures",
+          "PCG ANC 2014-03 — Compte 60225 Fournitures de bureau",
+          "PCG ANC 2014-03 — Compte 44566 TVA déductible sur autres biens et services"
+        ],
+        "niveau_risque": "FAIBLE",
+        "action_erp": "INJECTER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 2054,
+        "tokens_output": 480,
+        "cout_eur": 0.01336,
+        "fichier_sorti": "PAYLOAD_facture_B001_20260225_165333.json"
+      },
+      {
+        "fichier": "facture_C001.md",
+        "type": "facture_fournisseur",
+        "verdict": "REJET",
+        "motif": "La facture C001 est nulle en raison de l'absence simultanée de trois mentions obligatoires au sens du CGI Art. 289 : (1) numéro de facture séquentiel absent — entraînant la nullité de la facture, (2) numéro de TVA intracommunautaire du fournisseur absent — rendant la TVA non déductible, (3) numéro SIRET absent — empêchant l'identification légale du fournisseur. La TVA de 160,00 € ne peut pas être déduite. Les charges HT (800,00 €) restent déductibles à l'IS sous réserve de justification de la réalité de la prestation, mais la facture doit être corrigée avant tout paiement.",
+        "articles_appliques": [
+          "CGI Art. 289 — Mentions obligatoires des factures",
+          "CGI Art. 271 — Conditions de déductibilité de la TVA",
+          "PCG ANC 2014-03 — Classe 4, règles d'imputation fournisseurs"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1660,
+        "tokens_output": 639,
+        "cout_eur": 0.01456,
+        "fichier_sorti": "RAPPORT_facture_C001_20260225_165350.json"
+      },
+      {
+        "fichier": "note_frais_D001.md",
+        "type": "note_de_frais",
+        "verdict": "AVERTISSEMENT",
+        "motif": "Note de frais de repas d'affaires globalement recevable, mais émise sur ticket de caisse (non une facture au sens CGI art. 289) : absence de numéro de TVA intracommunautaire du fournisseur et de numéro de facture séquentiel. La TVA de 1,50 € est partiellement non déductible en l'absence de facture nominative conforme. Les charges HT restent déductibles à l'IS. Le montant par personne (8,25 € TTC) est bien inférieur au seuil de 73 €, l'objet professionnel est documenté et les participants sont identifiés.",
+        "articles_appliques": [
+          "CGI Art. 289 — mentions obligatoires de facturation",
+          "CGI Art. 206 IV — déductibilité TVA sur frais de réception",
+          "BOI-TVA-DED-30-30-20 — TVA sur dépenses de restaurant et réception",
+          "PCG ANC 2014-03 — compte 6257 (réceptions) ou 6256 (missions)",
+          "NORME KOS CGI_Art_289 — imputation en cas de facture sans numéro TVA fournisseur"
+        ],
+        "niveau_risque": "MOYEN",
+        "action_erp": "REVUE_HUMAINE",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1425,
+        "tokens_output": 706,
+        "cout_eur": 0.01486,
+        "fichier_sorti": "RAPPORT_note_frais_D001_20260225_165410.json"
+      },
+      {
+        "fichier": "note_frais_E001.md",
+        "type": "note_de_frais",
+        "verdict": "REJET",
+        "motif": "Note de frais rejetée en raison de multiples non-conformités bloquantes : absence de justificatif fiscal (ticket de caisse non joint), objet professionnel non précisé, liste des participants non fournie, et montant par convive incalculable. La TVA sur repas d'affaires n'est déductible qu'à hauteur de 80% et uniquement si le caractère professionnel est dûment justifié (CGI art. 206 IV-2). En l'état, la déductibilité IS et TVA est contestable.",
+        "articles_appliques": [
+          "CGI Art. 289 — mentions obligatoires et justificatifs",
+          "CGI Art. 206 IV-2 — déductibilité TVA sur frais de représentation et repas",
+          "CGI Art. 39-1-5° — déductibilité IS des charges mixtes (repas d'affaires)",
+          "BOI-TVA-DED-30-30-20 — exclusions du droit à déduction (dépenses de représentation)",
+          "CGI Art. 54 bis — obligation de justificatifs pour la déduction des charges"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1729,
+        "tokens_output": 657,
+        "cout_eur": 0.01504,
+        "fichier_sorti": "RAPPORT_note_frais_E001_20260225_165436.json"
+      }
+    ]
   }
 ]

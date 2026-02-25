@@ -1,0 +1,36 @@
+{
+  "document_source": "facture_A102.md",
+  "date_audit": "20260225_165320",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "La TVA sur cadeaux d'entreprise n'est pas déductible lorsque la valeur unitaire TTC est supérieure ou égale à 73 € par bénéficiaire. Ici, chaque coffret champagne est facturé 120,00 € TTC, soit bien au-dessus du seuil légal de 73 € TTC. La déduction de 100,00 € sur le compte 44566 est donc refusée. L'intégralité du montant TTC doit être imputée en charge (compte 6230).",
+    "articles_appliques": [
+      "CGI Art. 236 — Exclusion du droit à déduction pour cadeaux ≥ 73 € TTC",
+      "CGI Art. 271 — Droit à déduction (non applicable ici)",
+      "CGI Art. 206 IV — Exclusions du droit à déduction",
+      "BOFiP TVA-DED-30-30-20"
+    ],
+    "corrections_requises": [
+      "Supprimer la déduction de TVA de 100,00 € sur le compte 44566 : la valeur unitaire de 120,00 € TTC dépasse le seuil de 73 € TTC",
+      "Imputer la totalité du montant TTC (600,00 €) en charges sur le compte 6230 — Publicité/Cadeaux clients",
+      "Aucune TVA déductible à constater sur cette facture",
+      "Créditer le compte 401 — Fournisseur pour 600,00 €"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "6230 — Publicité, publications, relations publiques (cadeaux clients)",
+      "compte_credit": "401 — Fournisseurs",
+      "montant_ht": 500.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 100.0,
+      "montant_ttc": 600.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1298,
+      "output_tokens": 579,
+      "cout_estime_eur": 0.01258
+    }
+  }
+}

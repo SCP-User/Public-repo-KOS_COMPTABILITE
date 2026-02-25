@@ -204,5 +204,32 @@
     "detail": "ETL v1.0.0",
     "auteur": "Claude Code",
     "ergo_id": "ERGO_0024"
+  },
+  {
+    "iteration": 25,
+    "timestamp": "2026-02-25T14:00:00",
+    "fichier": "KOS_COMPTA_Taxonomie.json",
+    "action": "UPDATED",
+    "detail": "v1.2.0 — pdf_extractor + input/ Dropzone",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0025"
+  },
+  {
+    "iteration": 26,
+    "timestamp": "2026-02-25T16:33:08.626530",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "FAILED",
+    "detail": "pip install pytesseract pdf2image pillow\napt-get install tesseract-ocr tesseract-ocr-fra poppler-utils",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0026"
+  },
+  {
+    "iteration": 27,
+    "timestamp": "2026-02-25T16:37:37.354996",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "EXTRACTED",
+    "detail": "methode=pdfplumber | output=Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737.md",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0027"
   }
 ]

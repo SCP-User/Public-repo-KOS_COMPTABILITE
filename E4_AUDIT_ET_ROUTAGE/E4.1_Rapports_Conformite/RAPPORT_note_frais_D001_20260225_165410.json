@@ -1,0 +1,37 @@
+{
+  "document_source": "note_frais_D001.md",
+  "date_audit": "20260225_165410",
+  "verdict": {
+    "verdict": "AVERTISSEMENT",
+    "motif": "Note de frais de repas d'affaires globalement recevable, mais émise sur ticket de caisse (non une facture au sens CGI art. 289) : absence de numéro de TVA intracommunautaire du fournisseur et de numéro de facture séquentiel. La TVA de 1,50 € est partiellement non déductible en l'absence de facture nominative conforme. Les charges HT restent déductibles à l'IS. Le montant par personne (8,25 € TTC) est bien inférieur au seuil de 73 €, l'objet professionnel est documenté et les participants sont identifiés.",
+    "articles_appliques": [
+      "CGI Art. 289 — mentions obligatoires de facturation",
+      "CGI Art. 206 IV — déductibilité TVA sur frais de réception",
+      "BOI-TVA-DED-30-30-20 — TVA sur dépenses de restaurant et réception",
+      "PCG ANC 2014-03 — compte 6257 (réceptions) ou 6256 (missions)",
+      "NORME KOS CGI_Art_289 — imputation en cas de facture sans numéro TVA fournisseur"
+    ],
+    "corrections_requises": [
+      "Obtenir si possible une facture nominative auprès du restaurant (mention du nom de l'entreprise ERGO Capital, numéro de TVA intracommunautaire du fournisseur) pour permettre la déduction de la TVA",
+      "En l'absence de facture nominative conforme, imputer la TVA (1,50 €) en charge non récupérable (incluse dans le débit 6257)",
+      "Conserver le ticket de caisse original, la liste des participants signée et l'objet du repas comme justificatifs conformément aux obligations de documentation des frais généraux",
+      "Vérifier que la politique interne de notes de frais de l'entreprise est respectée (plafond, délai de remboursement)"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "6257 — Réceptions (HT + TVA non récupérable)",
+      "compte_credit": "421 — Personnel — Rémunérations dues (ou 512 si remboursement direct)",
+      "montant_ht": 15.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 1.5,
+      "montant_ttc": 16.5
+    },
+    "niveau_risque": "MOYEN",
+    "action_erp": "REVUE_HUMAINE",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1425,
+      "output_tokens": 706,
+      "cout_estime_eur": 0.01486
+    }
+  }
+}
