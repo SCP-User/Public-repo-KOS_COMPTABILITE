@@ -1,0 +1,41 @@
+{
+  "document_source": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737.md",
+  "date_audit": "20260225_165258",
+  "verdict": {
+    "verdict": "AVERTISSEMENT",
+    "motif": "Facture de clinique vétérinaire (NAF 7500Z) au nom d'un particulier (M. PIERI Adam) pour des médicaments vétérinaires destinés à un animal non identifié à l'entreprise. La déductibilité fiscale et comptable est conditionnée à la démonstration du lien avec l'activité professionnelle de l'entreprise. Le taux de TVA appliqué (20%) sur les médicaments vétérinaires doit être vérifié : les médicaments vétérinaires sont en principe soumis à 10% en France (CGI art. 278-0 bis), sauf exceptions. Une anomalie de taux de TVA est détectée (20% appliqué au lieu de 10% attendu pour médicaments vétérinaires). Par ailleurs, le document présente des artefacts de double-impression (caractères doublés) suggérant une extraction PDF dégradée, et l'identité du fournisseur émetteur n'est pas clairement identifiable.",
+    "articles_appliques": [
+      "CGI art. 39-1 (charges déductibles — lien avec l'exploitation)",
+      "CGI art. 278-0 bis (taux réduit TVA — médicaments)",
+      "CGI art. 271 (TVA déductible — conditions)",
+      "CGI art. 206 (assujettissement TVA)",
+      "PCG ANC 2014-03 — Compte 606 (Achats non stockés de matières et fournitures)",
+      "PCG ANC 2014-03 — Compte 6288 (Divers autres charges)",
+      "Directive TVA 2006/112/CE art. 98 (taux réduits)"
+    ],
+    "corrections_requises": [
+      "Vérifier et justifier le lien entre ces dépenses vétérinaires et l'activité professionnelle de l'entreprise (animal de garde, chien policier, animal d'élevage, etc.)",
+      "Contrôler le taux de TVA appliqué : les médicaments vétérinaires relèvent du taux de 10% (CGI art. 278-0 bis A) et non 20% — demander un avoir et une facture rectificative au fournisseur si le taux est erroné",
+      "Identifier clairement le fournisseur émetteur (raison sociale, SIRET complet) — le document ne mentionne que le numéro TVA FR53914517792",
+      "Obtenir une note de frais ou justificatif professionnel signé par M. PIERI Adam si remboursement de frais salarié",
+      "Vérifier que la facture est établie au nom de l'entreprise et non au nom du particulier pour permettre la déduction",
+      "Soumettre à validation du responsable comptable ou DAF avant imputation"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "62888",
+      "compte_credit": "401",
+      "montant_ht": 17.5,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 3.5,
+      "montant_ttc": 21.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "REVUE_HUMAINE",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 2089,
+      "output_tokens": 884,
+      "cout_estime_eur": 0.01953
+    }
+  }
+}

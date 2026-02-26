@@ -1,0 +1,486 @@
+[
+  {
+    "id": "J_0001",
+    "timestamp": "2026-02-23T14:00:00",
+    "session": "Claude.ai",
+    "type": "DECISION",
+    "statut": "DONE",
+    "sujet": "Architecture KOS_COMPTA définie",
+    "detail": "Conception de l'arborescence E0→E4, du pipeline 5 étapes, du format verdict JSON, et du système KOS constitutionnel. Fichier BRIEF_CLAUDE_CODE.md produit pour handoff.",
+    "fichiers_impactes": [
+      "BRIEF_CLAUDE_CODE.md",
+      "README.md",
+      "ERGO_CORE_SYSTEM_Architecture.md"
+    ],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0002",
+    "timestamp": "2026-02-23T14:02:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Init repo - arborescence E0 a E4 créée",
+    "detail": "Création de toute l'arborescence dans Public-repo-KOS_COMPTABILITE. Extraction des fichiers depuis les zips : agent_compliance.py, KOS JSONs constitutionnels, ergo_core_system.py, system_code_register.py, requirements.txt, normes E1, cas de test E3.1.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/ergo_core_system.py",
+      "E0_MOTEUR_AGENTIQUE/system_code_register.py",
+      "E1_CORPUS_LEGAL_ETAT/loi_tva_cadeaux.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_A102.md"
+    ],
+    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "COMPLIANCE_AGENT", "CODE_REGISTER"]
+  },
+  {
+    "id": "J_0003",
+    "timestamp": "2026-02-23T14:10:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Fichiers manquants créés - PRIORITES 2/3/4",
+    "detail": "Création de detect_document_type.py (PRIORITE 2), publish_report.py (PRIORITE 4), .gitlab-ci.yml complet 4 stages. Création de 3 normes E1 : mentions_obligatoires_facture.md, tva_regles_generales.md, pcg_classes_1_a_4.md. Création de 4 cas de test : B001, C001, D001, E001.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      ".gitlab-ci.yml",
+      "E1_CORPUS_LEGAL_ETAT/mentions_obligatoires_facture.md",
+      "E1_CORPUS_LEGAL_ETAT/tva_regles_generales.md",
+      "E1_CORPUS_LEGAL_ETAT/pcg_classes_1_a_4.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_B001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/facture_C001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/note_frais_D001.md",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/note_frais_E001.md"
+    ],
+    "ergo_ids_impactes": ["DETECT_DOCUMENT", "PUBLISH_REPORT"]
+  },
+  {
+    "id": "J_0004",
+    "timestamp": "2026-02-23T14:20:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Shadow Clone System créé",
+    "detail": "Création de shadow_clone.py (ERGO_ID: SHADOW_CLONE). Snapshots immuables du code à chaque run CI/CD. Actions : create, list, diff, restore. Stockage dans .shadow_clone/ avec SHADOW_INDEX.json et CLONE_MANIFEST.json par snapshot.",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/shadow_clone.py"],
+    "ergo_ids_impactes": ["SHADOW_CLONE"]
+  },
+  {
+    "id": "J_0005",
+    "timestamp": "2026-02-23T14:30:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme tracabilite complet - documentation pro",
+    "detail": "Réécriture complète de agent_compliance.py : ERGO_ID, type annotations, docstrings Google-style (0 commentaires inline), iteration log enrichi schema pipeline-level (ITER_XXXX). Création kos_registrar.py : scanne ERGO_IDs, génère KOS_ERGO_REGISTRY.json via AST. Nettoyage detect_document_type.py, publish_report.py, shadow_clone.py. Création CLAUDE.md (mémoire projet). Création KOS_JOURNAL.json (journal constitutionnel).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT",
+      "DETECT_DOCUMENT",
+      "PUBLISH_REPORT",
+      "SHADOW_CLONE",
+      "KOS_REGISTRAR"
+    ]
+  },
+  {
+    "id": "J_0006",
+    "timestamp": "2026-02-23T14:36:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme mis en place localement - bootstrap execute",
+    "detail": "Exécution locale de ergo_core_system.py (venv .venv_compta créé, dépendances installées). kos_registrar.py lancé - 7 composants enregistrés dans KOS_ERGO_REGISTRY.json. Shadow clone initial créé : SHADOW_20260223_143622_d022. system_code_register.py : ERGO_0006 à ERGO_0012 enregistrés (7 fichiers CREATED).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json",
+      ".shadow_clone/SHADOW_INDEX.json"
+    ],
+    "ergo_ids_impactes": [
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER"
+    ]
+  },
+  {
+    "id": "J_0011",
+    "timestamp": "2026-02-23T17:00:36",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme documentation .md versionné opérationnel - DOC_INDEX.json créé",
+    "detail": "Réécriture doc_generator.py v1.1.0 : ajout versioning SHA-256 (8 chars), identifiants DOC_XXXX séquentiels, doc_revision auto-incrémentée si SHA source change. Fonctions ajoutées : sha256_fichier(), charger_doc_index(), sauvegarder_doc_index(), prochain_doc_id(), mettre_a_jour_index(). Génération initiale : 8 .md versionnés (DOC_0001→DOC_0008) + DOC_INDEX.json. Frontmatter .md enrichi : doc_id, doc_revision, sha256_source. Pipeline .gitlab-ci.yml mis à jour : doc_generator.py dans stage setup, artifacts docs/ exposés. CLAUDE.md : arborescence maj, règles 9+10, section DOC_INDEX schema, commandes bash doc.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/doc_generator.py",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json",
+      "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DETECT_DOCUMENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_GENERATOR.md",
+      "E0_MOTEUR_AGENTIQUE/docs/CORE_BOOTSTRAP.md",
+      "E0_MOTEUR_AGENTIQUE/docs/KOS_REGISTRAR.md",
+      "E0_MOTEUR_AGENTIQUE/docs/PUBLISH_REPORT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/SHADOW_CLONE.md",
+      "E0_MOTEUR_AGENTIQUE/docs/CODE_REGISTER.md",
+      ".gitlab-ci.yml",
+      "CLAUDE.md"
+    ],
+    "ergo_ids_impactes": ["DOC_GENERATOR"]
+  },
+  {
+    "id": "J_0012",
+    "timestamp": "2026-02-23T17:20:00",
+    "session": "Claude Code",
+    "type": "NOTE",
+    "statut": "DONE",
+    "sujet": "Clarification architecture - roles des composants vis-a-vis de GitLab",
+    "detail": "Adam a demandé si agent_compliance.py était le lien avec GitLab. Clarification : (1) .gitlab-ci.yml = déclencheur pipeline, lu et exécuté par GitLab CI/CD ; (2) agent_compliance.py = cerveau LLM, aucun lien direct GitLab, appelle uniquement l'API Anthropic pour auditer les documents ; (3) publish_report.py = seul vrai lien GitLab actif, poste le verdict en commentaire MR via API REST GitLab. Greffiers système résumés : DOC_INDEX (DOC_XXXX), SYSTEM_LOG (ERGO_XXXX), KOS_ERGO_REGISTRY, SHADOW_INDEX, KOS_JOURNAL (J_XXXX), ITERATIONS_LOG (ITER_XXXX — attend ANTHROPIC_API_KEY).",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "PUBLISH_REPORT"]
+  },
+  {
+    "id": "J_0013",
+    "timestamp": "2026-02-23T17:21:20",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Reorganisation JSON E0 — kos/ logs/ registry/ + docs versionnees rev2",
+    "detail": "Classement des JSON de E0_MOTEUR_AGENTIQUE en 3 sous-dossiers : kos/ (constitutionnels : Taxonomie, Agentique, Client_Log), logs/ (opérationnels : SYSTEM_LOG, ITERATIONS_LOG, KOS_JOURNAL), registry/ (KOS_ERGO_REGISTRY). Mise à jour des chemins dans 5 scripts Python + .gitlab-ci.yml (artifacts × 3) + CLAUDE.md (protocole + arborescence). Validation : kos_registrar OK (registry/), system_code_register OK (logs/). doc_generator détecte automatiquement les SHA-256 modifiés → 5 composants passent en rev2 (COMPLIANCE_AGENT, CORE_BOOTSTRAP, KOS_REGISTRAR, SHADOW_CLONE, CODE_REGISTER). Shadow clone actif : SHADOW_20260223_143622_d022.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/ergo_core_system.py",
+      "E0_MOTEUR_AGENTIQUE/system_code_register.py",
+      "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json",
+      "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Agentique.json",
+      "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Client_Log.json",
+      "E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json",
+      "E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json",
+      ".gitlab-ci.yml",
+      "CLAUDE.md"
+    ],
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT",
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER"
+    ]
+  },
+  {
+    "id": "J_0014",
+    "timestamp": "2026-02-23T17:30:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Test a blanc agent_compliance.py — pipeline valide jusqu'a API key",
+    "detail": "Execution de agent_compliance.py sans ANTHROPIC_API_KEY. Resultat : demarrage OK, scan E3.1 OK (facture_A102.md detectee), lire_facture() OK, charger_normes() OK (RAG E1 execute), crash attendu sur KeyError ANTHROPIC_API_KEY dans analyser_avec_claude(). L'usine est operationnelle — seule la cle API manque pour un run complet. Shadow clone confirme actif (SHADOW_20260223_143622_d022). Chemin miroir .shadow_clone/ confirme normal (snapshot V1 avant refactoring JSON). Mention future : test comparatif avec Gemini API envisage.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0007",
+    "timestamp": "2026-02-24T00:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Push sur GitLab — repo hackathon en ligne",
+    "detail": "Repo GitLab public créé par Adam : https://gitlab.com/ergo363609/adaptation-de-ia-agentique-a-la-proceduralisation-informationnel-comptable. Remote 'gitlab' ajouté (origin GitHub conservé). Push de l'historique complet (4 commits) sur main. Pipeline .gitlab-ci.yml detecté automatiquement par GitLab. Prochaine etape : configurer variables CI/CD ANTHROPIC_API_KEY + GITLAB_TOKEN dans Settings > CI/CD > Variables.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0008",
+    "timestamp": "2026-02-23T14:37:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "DONE",
+    "sujet": "Test pipeline bout en bout avec ANTHROPIC_API_KEY",
+    "detail": "Poser la clé ANTHROPIC_API_KEY en variable d'env, lancer agent_compliance.py localement, vérifier que facture_A102.md produit un RAPPORT_*.json dans E4.1 avec verdict REJET, vérifier ITERATIONS_LOG.json créé.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json",
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/"
+    ],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0009",
+    "timestamp": "2026-02-23T14:37:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Demo video 2 minutes - script a ecrire",
+    "detail": "Écrire le script de la démo vidéo (ce qu'on dit + ce qu'on montre à chaque seconde). Enregistrement : dépôt facture A102 → pipeline GitLab → verdict REJET. Upload YouTube/Vimeo non listé.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0010",
+    "timestamp": "2026-02-23T14:45:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Systeme mis en place et opérationnel localement",
+    "detail": "Execution de ergo_core_system.py OK (venv + deps). kos_registrar.py : 7 composants ACTIVE dans KOS_ERGO_REGISTRY.json. Shadow clone initial SHADOW_20260223_143622_d022 (11 fichiers). SYSTEM_LOG : ERGO_0001 a ERGO_0015. ITERATIONS_LOG.json initialisé à []. Bug parser listes kos_registrar.py fixé. Champ 'role' ajouté dans les 4 docstrings ERGO_REGISTRY. Protocole demarrage session + regle mise a jour journal ajoutés dans CLAUDE.md.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/KOS_ERGO_REGISTRY.json",
+      "E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json",
+      "E0_MOTEUR_AGENTIQUE/kos_registrar.py",
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/detect_document_type.py",
+      "E0_MOTEUR_AGENTIQUE/publish_report.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "CLAUDE.md",
+      ".shadow_clone/SHADOW_INDEX.json"
+    ],
+    "ergo_ids_impactes": [
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER",
+      "COMPLIANCE_AGENT"
+    ]
+  },
+  {
+    "id": "J_0015",
+    "timestamp": "2026-02-24T12:12:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction API Key espace httpx.LocalProtocolError",
+    "detail": "Ajout de la methode .strip() a la recuperation de la variable d'environnement ANTHROPIC_API_KEY dans agent_compliance.py pour eviter le crash lie aux espaces malencontreux.",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0016",
+    "timestamp": "2026-02-24T12:16:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction UnicodeEncodeError Windows via encoding='utf-8'",
+    "detail": "Ajout explicite du parametre encoding='utf-8' sur les fonctions write_text() lors de l'enregistrement des payloads et rapports dans agent_compliance.py, pour eviter le crash lie a CP1252 sur Windows avec des elements speciaux (exemple : symbole superieur).",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0017",
+    "timestamp": "2026-02-24T12:20:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Correction UnicodeEncodeError Windows Console via sys.stdout.reconfigure",
+    "detail": "Ajout de sys.stdout.reconfigure(encoding='utf-8') en haut de agent_compliance.py pour eviter le plantage cp1252 du terminal Windows lors de l'impression des caracteres speciaux (emojis de bordure, cases a cocher et fleches).",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0018",
+    "timestamp": "2026-02-24T12:48:00",
+    "session": "Claude Code",
+    "type": "NOTE",
+    "statut": "DONE",
+    "sujet": "Clarification de l'Architecture — Separation des JSONs de sortie (E4 vs ITERATIONS)",
+    "detail": "Adam a demande si ITERATIONS_LOG.json devait contenir l'analyse formelle des documents. Reponse : NON. ITERATIONS_LOG.json est uniquement le 'Dashboard Token Economy' (log financier : quantite de tokens, cout Euro, resume du run). L'analyse comptable formelle generee par Claude est stockee dans les fichiers JSON du repertoire E4_AUDIT_ET_ROUTAGE (soit dans E4.1 pour publication par publish_report.py a destination de validants humains, soit dans E4.2 comme Payloads ERP destines a etre convertis ulterieurement en exports CSV ou lus par des APIs REST d'outils modernes type Pennylane).",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0019",
+    "timestamp": "2026-02-25T00:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Implementation module RAG ChromaDB — ingest_kos.py",
+    "detail": "Creation de ingest_kos.py (ERGO_ID: INGEST_KOS) : pipeline complet d'ingestion vectorielle des normes E1/E2 dans ChromaDB. Modele intfloat/multilingual-e5-base avec prefixes E5 asymetriques ('passage: ' a l'ingestion, 'query: ' a la requete) pour precision maximale. Chunks 700/100. Modification de charger_normes() dans agent_compliance.py : requete ChromaDB par similarite cosinus avec fallback sur l'ancienne methode substring si KOS_DB absent. Mise a jour requirements.txt (sentence-transformers>=3.0.0, langchain-text-splitters>=0.3.0), .gitlab-ci.yml (ingest_kos.py dans stage setup, KOS_DB/ en artifact), CLAUDE.md (arborescence + stack technique).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/ingest_kos.py",
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "requirements.txt",
+      ".gitlab-ci.yml",
+      "CLAUDE.md"
+    ],
+    "ergo_ids_impactes": ["INGEST_KOS", "COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0020",
+    "timestamp": "2026-02-25T02:20:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Affinage charger_normes() v1.1.0 — n_results=3, logging.warning fallback, format NORME i structure",
+    "detail": "Mise a jour de charger_normes() dans agent_compliance.py (version 1.0.0 -> 1.1.0) : (1) n_results ajuste de 5 a 3 — les 3 chunks les plus pertinents suffisent pour le prompt LLM et reduisent le bruit. (2) logging.warning explicite sur les deux cas de fallback : KOS_DB absent (avec message 'Lancer ingest_kos.py') et collection inaccessible (avec exception loguee). (3) Format de retour enrichi : chaque chunk devient 'NORME i — source [fichier] | Type | Tags | Applicable | contenu' pour maximiser la lisibilite dans le prompt Claude. (4) import logging ajoute au bloc d'imports du module. (5) ERGO_REGISTRY version 1.1.0 + dependances chromadb/sentence-transformers documentees. Documentation regeneree (DOC_0001 rev 4).",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+      "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json"
+    ],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0021",
+    "timestamp": "2026-02-25T02:30:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "DONE",
+    "sujet": "Module lecture PDF — ingestion documents PDF dans le pipeline",
+    "detail": "Ajouter la capacite de lire et parser des fichiers PDF en plus des .md. Objectif : permettre l'ingestion de factures PDF natives dans E3.1_Dropzone_Factures et leur traitement par agent_compliance.py. Pistes : pdfplumber ou pypdf pour extraction texte, detection automatique du type de fichier, integration dans lire_facture() ou nouveau module dedie (ERGO_ID: PDF_READER). Implémenté via pdf_extractor.py v1.0.0 (ETL zéro API, PDF natif + OCR + XML Factur-X).",
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/pdf_extractor.py"],
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
+  },
+  {
+    "id": "J_0022",
+    "timestamp": "2026-02-25T02:45:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Commit + push GitHub + GitLab — RAG ChromaDB complet (26 fichiers, +2028 lignes)",
+    "detail": "Premier push de la session RAG : commit 'feat: RAG ChromaDB complet' pushe sur origin (GitHub/SCP-User/Public-repo-KOS_COMPTABILITE) et gitlab (ergo363609). 26 fichiers changes dont ingest_kos.py, agent_compliance.py v1.1.0, 9 fichiers PCG ajoutes par Adam dans E1_CORPUS_LEGAL_ETAT/PGC-classes(RAG first)/, docs regenerees, KOS_JOURNAL J_0019-J_0021. Pipeline GitLab declenche automatiquement.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["INGEST_KOS", "COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0023",
+    "timestamp": "2026-02-25T03:00:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "Fix CI pipeline — retrait sentence-transformers/torch du runner GitLab",
+    "detail": "Pipeline bootstrap a echoue : [Errno 28] No space left on device. Cause : ergo_core_system.py installe requirements.txt dans un venv, incluant sentence-transformers qui tire PyTorch (~1.5 Go) — trop lourd pour le runner saas-linux-small-amd64. Fix : retrait de sentence-transformers et langchain-text-splitters de requirements.txt et de .gitlab-ci.yml. Ces libs restent utilisables en local pour ingest_kos.py. En CI, charger_normes() bascule automatiquement sur le fallback substring (KOS_DB absent). Commit a pusher pour declencher le nouveau pipeline.",
+    "fichiers_impactes": ["requirements.txt", ".gitlab-ci.yml"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0024",
+    "timestamp": "2026-02-25T13:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Implémentation pdf_extractor.py v1.0.0 — ETL sas d'entrée factures",
+    "detail": "Création de pdf_extractor.py (ERGO_ID: PDF_EXTRACTOR) v1.0.0 : ETL zéro API capable de lire PDF natif (pdfplumber), PDF scanné OCR (pytesseract + pdf2image), et XML Factur-X (lxml). Génère des .md structurés (frontmatter YAML + tableau Markdown) dans E3.1_Dropzone_Factures/ prêts pour detect_document_type.py et agent_compliance.py. SYSTEM_LOG pointe vers E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json. Création du dossier input/ (avec .gitkeep) pour dépôt des fichiers bruts. Mise à jour requirements.txt (5 nouvelles dépendances ETL lazy-importées). Mise à jour CLAUDE.md : arborescence (pdf_extractor.py + input/) et nouvelle section flux pipeline complet ETL→AUDIT→ROUTAGE. J_0021 marqué DONE.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/pdf_extractor.py",
+      "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/input/.gitkeep",
+      "requirements.txt",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
+  },
+  {
+    "id": "J_0025",
+    "timestamp": "2026-02-25T14:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Mise à jour taxonomie v1.2.0 — pdf_extractor + dossier input/",
+    "detail": "KOS_COMPTA_Taxonomie.json passé en v1.2.0 : ajout de pdf_extractor.py dans CARTE_FICHIERS_JSON (rôle ETL, entrées/sorties, version 1.0.0), ajout du sous-dossier input/ dans E3_1_Dropzone_Factures (formats PDF/XML/UBL, note pdf_extractor --batch), mise à jour fichiers_existants avec les 5 cas de test réels.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
+  },
+  {
+    "id": "J_0026",
+    "timestamp": "2026-02-25T16:53:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Test pipeline end-to-end — PDF réel + hallucination notée",
+    "detail": "Boucle complète validée : pdf_extractor.py (pdfplumber) → facture vétérinaire CVM-2025-012558 → .md Dropzone → agent_compliance.py (RAG ChromaDB + claude-sonnet-4-6) → RAPPORT JSON AVERTISSEMENT. Claude a correctement détecté : facture au nom d'un particulier, déductibilité professionnelle non démontrée, SIRET fournisseur manquant. Hallucination partielle : taux TVA 10% cité (CGI art.278-0 bis) — plausible légalement mais non applicable ici car facture personnelle, pas professionnelle. Piège intentionnel validé : le système signale bien le risque plutôt que de laisser passer. Coût analyse : 0,02€. RAG multilingual-e5-base opérationnel.",
+    "fichiers_impactes": [
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737_20260225_165258.json",
+      "E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json"
+    ],
+    "ergo_ids_impactes": ["PDF_EXTRACTOR", "COMPLIANCE_AGENT", "INGEST_KOS"]
+  },
+  {
+    "id": "J_0027",
+    "timestamp": "2026-02-25T16:53:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Module veille_curative.py — API Legifrance (gratuite)",
+    "detail": "Créer veille_curative.py (ERGO_ID: VEILLE_CURATIVE) : récupération automatique des mises à jour légales via l'API Legifrance (DILA — gratuite, OAuth2). Objectif : maintenir E1_CORPUS_LEGAL_ETAT/ à jour sans intervention manuelle. Pistes : endpoint /consult/jorf pour les textes publiés au JO, filtrage par mots-clés (TVA, CGI, PCG, facturation). Sortie : mise à jour des .md E1 + ingest_kos.py relancé automatiquement.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0028",
+    "timestamp": "2026-02-25T17:00:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "DONE",
+    "sujet": "Duo Flow GitLab Hackathon — wrapper agent_compliance dans le groupe officiel",
+    "detail": "YAML agent.yml et flow.yml préparés par Claude Code. Règles KOS embedées dans system_prompt (CGI Art.289/271/236/278-0bis/39-1, PCG ANC 2014-03, Code Commerce Art.L123-14). Trigger : @ai-kos-compliance dans issue/MR. Toolset : get_issue, create_issue_note, read_file. README hackathon rédigé (pitch, architecture, table règles légales, stack). À déployer via Web IDE dans https://gitlab.com/gitlab-ai-hackathon/participants/34837699 — remplacer agent.yml.template et flow.yml.template, commiter, créer tag v1.0.0.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0029",
+    "timestamp": "2026-02-25T17:30:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Vidéo démo 3 min — script + enregistrement",
+    "detail": "Scénario : (1) dépôt facture champagne dans input/ → pdf_extractor.py --batch → .md Dropzone (2) mention @ai-kos-compliance dans issue GitLab → verdict REJET en commentaire (3) montrer RAPPORT JSON dans E4.1 avec articles CGI cités. Durée max 3 min. Upload YouTube ou Vimeo non listé. Mentionner explicitement l'intégration Anthropic Claude API pour le Bonus $10K.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0030",
+    "timestamp": "2026-02-26T00:00:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "DONE",
+    "sujet": "Module export_csv.py — PAYLOAD JSON → CSV import ERP comptable",
+    "detail": "Créer export_csv.py (ERGO_ID: EXPORT_CSV) : lit les PAYLOAD_*.json dans E4.2_Payloads_ERP/ et génère un fichier CSV d'écritures comptables importable directement dans les ERP du marché (Sage, EBP, Cegid, Pennylane). Colonnes cibles : date, journal, compte_débit, compte_crédit, libellé, montant_HT, TVA, montant_TTC, référence_facture, statut_conformité. Format universel + variantes par ERP. Extension future : lecture tickets CB (relevés bancaires DSP2 / OFX / ISO20022) → même pipeline ETL → journalisation automatique complète. Objectif final : zéro saisie manuelle du dépôt document à l'écriture ERP. Implémenté comme export_erp.py (ERGO_ID: EXPORT_ERP) v2.0.0 dans E0_MOTEUR_AGENTIQUE/.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": ["EXPORT_ERP"]
+  },
+  {
+    "id": "J_0031",
+    "timestamp": "2026-02-26T17:26:00",
+    "session": "Gemini",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Déploiement export_erp.py v2.0.0 — Lab → Production KOS_COMPTA",
+    "detail": "Script kos_compta.py v2.0 (lab E3.2_Requetes_Assistants) adapté et déployé comme export_erp.py dans E0_MOTEUR_AGENTIQUE. Adaptations : header ERGO_ID: EXPORT_ERP + ERGO_REGISTRY, docstrings Google-style (0 commentaires inline), type annotations complètes, fix encoding Windows (sys.stdout.reconfigure utf-8). Chemins Pathlib confirmés identiques (BASE_DIR = Path(__file__).parent.parent → E4.2 lecture, E4.3 écriture, archive/). 3 gardes conservés intégralement : validation JSON, intégrité comptable HT+TVA=TTC, archivage transactionnel. Dossier E4.3_Imports_ERP créé (.gitkeep). CLAUDE.md mis à jour (arborescence + E4.3). J_0030 marqué DONE.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/export_erp.py",
+      "E4_AUDIT_ET_ROUTAGE/E4.3_Imports_ERP/.gitkeep",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": ["EXPORT_ERP"]
+  },
+  {
+    "id": "J_0032",
+    "timestamp": "2026-02-26T17:47:00",
+    "session": "Gemini",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "README roadmap V2/V3, Mermaid workflow, shadow clone, nettoyage doublons E4.1",
+    "detail": "README.md : ajout section Roadmap (V2 Veille Curative Legifrance, V3 Factur-X), ajout diagramme Mermaid complet des relations entre les 9 scripts E0, ajout E4.3_Imports_ERP dans architecture. shadow_clone.py : ajout export_erp.py + ingest_kos.py + doc_generator.py + pdf_extractor.py dans FICHIERS_CIBLES (15 fichiers total), fix encoding Windows UTF-8. Shadow clone SHADOW_20260226_174725_0c28 créé. Nettoyage 4 doublons E4.1 (rapports du 20260224 supprimés, seuls les 20260225 conservés). CSV test supprimé de E4.3.",
+    "fichiers_impactes": [
+      "README.md",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json",
+      ".shadow_clone/SHADOW_20260226_174725_0c28/"
+    ],
+    "ergo_ids_impactes": ["SHADOW_CLONE"]
+  }
+]

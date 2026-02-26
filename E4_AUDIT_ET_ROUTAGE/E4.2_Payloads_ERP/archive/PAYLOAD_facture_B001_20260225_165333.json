@@ -1,0 +1,30 @@
+{
+  "ergo_pgi_export_v1": {
+    "document_source": "facture_B001.md",
+    "date_export": "20260225_165333",
+    "compliance_status": "conforme",
+    "analyse_par": "claude-sonnet-4-6",
+    "cout_eur": 0.01336,
+    "ecriture": {
+      "journal": "ACH",
+      "libelle": "Import auto — facture_B001.md",
+      "lignes": [
+        {
+          "compte": "60225",
+          "debit": 250.0,
+          "credit": 0
+        },
+        {
+          "compte": "44566",
+          "debit": 50.0,
+          "credit": 0
+        },
+        {
+          "compte": "401",
+          "debit": 0,
+          "credit": 300.0
+        }
+      ]
+    }
+  }
+}

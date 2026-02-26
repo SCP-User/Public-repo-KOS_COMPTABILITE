@@ -1,0 +1,26 @@
+[
+  {
+    "clone_id": "SHADOW_20260223_143622_d022",
+    "timestamp": "2026-02-23T14:36:22.311100",
+    "label": "init-projet session-1",
+    "auteur": "Adam",
+    "pipeline_id": "local-init",
+    "nb_fichiers": 11
+  },
+  {
+    "clone_id": "SHADOW_20260225_141900_a3d1",
+    "timestamp": "2026-02-25T14:19:00.868619",
+    "label": "ETL      \n  v1.0.0",
+    "auteur": "CI/CD",
+    "pipeline_id": "",
+    "nb_fichiers": 11
+  },
+  {
+    "clone_id": "SHADOW_20260226_174725_0c28",
+    "timestamp": "2026-02-26T17:47:25.703646",
+    "label": "post-export_erp v2.0.0",
+    "auteur": "Gemini",
+    "pipeline_id": "",
+    "nb_fichiers": 15
+  }
+]

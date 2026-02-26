@@ -1,0 +1,39 @@
+{
+  "document_source": "note_frais_E001.md",
+  "date_audit": "20260225_165436",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "Note de frais rejetée en raison de multiples non-conformités bloquantes : absence de justificatif fiscal (ticket de caisse non joint), objet professionnel non précisé, liste des participants non fournie, et montant par convive incalculable. La TVA sur repas d'affaires n'est déductible qu'à hauteur de 80% et uniquement si le caractère professionnel est dûment justifié (CGI art. 206 IV-2). En l'état, la déductibilité IS et TVA est contestable.",
+    "articles_appliques": [
+      "CGI Art. 289 — mentions obligatoires et justificatifs",
+      "CGI Art. 206 IV-2 — déductibilité TVA sur frais de représentation et repas",
+      "CGI Art. 39-1-5° — déductibilité IS des charges mixtes (repas d'affaires)",
+      "BOI-TVA-DED-30-30-20 — exclusions du droit à déduction (dépenses de représentation)",
+      "CGI Art. 54 bis — obligation de justificatifs pour la déduction des charges"
+    ],
+    "corrections_requises": [
+      "Fournir le ticket de caisse original du restaurant Le Grand Véfour daté du 2026-03-18",
+      "Préciser la liste nominative des participants avec leur qualité (interne/externe)",
+      "Documenter l'objet professionnel du repas (nom du client, nature de la réunion, projet concerné)",
+      "Recalculer le montant par convive afin de justifier le caractère non excessif de la dépense",
+      "Sans ces éléments, imputer la totalité TTC (110,00 €) en charge non déductible TVA et soumettre à validation RH/Direction pour déductibilité IS",
+      "Si le repas est en solo, appliquer la limite de raisonnabilité et envisager un rejet partiel ou total de la charge"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "62570",
+      "compte_credit": "42500",
+      "montant_ht": 110.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 10.0,
+      "montant_ttc": 110.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1729,
+      "output_tokens": 657,
+      "cout_estime_eur": 0.01504
+    }
+  }
+}

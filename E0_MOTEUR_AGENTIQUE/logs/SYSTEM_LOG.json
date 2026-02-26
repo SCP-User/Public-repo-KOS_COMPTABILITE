@@ -1,0 +1,235 @@
+[
+  {
+    "timestamp": "2026-02-23T14:33:14.544107",
+    "fichier": "ergo_core_system.py",
+    "action": "creer_venv",
+    "statut": "OK",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-02-23T14:35:48.452881",
+    "fichier": "ergo_core_system.py",
+    "action": "installer_dependances",
+    "statut": "OK",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-02-23T14:35:48.463963",
+    "fichier": "ergo_core_system.py",
+    "action": "initialiser_dossiers",
+    "statut": "OK",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-02-23T14:35:48.474985",
+    "fichier": "ergo_core_system.py",
+    "action": "verifier_variables_env",
+    "statut": "OK",
+    "detail": ""
+  },
+  {
+    "timestamp": "2026-02-23T14:35:48.484366",
+    "fichier": "ergo_core_system.py",
+    "action": "bootstrap_complet",
+    "statut": "SUCCES",
+    "detail": ""
+  },
+  {
+    "iteration": 6,
+    "timestamp": "2026-02-23T14:36:36.995945",
+    "fichier": "agent_compliance.py",
+    "action": "CREATED",
+    "detail": "Pipeline 5 etapes - audit conformite comptable",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0006"
+  },
+  {
+    "iteration": 7,
+    "timestamp": "2026-02-23T14:36:37.075928",
+    "fichier": "detect_document_type.py",
+    "action": "CREATED",
+    "detail": "Stage detect - scan E3.1 dropzone",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0007"
+  },
+  {
+    "iteration": 8,
+    "timestamp": "2026-02-23T14:36:37.161575",
+    "fichier": "publish_report.py",
+    "action": "CREATED",
+    "detail": "Stage report - post MR comment GitLab",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0008"
+  },
+  {
+    "iteration": 9,
+    "timestamp": "2026-02-23T14:36:37.246389",
+    "fichier": "shadow_clone.py",
+    "action": "CREATED",
+    "detail": "Shadow cloning system - snapshots immuables du code",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0009"
+  },
+  {
+    "iteration": 10,
+    "timestamp": "2026-02-23T14:36:37.336054",
+    "fichier": "kos_registrar.py",
+    "action": "CREATED",
+    "detail": "Registre ERGO_ID - scan + generation KOS_ERGO_REGISTRY",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0010"
+  },
+  {
+    "iteration": 11,
+    "timestamp": "2026-02-23T14:36:37.420186",
+    "fichier": ".gitlab-ci.yml",
+    "action": "CREATED",
+    "detail": "Pipeline CI/CD 4 stages - setup detect audit report",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0011"
+  },
+  {
+    "iteration": 12,
+    "timestamp": "2026-02-23T14:36:37.509036",
+    "fichier": "CLAUDE.md",
+    "action": "CREATED",
+    "detail": "Fichier memoire projet Claude Code",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0012"
+  },
+  {
+    "iteration": 13,
+    "timestamp": "2026-02-23T14:39:30.833794",
+    "fichier": "KOS_JOURNAL.json",
+    "action": "CREATED",
+    "detail": "Journal constitutionnel - 9 entrees initiales J_0001 a J_0009",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0013"
+  },
+  {
+    "iteration": 14,
+    "timestamp": "2026-02-23T14:39:30.917104",
+    "fichier": "ITERATIONS_LOG.json",
+    "action": "CREATED",
+    "detail": "Log iterations pipeline - schema ITER_XXXX - init vide []",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0014"
+  },
+  {
+    "iteration": 15,
+    "timestamp": "2026-02-23T14:39:30.998615",
+    "fichier": "CLAUDE.md",
+    "action": "UPDATED",
+    "detail": "Ajout protocole demarrage session + regles mise a jour journal",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0015"
+  },
+  {
+    "iteration": 16,
+    "timestamp": "2026-02-23T14:45:45.406257",
+    "fichier": "KOS_JOURNAL.json",
+    "action": "UPDATED",
+    "detail": "J_0010 ajoute - session cloturee - systeme operationnel",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0016"
+  },
+  {
+    "iteration": 17,
+    "timestamp": "2026-02-23T17:20:17.579207",
+    "fichier": "reorganisation.json",
+    "action": "UPDATED",
+    "detail": "JSON classes en kos/ logs/ registry/",
+    "auteur": "Adam",
+    "ergo_id": "ERGO_0017"
+  },
+  {
+    "iteration": 18,
+    "timestamp": "2026-02-24T12:11:47.224156",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix variable espaces API Key avec .strip()",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0018"
+  },
+  {
+    "iteration": 19,
+    "timestamp": "2026-02-24T12:13:54.663811",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix variable espaces API Key avec .strip()",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0019"
+  },
+  {
+    "iteration": 20,
+    "timestamp": "2026-02-24T12:16:16.064018",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix write_text encoding utf-8 pour outputs Windows",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0020"
+  },
+  {
+    "iteration": 21,
+    "timestamp": "2026-02-24T12:18:03.114120",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "Fix UnicodeEncodeError print emojis via sys.stdout.reconfigure(encoding='utf-8')",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0021"
+  },
+  {
+    "iteration": 22,
+    "timestamp": "2026-02-24T12:32:58.705183",
+    "fichier": "publish_report.py",
+    "action": "UPDATED",
+    "detail": "Fix sys.stdout.reconfigure(utf-8) pour eviter crash flèche sur cmd windows",
+    "auteur": "CI/CD",
+    "ergo_id": "ERGO_0022"
+  },
+  {
+    "iteration": 23,
+    "timestamp": "2026-02-25T02:20:26.817911",
+    "fichier": "agent_compliance.py",
+    "action": "UPDATED",
+    "detail": "charger_normes() v1.1.0 : RAG ChromaDB n_results=3, prefixe query: E5, logging.warning fallback, format structuré NORME i",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0023"
+  },
+  {
+    "iteration": 24,
+    "timestamp": "2026-02-25T13:00:00",
+    "fichier": "pdf_extractor.py",
+    "action": "CREATED",
+    "detail": "ETL v1.0.0",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0024"
+  },
+  {
+    "iteration": 25,
+    "timestamp": "2026-02-25T14:00:00",
+    "fichier": "KOS_COMPTA_Taxonomie.json",
+    "action": "UPDATED",
+    "detail": "v1.2.0 — pdf_extractor + input/ Dropzone",
+    "auteur": "Claude Code",
+    "ergo_id": "ERGO_0025"
+  },
+  {
+    "iteration": 26,
+    "timestamp": "2026-02-25T16:33:08.626530",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "FAILED",
+    "detail": "pip install pytesseract pdf2image pillow\napt-get install tesseract-ocr tesseract-ocr-fra poppler-utils",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0026"
+  },
+  {
+    "iteration": 27,
+    "timestamp": "2026-02-25T16:37:37.354996",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "EXTRACTED",
+    "detail": "methode=pdfplumber | output=Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737.md",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0027"
+  }
+]

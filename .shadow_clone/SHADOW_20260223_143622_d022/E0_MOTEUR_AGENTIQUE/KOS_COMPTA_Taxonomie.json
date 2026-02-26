@@ -1,0 +1,250 @@
+{
+  "KOS_COMPTA_TAXONOMIE": {
+    "version": "1.1.0",
+    "date_creation": "2026-02-23",
+    "auteur": "ERGO Capital",
+    "statut": "ACTIF",
+    "role": "Fichier taxonomique central — cartographie l'intégralité du système KOS_COMPTA. Décrit le rôle de chaque fichier JSON, chaque dossier, chaque dépendance. Point d'entrée obligatoire pour tout LLM entrant dans le projet.",
+    "note": "Ce fichier ne contient PAS les règles agentiques (voir KOS_COMPTA_Agentique.json) ni les logs client (voir KOS_COMPTA_Client_Log.json). Il est la carte — pas le moteur."
+  },
+
+  "FONDEMENTS_JURIDIQUES": {
+    "principe_fondateur": "Le KOS est le législateur. Le LLM est l'exécuteur. Le CI/CD est le tribunal.",
+    "article_L123_14": {
+      "reference": "Code de Commerce — Article L123-14",
+      "version_en_vigueur": "depuis le 21 septembre 2000",
+      "texte_integral": "Les comptes annuels doivent être réguliers, sincères et donner une image fidèle du patrimoine, de la situation financière et du résultat de l'entreprise. Lorsque l'application d'une prescription comptable ne suffit pas pour donner l'image fidèle mentionnée au présent article, des informations complémentaires doivent être fournies dans l'annexe. Si, dans un cas exceptionnel, l'application d'une prescription comptable se révèle impropre à donner une image fidèle du patrimoine, de la situation financière ou du résultat, il doit y être dérogé. Cette dérogation est mentionnée à l'annexe et dûment motivée, avec l'indication de son influence sur le patrimoine, la situation financière et le résultat de l'entreprise.",
+      "note_ergo": "Article non exhaustif — constitue le socle minimal. Des prescriptions complémentaires peuvent s'appliquer selon le secteur, la taille et la forme juridique de l'entreprise."
+    },
+    "trois_principes": {
+      "regularite": {
+        "definition": "Conformité aux règles et procédures en vigueur",
+        "portee": "PCG, CGI, Code de Commerce, normes ANC",
+        "non_exhaustif": true
+      },
+      "sincerite": {
+        "definition": "Application de bonne foi des règles selon la réalité économique des opérations",
+        "portee": "Absence d'omission, absence de dissimulation, réalité de l'opération",
+        "non_exhaustif": true
+      },
+      "image_fidele": {
+        "definition": "Les comptes reflètent fidèlement le patrimoine, la situation financière et le résultat",
+        "portee": "Prudence, continuité d'exploitation, permanence des méthodes, dérogation motivée si nécessaire",
+        "non_exhaustif": true
+      }
+    }
+  },
+
+  "CARTE_FICHIERS_JSON": {
+    "description": "Rôle précis de chaque fichier JSON du système — ce que le LLM doit savoir sur chacun",
+    "E0_MOTEUR_AGENTIQUE": {
+      "KOS_COMPTA_Taxonomie.json": {
+        "role": "CE FICHIER — carte taxonomique globale, lire EN PREMIER",
+        "contenu": "Structure du projet, fondements juridiques, rôle de chaque fichier",
+        "acces": "lecture seule pour les agents"
+      },
+      "KOS_COMPTA_Agentique.json": {
+        "role": "Règles de comportement agentique — protocoles internes ERGO",
+        "contenu": "Ordre de raisonnement, règles de verdict, gestion des mises à jour, communication ERGO",
+        "acces": "lecture seule pour les agents"
+      },
+      "KOS_COMPTA_Client_Log.json": {
+        "role": "Journal de suivi côté entreprise cliente — contexte opérationnel",
+        "contenu": "Factures reçues, notes de frais, statuts, dépendances actives, historique client",
+        "acces": "lecture + écriture par l'agent après chaque analyse"
+      },
+      "agent_compliance.py": {
+        "role": "Moteur exécutable Python — pipeline RAG + Claude API + routing E4",
+        "contenu": "5 étapes : lecture facture, RAG E1+E2, analyse Claude, routing E4, log itération",
+        "acces": "exécutable"
+      },
+      ".gitlab-ci.yml": {
+        "role": "Déclencheur CI/CD GitLab — active le pipeline sur trigger MR ou push",
+        "contenu": "4 stages : detect, load_kos, analyse, report",
+        "acces": "lecture par GitLab Runner"
+      },
+      "ITERATIONS_LOG.json": {
+        "role": "Journal technique d'audit — toutes les analyses horodatées côté système",
+        "contenu": "timestamp, document, verdict, LLM utilisé, coût tokens",
+        "acces": "écriture automatique après chaque pipeline"
+      }
+    }
+  },
+
+  "CARTE_DOSSIERS": {
+    "E1_CORPUS_LEGAL_ETAT": {
+      "role": "Vérité absolue — normes légales FR et européennes. LECTURE SEULE. Primauté absolue sur E2.",
+      "sources_autorisees": [
+        "CGI — Code Général des Impôts",
+        "PCG — Plan Comptable Général (ANC Règlement 2014-03)",
+        "Code de Commerce",
+        "BOFiP — Bulletin Officiel des Finances Publiques",
+        "Directives européennes 2013/34/UE",
+        "Normes IFRS applicables en France",
+        "Jurisprudence fiscale française"
+      ],
+      "fichiers_existants": {
+        "loi_tva_cadeaux.md": "TVA cadeaux — seuil 73€ TTC — CGI Art.236"
+      },
+      "fichiers_a_creer": [
+        "pcg_classes_1_a_4.md",
+        "pcg_classes_5_a_8.md",
+        "tva_regles_generales.md",
+        "tva_cas_speciaux.md",
+        "mentions_obligatoires_facture.md",
+        "cycle_achat_normes.md",
+        "cycle_vente_normes.md",
+        "cycle_tresorerie_normes.md",
+        "normes_bilan_actif_passif.md",
+        "normes_compte_resultat.md",
+        "principes_comptables_generaux.md"
+      ]
+    },
+
+    "E2_SOP_INTERNE_ET_ERP": {
+      "role": "Règles de l'entreprise cliente — procédures internes, politique RH, paramétrage ERP, dépendances outils externes. Subordonné à E1 en cas de conflit.",
+      "sous_categories": {
+
+        "plan_comptable_entreprise": {
+          "description": "Adaptation du PCG général aux spécificités de l'entreprise cliente",
+          "contenu_type": [
+            "Comptes auxiliaires créés (ex: 401xxx par fournisseur)",
+            "Codes analytiques internes",
+            "Centres de coût",
+            "Journaux spécifiques créés dans l'ERP"
+          ],
+          "fichier_cible": "plan_comptable_client.json"
+        },
+
+        "politique_notes_de_frais": {
+          "description": "Règles internes de remboursement des dépenses professionnelles",
+          "contenu_type": [
+            "Plafonds par catégorie (repas, transport, hébergement)",
+            "Délai de soumission maximum",
+            "Niveau d'autorisation requis selon montant",
+            "Justificatifs obligatoires par type de dépense",
+            "Barèmes kilométriques applicables (URSSAF)",
+            "Politique cadeaux clients (cohérence avec seuil TVA 73€)"
+          ],
+          "fichier_cible": "politique_notes_de_frais.json"
+        },
+
+        "seuils_autorisation": {
+          "description": "Qui peut valider quoi selon le montant",
+          "contenu_type": [
+            "Seuil 1 : auto-validation collaborateur (ex: < 50€)",
+            "Seuil 2 : validation N+1 (ex: 50€ à 500€)",
+            "Seuil 3 : validation direction (ex: > 500€)",
+            "Seuil 4 : validation conseil / DAF (ex: > 5000€)"
+          ],
+          "fichier_cible": "seuils_autorisation.json"
+        },
+
+        "parametrage_erp": {
+          "description": "Configuration spécifique de l'ERP utilisé par l'entreprise cliente",
+          "erp_supportes": ["Sage 50/100", "EBP Compta", "Cegid", "QuickBooks", "Pennylane", "Axonaut"],
+          "contenu_type": [
+            "Méthode d'import (API native / CSV / JSON)",
+            "Format d'écriture attendu",
+            "Codes journaux",
+            "Mapping comptes PCG ↔ comptes ERP"
+          ],
+          "fichier_cible": "config_erp_client.json"
+        },
+
+        "dependances_outils_externes": {
+          "description": "Applications tierces connectées au flux documentaire de l'entreprise cliente",
+          "outils_identifies": {
+            "Cleemy_by_Notilus": {
+              "type": "Gestion notes de frais",
+              "role_dans_systeme": "Source de données pour E3.1 — export automatique des notes de frais validées",
+              "format_export": ["CSV", "XML", "API REST"],
+              "point_integration": "Webhook ou export périodique vers E3.1_Dropzone_Factures",
+              "site": "https://www.notilus.com/cleemy"
+            },
+            "Expensya": {
+              "type": "Gestion notes de frais — alternative Cleemy",
+              "role_dans_systeme": "Source de données E3.1",
+              "format_export": ["CSV", "API REST"],
+              "point_integration": "E3.1_Dropzone_Factures"
+            },
+            "Jenji": {
+              "type": "Gestion notes de frais IA — scanning OCR",
+              "role_dans_systeme": "OCR natif — fournit données structurées directement",
+              "format_export": ["JSON", "CSV"],
+              "point_integration": "E3.1_Dropzone_Factures"
+            },
+            "Chorus_Pro": {
+              "type": "Plateforme factures électroniques — obligatoire secteur public FR",
+              "role_dans_systeme": "Source factures fournisseurs secteur public",
+              "format_export": ["XML UBL", "PDF/A3"],
+              "point_integration": "E3.1_Dropzone_Factures",
+              "obligatoire_depuis": "2017 pour fournisseurs de l'Etat"
+            },
+            "Pennylane": {
+              "type": "Logiciel comptable + collecte automatique",
+              "role_dans_systeme": "Peut remplacer ou compléter E3 — collecte OCR native",
+              "format_export": ["API REST", "CSV"],
+              "point_integration": "Double sens — E3.1 input ET E4.2 output ERP"
+            },
+            "bancaires_API_DSP2": {
+              "type": "Flux bancaires open banking",
+              "role_dans_systeme": "Alimentation cycle trésorerie — rapprochement automatique",
+              "format_export": ["JSON ISO20022", "OFX"],
+              "point_integration": "E3.1_Dropzone_Factures — sous-dossier /relevés"
+            }
+          },
+          "note_integration": "Chaque outil externe doit avoir un connecteur Python dédié dans E0. L'agent ne se connecte jamais directement aux APIs externes — les connecteurs déposent les fichiers normalisés dans E3.1."
+        }
+      }
+    },
+
+    "E3_INTERFACES_ACTEURS": {
+      "E3_1_Dropzone_Factures": {
+        "role": "Zone d'entrée documents — factures, notes de frais, relevés, écritures manuelles",
+        "formats_acceptes": ["md", "pdf", "csv", "xlsx", "json", "xml"],
+        "convention_nommage": "{type}_{id}_{date}.{ext}",
+        "exemples": ["facture_A102_20260310.md", "note_frais_NF045_20260310.csv"],
+        "fichiers_existants": {
+          "brouillon_facture_A102.md": "Cas de test champagne 120€ TTC — TVA non déductible"
+        }
+      },
+      "E3_2_Requetes_Assistants": {
+        "role": "Mode copilote — questions libres de l'humain (comptable, DAF, dirigeant)",
+        "format": "fichier .md avec frontmatter YAML type: requete_humaine",
+        "exemple_requete": "Quelle est la TVA applicable sur un cadeau client à 90€ TTC ?"
+      }
+    },
+
+    "E4_AUDIT_ET_ROUTAGE": {
+      "E4_1_Rapports_Conformite": {
+        "role": "Verdicts REJET et AVERTISSEMENT avec explication légale complète",
+        "format_sortie": "RAPPORT_{id_document}_{timestamp}.json",
+        "contenu_rapport": ["verdict", "motif", "articles_legaux_cites", "corrections_requises", "niveau_risque"]
+      },
+      "E4_2_Payloads_ERP": {
+        "role": "Fichiers validés et normalisés — prêts à injection dans l'ERP client",
+        "format_sortie": "PAYLOAD_{id_document}_{timestamp}.json",
+        "standard": "ergo_pgi_export_v1",
+        "compatibilite": ["Sage", "EBP", "Cegid", "QuickBooks", "Pennylane", "CSV universel"]
+      }
+    }
+  },
+
+  "OPEN_LLM_STRATEGY": {
+    "principe": "Les règles comptables sont dans le KOS, pas dans le modèle. Changer de LLM ne change pas la conformité.",
+    "routing": {
+      "claude-sonnet-4-6": "Analyse conformité principale — raisonnement légal structuré — Bonus Anthropic",
+      "gemini-2.5-flash": "Documents scannés PDF — vision multimodale",
+      "ollama-llama3": "Données confidentielles — zéro envoi externe",
+      "mistral-7b": "Volume élevé — FR natif — gratuit en local"
+    }
+  },
+
+  "METADONNEES": {
+    "hackathon": "GitLab AI Hackathon 2026",
+    "deadline": "2026-03-25T14:00:00-04:00",
+    "bonus_vise": "Anthropic Bonus 10K USD + Most Impactful 5K USD",
+    "tags": ["kos-compta", "taxonomie", "compliance", "pcg", "tva", "ci-cd", "open-llm", "pme-fr", "ergo-capital"]
+  }
+}
