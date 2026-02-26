@@ -7,7 +7,11 @@
     "statut": "DONE",
     "sujet": "Architecture KOS_COMPTA définie",
     "detail": "Conception de l'arborescence E0→E4, du pipeline 5 étapes, du format verdict JSON, et du système KOS constitutionnel. Fichier BRIEF_CLAUDE_CODE.md produit pour handoff.",
-    "fichiers_impactes": ["BRIEF_CLAUDE_CODE.md", "README.md", "ERGO_CORE_SYSTEM_Architecture.md"],
+    "fichiers_impactes": [
+      "BRIEF_CLAUDE_CODE.md",
+      "README.md",
+      "ERGO_CORE_SYSTEM_Architecture.md"
+    ],
     "ergo_ids_impactes": []
   },
   {
@@ -78,7 +82,13 @@
       "CLAUDE.md",
       "E0_MOTEUR_AGENTIQUE/KOS_JOURNAL.json"
     ],
-    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "DETECT_DOCUMENT", "PUBLISH_REPORT", "SHADOW_CLONE", "KOS_REGISTRAR"]
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT",
+      "DETECT_DOCUMENT",
+      "PUBLISH_REPORT",
+      "SHADOW_CLONE",
+      "KOS_REGISTRAR"
+    ]
   },
   {
     "id": "J_0006",
@@ -93,7 +103,12 @@
       "E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json",
       ".shadow_clone/SHADOW_INDEX.json"
     ],
-    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER"]
+    "ergo_ids_impactes": [
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER"
+    ]
   },
   {
     "id": "J_0011",
@@ -155,7 +170,13 @@
       ".gitlab-ci.yml",
       "CLAUDE.md"
     ],
-    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER"]
+    "ergo_ids_impactes": [
+      "COMPLIANCE_AGENT",
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER"
+    ]
   },
   {
     "id": "J_0014",
@@ -187,7 +208,10 @@
     "statut": "DONE",
     "sujet": "Test pipeline bout en bout avec ANTHROPIC_API_KEY",
     "detail": "Poser la clé ANTHROPIC_API_KEY en variable d'env, lancer agent_compliance.py localement, vérifier que facture_A102.md produit un RAPPORT_*.json dans E4.1 avec verdict REJET, vérifier ITERATIONS_LOG.json créé.",
-    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json", "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/"],
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json",
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/"
+    ],
     "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
@@ -221,7 +245,13 @@
       "CLAUDE.md",
       ".shadow_clone/SHADOW_INDEX.json"
     ],
-    "ergo_ids_impactes": ["CORE_BOOTSTRAP", "KOS_REGISTRAR", "SHADOW_CLONE", "CODE_REGISTER", "COMPLIANCE_AGENT"]
+    "ergo_ids_impactes": [
+      "CORE_BOOTSTRAP",
+      "KOS_REGISTRAR",
+      "SHADOW_CLONE",
+      "CODE_REGISTER",
+      "COMPLIANCE_AGENT"
+    ]
   },
   {
     "id": "J_0015",
@@ -231,12 +261,8 @@
     "statut": "DONE",
     "sujet": "Correction API Key espace httpx.LocalProtocolError",
     "detail": "Ajout de la methode .strip() a la recuperation de la variable d'environnement ANTHROPIC_API_KEY dans agent_compliance.py pour eviter le crash lie aux espaces malencontreux.",
-    "fichiers_impactes": [
-      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
-    ],
-    "ergo_ids_impactes": [
-      "COMPLIANCE_AGENT"
-    ]
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0016",
@@ -246,12 +272,8 @@
     "statut": "DONE",
     "sujet": "Correction UnicodeEncodeError Windows via encoding='utf-8'",
     "detail": "Ajout explicite du parametre encoding='utf-8' sur les fonctions write_text() lors de l'enregistrement des payloads et rapports dans agent_compliance.py, pour eviter le crash lie a CP1252 sur Windows avec des elements speciaux (exemple : symbole superieur).",
-    "fichiers_impactes": [
-      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
-    ],
-    "ergo_ids_impactes": [
-      "COMPLIANCE_AGENT"
-    ]
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0017",
@@ -261,12 +283,8 @@
     "statut": "DONE",
     "sujet": "Correction UnicodeEncodeError Windows Console via sys.stdout.reconfigure",
     "detail": "Ajout de sys.stdout.reconfigure(encoding='utf-8') en haut de agent_compliance.py pour eviter le plantage cp1252 du terminal Windows lors de l'impression des caracteres speciaux (emojis de bordure, cases a cocher et fleches).",
-    "fichiers_impactes": [
-      "E0_MOTEUR_AGENTIQUE/agent_compliance.py"
-    ],
-    "ergo_ids_impactes": [
-      "COMPLIANCE_AGENT"
-    ]
+    "fichiers_impactes": ["E0_MOTEUR_AGENTIQUE/agent_compliance.py"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0018",
@@ -294,10 +312,7 @@
       ".gitlab-ci.yml",
       "CLAUDE.md"
     ],
-    "ergo_ids_impactes": [
-      "INGEST_KOS",
-      "COMPLIANCE_AGENT"
-    ]
+    "ergo_ids_impactes": ["INGEST_KOS", "COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0020",
@@ -312,9 +327,7 @@
       "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
       "E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json"
     ],
-    "ergo_ids_impactes": [
-      "COMPLIANCE_AGENT"
-    ]
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0021",
@@ -336,10 +349,7 @@
     "sujet": "Commit + push GitHub + GitLab — RAG ChromaDB complet (26 fichiers, +2028 lignes)",
     "detail": "Premier push de la session RAG : commit 'feat: RAG ChromaDB complet' pushe sur origin (GitHub/SCP-User/Public-repo-KOS_COMPTABILITE) et gitlab (ergo363609). 26 fichiers changes dont ingest_kos.py, agent_compliance.py v1.1.0, 9 fichiers PCG ajoutes par Adam dans E1_CORPUS_LEGAL_ETAT/PGC-classes(RAG first)/, docs regenerees, KOS_JOURNAL J_0019-J_0021. Pipeline GitLab declenche automatiquement.",
     "fichiers_impactes": [],
-    "ergo_ids_impactes": [
-      "INGEST_KOS",
-      "COMPLIANCE_AGENT"
-    ]
+    "ergo_ids_impactes": ["INGEST_KOS", "COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0023",
@@ -349,13 +359,8 @@
     "statut": "DONE",
     "sujet": "Fix CI pipeline — retrait sentence-transformers/torch du runner GitLab",
     "detail": "Pipeline bootstrap a echoue : [Errno 28] No space left on device. Cause : ergo_core_system.py installe requirements.txt dans un venv, incluant sentence-transformers qui tire PyTorch (~1.5 Go) — trop lourd pour le runner saas-linux-small-amd64. Fix : retrait de sentence-transformers et langchain-text-splitters de requirements.txt et de .gitlab-ci.yml. Ces libs restent utilisables en local pour ingest_kos.py. En CI, charger_normes() bascule automatiquement sur le fallback substring (KOS_DB absent). Commit a pusher pour declencher le nouveau pipeline.",
-    "fichiers_impactes": [
-      "requirements.txt",
-      ".gitlab-ci.yml"
-    ],
-    "ergo_ids_impactes": [
-      "COMPLIANCE_AGENT"
-    ]
+    "fichiers_impactes": ["requirements.txt", ".gitlab-ci.yml"],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
   },
   {
     "id": "J_0024",
@@ -372,9 +377,7 @@
       "CLAUDE.md",
       "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
     ],
-    "ergo_ids_impactes": [
-      "PDF_EXTRACTOR"
-    ]
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
   },
   {
     "id": "J_0025",
@@ -388,9 +391,7 @@
       "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json",
       "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
     ],
-    "ergo_ids_impactes": [
-      "PDF_EXTRACTOR"
-    ]
+    "ergo_ids_impactes": ["PDF_EXTRACTOR"]
   },
   {
     "id": "J_0026",
@@ -404,11 +405,7 @@
       "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737_20260225_165258.json",
       "E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json"
     ],
-    "ergo_ids_impactes": [
-      "PDF_EXTRACTOR",
-      "COMPLIANCE_AGENT",
-      "INGEST_KOS"
-    ]
+    "ergo_ids_impactes": ["PDF_EXTRACTOR", "COMPLIANCE_AGENT", "INGEST_KOS"]
   },
   {
     "id": "J_0027",
@@ -448,10 +445,42 @@
     "timestamp": "2026-02-26T00:00:00",
     "session": "Claude Code",
     "type": "TACHE",
-    "statut": "TODO",
+    "statut": "DONE",
     "sujet": "Module export_csv.py — PAYLOAD JSON → CSV import ERP comptable",
-    "detail": "Créer export_csv.py (ERGO_ID: EXPORT_CSV) : lit les PAYLOAD_*.json dans E4.2_Payloads_ERP/ et génère un fichier CSV d'écritures comptables importable directement dans les ERP du marché (Sage, EBP, Cegid, Pennylane). Colonnes cibles : date, journal, compte_débit, compte_crédit, libellé, montant_HT, TVA, montant_TTC, référence_facture, statut_conformité. Format universel + variantes par ERP. Extension future : lecture tickets CB (relevés bancaires DSP2 / OFX / ISO20022) → même pipeline ETL → journalisation automatique complète. Objectif final : zéro saisie manuelle du dépôt document à l'écriture ERP.",
+    "detail": "Créer export_csv.py (ERGO_ID: EXPORT_CSV) : lit les PAYLOAD_*.json dans E4.2_Payloads_ERP/ et génère un fichier CSV d'écritures comptables importable directement dans les ERP du marché (Sage, EBP, Cegid, Pennylane). Colonnes cibles : date, journal, compte_débit, compte_crédit, libellé, montant_HT, TVA, montant_TTC, référence_facture, statut_conformité. Format universel + variantes par ERP. Extension future : lecture tickets CB (relevés bancaires DSP2 / OFX / ISO20022) → même pipeline ETL → journalisation automatique complète. Objectif final : zéro saisie manuelle du dépôt document à l'écriture ERP. Implémenté comme export_erp.py (ERGO_ID: EXPORT_ERP) v2.0.0 dans E0_MOTEUR_AGENTIQUE/.",
     "fichiers_impactes": [],
-    "ergo_ids_impactes": []
+    "ergo_ids_impactes": ["EXPORT_ERP"]
+  },
+  {
+    "id": "J_0031",
+    "timestamp": "2026-02-26T17:26:00",
+    "session": "Gemini",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Déploiement export_erp.py v2.0.0 — Lab → Production KOS_COMPTA",
+    "detail": "Script kos_compta.py v2.0 (lab E3.2_Requetes_Assistants) adapté et déployé comme export_erp.py dans E0_MOTEUR_AGENTIQUE. Adaptations : header ERGO_ID: EXPORT_ERP + ERGO_REGISTRY, docstrings Google-style (0 commentaires inline), type annotations complètes, fix encoding Windows (sys.stdout.reconfigure utf-8). Chemins Pathlib confirmés identiques (BASE_DIR = Path(__file__).parent.parent → E4.2 lecture, E4.3 écriture, archive/). 3 gardes conservés intégralement : validation JSON, intégrité comptable HT+TVA=TTC, archivage transactionnel. Dossier E4.3_Imports_ERP créé (.gitkeep). CLAUDE.md mis à jour (arborescence + E4.3). J_0030 marqué DONE.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/export_erp.py",
+      "E4_AUDIT_ET_ROUTAGE/E4.3_Imports_ERP/.gitkeep",
+      "CLAUDE.md",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json"
+    ],
+    "ergo_ids_impactes": ["EXPORT_ERP"]
+  },
+  {
+    "id": "J_0032",
+    "timestamp": "2026-02-26T17:47:00",
+    "session": "Gemini",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "README roadmap V2/V3, Mermaid workflow, shadow clone, nettoyage doublons E4.1",
+    "detail": "README.md : ajout section Roadmap (V2 Veille Curative Legifrance, V3 Factur-X), ajout diagramme Mermaid complet des relations entre les 9 scripts E0, ajout E4.3_Imports_ERP dans architecture. shadow_clone.py : ajout export_erp.py + ingest_kos.py + doc_generator.py + pdf_extractor.py dans FICHIERS_CIBLES (15 fichiers total), fix encoding Windows UTF-8. Shadow clone SHADOW_20260226_174725_0c28 créé. Nettoyage 4 doublons E4.1 (rapports du 20260224 supprimés, seuls les 20260225 conservés). CSV test supprimé de E4.3.",
+    "fichiers_impactes": [
+      "README.md",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      "E0_MOTEUR_AGENTIQUE/logs/KOS_JOURNAL.json",
+      ".shadow_clone/SHADOW_20260226_174725_0c28/"
+    ],
+    "ergo_ids_impactes": ["SHADOW_CLONE"]
   }
 ]

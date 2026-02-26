@@ -1,0 +1,143 @@
+# KOS_COMPTA — GitLab CI/CD Pipeline
+# ERGO Capital — Hackathon GitLab AI 2026
+# The KOS is the legislator. The LLM is the executor. The CI/CD is the tribunal.
+
+stages:
+  - setup
+  - detect
+  - audit
+  - report
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  KOS_PATH: "$CI_PROJECT_DIR"
+
+cache:
+  paths:
+    - .cache/pip
+
+# ─────────────────────────────────────────────
+# STAGE 1 — SETUP
+# Bootstrap + Shadow Clone (snapshot du code avant run)
+# ─────────────────────────────────────────────
+bootstrap:
+  stage: setup
+  image: python:3.11-slim
+  script:
+    - pip install --quiet --upgrade pip
+    - pip install --quiet anthropic python-frontmatter pyyaml requests
+    # Infrastructure
+    - python E0_MOTEUR_AGENTIQUE/ergo_core_system.py
+    # Shadow Clone — snapshot immuable du code au démarrage du pipeline
+    - python E0_MOTEUR_AGENTIQUE/shadow_clone.py
+        --action create
+        --label "pipeline-start $CI_PIPELINE_ID"
+        --auteur "gitlab-ci"
+        --pipeline-id "$CI_PIPELINE_ID"
+    # Traçabilité
+    - python E0_MOTEUR_AGENTIQUE/kos_registrar.py
+    # Documentation — génère/met à jour les .md versionnés + DOC_INDEX.json
+    - python E0_MOTEUR_AGENTIQUE/doc_generator.py
+    - python E0_MOTEUR_AGENTIQUE/system_code_register.py
+        --fichier "ergo_core_system.py"
+        --action DEPLOYED
+        --detail "Bootstrap pipeline $CI_PIPELINE_ID"
+        --auteur "gitlab-ci"
+  artifacts:
+    paths:
+      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
+      - E0_MOTEUR_AGENTIQUE/registry/KOS_ERGO_REGISTRY.json
+      - E0_MOTEUR_AGENTIQUE/docs/
+      - .shadow_clone/
+      - E4_AUDIT_ET_ROUTAGE/
+    expire_in: 30 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+# ─────────────────────────────────────────────
+# STAGE 2 — DETECT
+# Identifie le type de document entrant dans E3.1
+# ─────────────────────────────────────────────
+detect_document:
+  stage: detect
+  image: python:3.11-slim
+  needs: [bootstrap]
+  script:
+    - pip install --quiet python-frontmatter pyyaml
+    - python E0_MOTEUR_AGENTIQUE/detect_document_type.py
+        --path "$KOS_PATH/E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures"
+        --output document_type.env
+    - python E0_MOTEUR_AGENTIQUE/system_code_register.py
+        --fichier "detect_document_type.py"
+        --action DEPLOYED
+        --detail "Detection run $CI_PIPELINE_ID"
+        --auteur "gitlab-ci"
+    - cat document_type.env
+  artifacts:
+    reports:
+      dotenv: document_type.env
+    paths:
+      - document_type.env
+      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
+    expire_in: 1 day
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+# ─────────────────────────────────────────────
+# STAGE 3 — AUDIT
+# RAG sur E1+E2 + analyse via Claude API
+# ─────────────────────────────────────────────
+compliance_audit:
+  stage: audit
+  image: python:3.11-slim
+  needs: [detect_document]
+  script:
+    - pip install --quiet anthropic python-frontmatter pyyaml
+    - python E0_MOTEUR_AGENTIQUE/agent_compliance.py
+    - python E0_MOTEUR_AGENTIQUE/system_code_register.py
+        --fichier "agent_compliance.py"
+        --action DEPLOYED
+        --detail "Audit compliance run $CI_PIPELINE_ID — verdict dans E4"
+        --auteur "gitlab-ci"
+    - echo "=== RAPPORTS GÉNÉRÉS ==="
+    - ls E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/ 2>/dev/null || echo "(aucun rejet)"
+    - ls E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/ 2>/dev/null || echo "(aucun payload conforme)"
+  artifacts:
+    paths:
+      - E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/
+      - E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/
+      - E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json
+      - E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
+    expire_in: 30 days
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+# ─────────────────────────────────────────────
+# STAGE 4 — REPORT
+# Publie le verdict en commentaire sur la Merge Request
+# ─────────────────────────────────────────────
+publish_report:
+  stage: report
+  image: python:3.11-slim
+  needs: [compliance_audit]
+  script:
+    - pip install --quiet requests
+    - python E0_MOTEUR_AGENTIQUE/publish_report.py
+        --report-dir "$KOS_PATH/E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite"
+        --payload-dir "$KOS_PATH/E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP"
+        --mr-iid "$CI_MERGE_REQUEST_IID"
+        --project-id "$CI_PROJECT_ID"
+        --token "$GITLAB_TOKEN"
+    - python E0_MOTEUR_AGENTIQUE/system_code_register.py
+        --fichier "publish_report.py"
+        --action DEPLOYED
+        --detail "Rapport publié sur MR $CI_MERGE_REQUEST_IID"
+        --auteur "gitlab-ci"
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'

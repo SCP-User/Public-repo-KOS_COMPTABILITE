@@ -15,6 +15,7 @@
 **Quand Adam dit "okay on met à jour le log" :**
 
 Ajouter une entrée dans `KOS_JOURNAL.json` avec :
+
 - `id` : prochain `J_XXXX` séquentiel
 - `timestamp` : horodatage ISO 8601 actuel
 - `session` : "Claude Code"
@@ -36,7 +37,8 @@ Puis mettre à jour les entrées précédentes dont le statut a changé (ex: TOD
 **Bonus visés** : Anthropic ($10K) + Most Impactful ($5K)
 
 **Principe fondateur :**
-> *The KOS is the legislator. The LLM is the executor. The CI/CD is the tribunal.*
+
+> _The KOS is the legislator. The LLM is the executor. The CI/CD is the tribunal._
 
 **Ce que ça fait :** Agent GitLab CI/CD qui intercepte les documents comptables avant injection ERP,
 les audite contre le droit français (Art. L123-14 Code de Commerce), et produit un verdict JSON
@@ -46,11 +48,11 @@ structuré : CONFORME → payload ERP / REJET → rapport légal motivé.
 
 ## RÔLES
 
-| Acteur | Rôle |
-|---|---|
+| Acteur          | Rôle                                       |
+| --------------- | ------------------------------------------ |
 | **Claude Code** | Agent Ouvrier — exécute, code, teste, push |
-| **Claude.ai** | Architecte — conçoit, documente, structure |
-| **Adam** | Chef d'Orchestre — valide et oriente |
+| **Claude.ai**   | Architecte — conçoit, documente, structure |
+| **Adam**        | Chef d'Orchestre — valide et oriente       |
 
 ---
 
@@ -75,6 +77,7 @@ Public-repo-KOS_COMPTABILITE/
 │   ├── kos_registrar.py                 ← ERGO_ID: KOS_REGISTRAR
 │   ├── doc_generator.py                 ← ERGO_ID: DOC_GENERATOR
 │   ├── pdf_extractor.py                 ← ERGO_ID: PDF_EXTRACTOR (ETL PDF/XML)
+│   ├── export_erp.py                    ← ERGO_ID: EXPORT_ERP (JSON→CSV CEGID)
 │   ├── kos/                             ← JSONs constitutionnels (quasi-statiques)
 │   │   ├── KOS_COMPTA_Taxonomie.json    ← carte constitutionnelle
 │   │   ├── KOS_COMPTA_Agentique.json    ← règles de comportement agent
@@ -111,7 +114,9 @@ Public-repo-KOS_COMPTABILITE/
 │
 └── E4_AUDIT_ET_ROUTAGE/
     ├── E4.1_Rapports_Conformite/        ← RAPPORT_*.json générés automatiquement
-    └── E4.2_Payloads_ERP/               ← PAYLOAD_*.json générés automatiquement
+    ├── E4.2_Payloads_ERP/               ← PAYLOAD_*.json générés automatiquement
+    │   └── archive/                     ← JSONs déjà exportés par export_erp.py
+    └── E4.3_Imports_ERP/                ← IMPORT_CEGID_*.csv générés par export_erp.py
 ```
 
 ---
@@ -121,10 +126,12 @@ Public-repo-KOS_COMPTABILITE/
 ### Règle d'annotation
 
 Chaque fichier Python du projet **doit** avoir :
+
 1. Un header `# ERGO_ID: NOM_COMPOSANT` en première ligne
 2. Une docstring de module avec une section `ERGO_REGISTRY:` structurée
 
 Format obligatoire :
+
 ```python
 # ERGO_ID: MON_COMPOSANT
 """
@@ -144,11 +151,11 @@ ERGO_REGISTRY:
 
 ### Règles de documentation (NO COMMENTS)
 
-| Autorisé | Interdit |
-|---|---|
+| Autorisé                                      | Interdit                                    |
+| --------------------------------------------- | ------------------------------------------- |
 | Docstrings Google-style sur fonctions/modules | Commentaires inline `# explication logique` |
-| Type annotations sur tous les paramètres | Section headers `# ─────────────────────` |
-| `ERGO_ID` + `ERGO_REGISTRY` dans docstring | Commentaires d'explication de structure |
+| Type annotations sur tous les paramètres      | Section headers `# ─────────────────────`   |
+| `ERGO_ID` + `ERGO_REGISTRY` dans docstring    | Commentaires d'explication de structure     |
 
 ### Outils de traçabilité
 
@@ -188,32 +195,33 @@ python E0_MOTEUR_AGENTIQUE/shadow_clone.py --action diff --clone-id SHADOW_20260
 `ITERATIONS_LOG.json` — log cumulatif de chaque run du pipeline.
 
 **Schema d'une itération :**
+
 ```json
 {
-  "iteration_id":        "ITER_0001",
-  "pipeline_id":         "local | <CI_PIPELINE_ID>",
-  "timestamp_start":     "ISO 8601",
-  "timestamp_end":       "ISO 8601",
-  "duration_seconds":    44.67,
-  "documents_count":     1,
-  "resume":              {"CONFORME": 0, "REJET": 1, "AVERTISSEMENT": 0, "ERREUR": 0},
-  "cout_total_eur":      0.00045,
-  "tokens_total_input":  800,
+  "iteration_id": "ITER_0001",
+  "pipeline_id": "local | <CI_PIPELINE_ID>",
+  "timestamp_start": "ISO 8601",
+  "timestamp_end": "ISO 8601",
+  "duration_seconds": 44.67,
+  "documents_count": 1,
+  "resume": { "CONFORME": 0, "REJET": 1, "AVERTISSEMENT": 0, "ERREUR": 0 },
+  "cout_total_eur": 0.00045,
+  "tokens_total_input": 800,
   "tokens_total_output": 250,
   "documents": [
     {
-      "fichier":            "facture_A102.md",
-      "type":               "facture_fournisseur",
-      "verdict":            "REJET",
-      "motif":              "TVA non déductible — valeur unitaire > 73€ TTC",
+      "fichier": "facture_A102.md",
+      "type": "facture_fournisseur",
+      "verdict": "REJET",
+      "motif": "TVA non déductible — valeur unitaire > 73€ TTC",
       "articles_appliques": ["CGI Art.236"],
-      "niveau_risque":      "ELEVE",
-      "action_erp":         "BLOQUER",
-      "llm":                "claude-sonnet-4-6",
-      "tokens_input":       800,
-      "tokens_output":      250,
-      "cout_eur":           0.00045,
-      "fichier_sorti":      "RAPPORT_facture_A102_20260323_142501.json"
+      "niveau_risque": "ELEVE",
+      "action_erp": "BLOQUER",
+      "llm": "claude-sonnet-4-6",
+      "tokens_input": 800,
+      "tokens_output": 250,
+      "cout_eur": 0.00045,
+      "fichier_sorti": "RAPPORT_facture_A102_20260323_142501.json"
     }
   ]
 }
@@ -226,16 +234,17 @@ python E0_MOTEUR_AGENTIQUE/shadow_clone.py --action diff --clone-id SHADOW_20260
 `E0_MOTEUR_AGENTIQUE/docs/DOC_INDEX.json` — registre versionné de chaque doc générée.
 
 **Schema d'une entrée DOC :**
+
 ```json
 {
-  "doc_id":               "DOC_0001",
-  "ergo_id":              "COMPLIANCE_AGENT",
-  "fichier_source":       "agent_compliance.py",
-  "fichier_doc":          "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
-  "sha256_source":        "a1b2c3d4",
-  "source_version":       "1.0.0",
-  "doc_revision":         1,
-  "premiere_generation":  "2026-02-23T14:36:22",
+  "doc_id": "DOC_0001",
+  "ergo_id": "COMPLIANCE_AGENT",
+  "fichier_source": "agent_compliance.py",
+  "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/COMPLIANCE_AGENT.md",
+  "sha256_source": "a1b2c3d4",
+  "source_version": "1.0.0",
+  "doc_revision": 1,
+  "premiere_generation": "2026-02-23T14:36:22",
   "derniere_mise_a_jour": "2026-02-23T14:36:22"
 }
 ```
@@ -256,6 +265,7 @@ python E0_MOTEUR_AGENTIQUE/shadow_clone.py --action diff --clone-id SHADOW_20260
 ```
 
 **Commandes :**
+
 ```bash
 # 1. Déposer PDF/XML dans input/
 # 2. Convertir en .md structuré
@@ -269,13 +279,14 @@ python E0_MOTEUR_AGENTIQUE/agent_compliance.py
 ## PIPELINE CI/CD — 4 STAGES
 
 ```yaml
-setup:   bootstrap → shadow_clone → kos_registrar → system_code_register
-detect:  detect_document_type → dotenv (DOCUMENT_TYPE, DOCUMENT_FILE, ...)
-audit:   agent_compliance → E4.1 (rejets) ou E4.2 (conformes)
-report:  publish_report → commentaire MR GitLab
+setup: bootstrap → shadow_clone → kos_registrar → system_code_register
+detect: detect_document_type → dotenv (DOCUMENT_TYPE, DOCUMENT_FILE, ...)
+audit: agent_compliance → E4.1 (rejets) ou E4.2 (conformes)
+report: publish_report → commentaire MR GitLab
 ```
 
 **Variables GitLab CI/CD à configurer (Settings → CI/CD → Variables) :**
+
 - `ANTHROPIC_API_KEY` : clé API Anthropic (masked, protected)
 - `GITLAB_TOKEN` : Personal Access Token avec scope `api` (masked)
 
@@ -292,10 +303,10 @@ report:  publish_report → commentaire MR GitLab
   "imputation_recommandee": {
     "compte_debit": "XXXXX",
     "compte_credit": "XXXXX",
-    "montant_ht": 0.00,
-    "tva_deductible": 0.00,
-    "tva_non_deductible": 0.00,
-    "montant_ttc": 0.00
+    "montant_ht": 0.0,
+    "tva_deductible": 0.0,
+    "tva_non_deductible": 0.0,
+    "montant_ttc": 0.0
   },
   "niveau_risque": "FAIBLE | MOYEN | ELEVE",
   "action_erp": "INJECTER | BLOQUER | REVUE_HUMAINE",
@@ -303,7 +314,7 @@ report:  publish_report → commentaire MR GitLab
     "llm": "claude-sonnet-4-6",
     "input_tokens": 0,
     "output_tokens": 0,
-    "cout_estime_eur": 0.00
+    "cout_estime_eur": 0.0
   }
 }
 ```
@@ -313,6 +324,7 @@ report:  publish_report → commentaire MR GitLab
 ## FORMAT NORME E1
 
 Chaque fichier `.md` dans `E1_CORPUS_LEGAL_ETAT/` doit avoir ce frontmatter :
+
 ```yaml
 ---
 type: norme_fiscale | norme_comptable | procedure
@@ -328,6 +340,7 @@ applicable_a: [cycle_achat, cycle_vente, ...]
 ## FORMAT DOCUMENT E3.1
 
 Chaque facture/note de frais dans `E3.1_Dropzone_Factures/` :
+
 ```yaml
 ---
 type: facture_fournisseur | note_de_frais | ecriture | bilan
@@ -346,15 +359,16 @@ montant_ttc: 0.00
 
 ## STACK TECHNIQUE
 
-| Composant | Tech |
-|---|---|
-| LLM principal | claude-sonnet-4-6 (Anthropic API) |
-| CI/CD | GitLab CI/CD |
-| Vector DB | ChromaDB + multilingual-e5-base (RAG E1/E2) |
-| Backend | FastAPI (post-hackathon) |
-| ERP output | JSON / CSV (Sage, EBP, Cegid, Pennylane) |
+| Composant     | Tech                                        |
+| ------------- | ------------------------------------------- |
+| LLM principal | claude-sonnet-4-6 (Anthropic API)           |
+| CI/CD         | GitLab CI/CD                                |
+| Vector DB     | ChromaDB + multilingual-e5-base (RAG E1/E2) |
+| Backend       | FastAPI (post-hackathon)                    |
+| ERP output    | JSON / CSV (Sage, EBP, Cegid, Pennylane)    |
 
 **Dépendances :**
+
 ```
 anthropic>=0.40.0
 chromadb>=0.5.0
@@ -386,12 +400,12 @@ fastapi>=0.115.0
 
 ## DEADLINES ET LIVRABLES
 
-| Date | Livrable |
-|---|---|
+| Date                        | Livrable                                            |
+| --------------------------- | --------------------------------------------------- |
 | **25 mars 2026, 14h00 EDT** | Soumission Devpost + repo GitLab public fonctionnel |
-| — | Pipeline CI/CD tournant sur au moins 1 cas de test |
-| — | Vidéo démo 2 minutes |
-| — | Description Devpost complète |
+| —                           | Pipeline CI/CD tournant sur au moins 1 cas de test  |
+| —                           | Vidéo démo 2 minutes                                |
+| —                           | Description Devpost complète                        |
 
 ---
 
@@ -404,5 +418,5 @@ Autodidacte MLOps · KOS builder depuis GPT-3
 
 ---
 
-*CLAUDE.md généré le 23 février 2026 — ERGO Capital / Adam*
-*Maintenu automatiquement par Claude Code entre les sessions*
+_CLAUDE.md généré le 23 février 2026 — ERGO Capital / Adam_
+_Maintenu automatiquement par Claude Code entre les sessions_

@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-02-25T13:41:57.405277",
+  "generated_at": "2026-02-26T17:52:42.239568",
   "generateur": "DOC_GENERATOR",
-  "total_docs": 10,
+  "total_docs": 11,
   "docs": [
     {
       "doc_id": "DOC_0001",
@@ -112,6 +112,17 @@
       "doc_revision": 1,
       "premiere_generation": "2026-02-25T13:41:57.389433",
       "derniere_mise_a_jour": "2026-02-25T13:41:57.389433"
+    },
+    {
+      "doc_id": "DOC_0011",
+      "ergo_id": "EXPORT_ERP",
+      "fichier_source": "export_erp.py",
+      "fichier_doc": "E0_MOTEUR_AGENTIQUE/docs/EXPORT_ERP.md",
+      "sha256_source": "1042ac12",
+      "source_version": "2.0.0",
+      "doc_revision": 1,
+      "premiere_generation": "2026-02-26T17:52:42.219410",
+      "derniere_mise_a_jour": "2026-02-26T17:52:42.219410"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "KOS_COMPTA_TAXONOMIE": {
-    "version": "1.3.0",
+    "version": "1.2.0",
     "date_creation": "2026-02-23",
     "auteur": "ERGO Capital",
     "statut": "ACTIF",
@@ -75,14 +75,6 @@
         "role": "Journal technique d'audit — toutes les analyses horodatées côté système",
         "contenu": "timestamp, document, verdict, LLM utilisé, coût tokens",
         "acces": "écriture automatique après chaque pipeline"
-      },
-      "export_erp.py": {
-        "role": "Transforme les PAYLOAD_*.json conformes (E4.2) en CSV d'écritures comptables importable dans ERP (CEGID)",
-        "contenu": "3 gardes de sécurité (JSON, intégrité comptable HT+TVA=TTC, archivage transactionnel). Supporte format verdict brut et ergo_pgi_export_v1.",
-        "acces": "exécutable",
-        "entrees": "E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/*.json",
-        "sorties": "E4_AUDIT_ET_ROUTAGE/E4.3_Imports_ERP/IMPORT_CEGID_*.csv",
-        "version": "2.0.0"
       }
     }
   },
@@ -253,19 +245,7 @@
         "role": "Fichiers validés et normalisés — prêts à injection dans l'ERP client",
         "format_sortie": "PAYLOAD_{id_document}_{timestamp}.json",
         "standard": "ergo_pgi_export_v1",
-        "compatibilite": ["Sage", "EBP", "Cegid", "QuickBooks", "Pennylane", "CSV universel"],
-        "sous_dossiers": {
-          "archive": {
-            "role": "JSONs déjà exportés par export_erp.py — archivage transactionnel post-CSV"
-          }
-        }
-      },
-      "E4_3_Imports_ERP": {
-        "role": "Fichiers CSV d'écritures comptables générés par export_erp.py — prêts à import ERP",
-        "format_sortie": "IMPORT_CEGID_{timestamp}.csv",
-        "colonnes": ["DATE", "JOURNAL", "COMPTE", "SENS", "MONTANT", "LIBELLE", "STATUT_KOS"],
-        "separateur": ";",
-        "encoding": "UTF-8"
+        "compatibilite": ["Sage", "EBP", "Cegid", "QuickBooks", "Pennylane", "CSV universel"]
       }
     }
   },

@@ -1,0 +1,84 @@
+{
+  "clone_id": "SHADOW_20260226_174725_0c28",
+  "timestamp": "2026-02-26T17:47:25.703646",
+  "label": "post-export_erp v2.0.0",
+  "auteur": "Gemini",
+  "pipeline_id": "",
+  "fichiers": {
+    "E0_MOTEUR_AGENTIQUE/agent_compliance.py": {
+      "statut": "CLONE",
+      "sha256": "ac36e08c159ed068",
+      "taille_bytes": 18931
+    },
+    "E0_MOTEUR_AGENTIQUE/detect_document_type.py": {
+      "statut": "CLONE",
+      "sha256": "cf510afeaeb3f39d",
+      "taille_bytes": 5829
+    },
+    "E0_MOTEUR_AGENTIQUE/publish_report.py": {
+      "statut": "CLONE",
+      "sha256": "4e20b45557f2fc8b",
+      "taille_bytes": 10544
+    },
+    "E0_MOTEUR_AGENTIQUE/export_erp.py": {
+      "statut": "CLONE",
+      "sha256": "1042ac126e074a9e",
+      "taille_bytes": 12154
+    },
+    "E0_MOTEUR_AGENTIQUE/ingest_kos.py": {
+      "statut": "CLONE",
+      "sha256": "94b90fa1a4cdc43b",
+      "taille_bytes": 7855
+    },
+    "E0_MOTEUR_AGENTIQUE/doc_generator.py": {
+      "statut": "CLONE",
+      "sha256": "bae0625c7e10c1cb",
+      "taille_bytes": 17951
+    },
+    "E0_MOTEUR_AGENTIQUE/pdf_extractor.py": {
+      "statut": "CLONE",
+      "sha256": "18b26536a6f6bbf0",
+      "taille_bytes": 10840
+    },
+    "E0_MOTEUR_AGENTIQUE/shadow_clone.py": {
+      "statut": "CLONE",
+      "sha256": "0b2685f590f6c130",
+      "taille_bytes": 10906
+    },
+    "E0_MOTEUR_AGENTIQUE/ergo_core_system.py": {
+      "statut": "CLONE",
+      "sha256": "cdd1f32f40910a98",
+      "taille_bytes": 5591
+    },
+    "E0_MOTEUR_AGENTIQUE/system_code_register.py": {
+      "statut": "CLONE",
+      "sha256": "fd1d70f54d27a7c4",
+      "taille_bytes": 5331
+    },
+    "E0_MOTEUR_AGENTIQUE/kos_registrar.py": {
+      "statut": "CLONE",
+      "sha256": "17ce95bcf69ec101",
+      "taille_bytes": 9714
+    },
+    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Taxonomie.json": {
+      "statut": "CLONE",
+      "sha256": "47d2d7739e3106b5",
+      "taille_bytes": 13849
+    },
+    "E0_MOTEUR_AGENTIQUE/kos/KOS_COMPTA_Agentique.json": {
+      "statut": "CLONE",
+      "sha256": "5fbfe800fe2a193c",
+      "taille_bytes": 7540
+    },
+    ".gitlab-ci.yml": {
+      "statut": "CLONE",
+      "sha256": "fa025c7828a0692b",
+      "taille_bytes": 5680
+    },
+    "requirements.txt": {
+      "statut": "CLONE",
+      "sha256": "c4a498acb12afa16",
+      "taille_bytes": 202
+    }
+  }
+}
