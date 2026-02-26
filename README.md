@@ -65,8 +65,7 @@
       ↓ GitLab CI/CD — 4 stages (detect → audit → route → report)
 
   **Main repository:**
-  [Public-repo-KOS_COMPTABILITE](https://github.com/SCP-User/Public-repo-KOS_
-  COMPTABILITE)
+  [Public-repo-KOS_COMPTABILITE](https://github.com/SCP-User/Public-repo-KOS_COMPTABILITE)
 
   ## Legal Rules Embedded (KOS)
 
