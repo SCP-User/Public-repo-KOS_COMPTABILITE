@@ -10,6 +10,7 @@ build/
 
 # ChromaDB
 chroma_db_storage/
+KOS_DB/
 
 # Secrets
 .env
@@ -25,9 +26,9 @@ secrets/
 .DS_Store
 Thumbs.db
 
-# Logs générés automatiquement (gardés en git pour la démo)
-# E0_MOTEUR_AGENTIQUE/ITERATIONS_LOG.json
-# E0_MOTEUR_AGENTIQUE/SYSTEM_LOG.json
+# Logs opérationnels — exclus pour éviter la fuite de données financières
+E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json
+E0_MOTEUR_AGENTIQUE/logs/SYSTEM_LOG.json
 
 # Cache pip
 .cache/

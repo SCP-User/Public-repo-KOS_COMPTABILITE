@@ -77,7 +77,7 @@ def sha256_fichier(chemin: Path) -> str:
         return "ABSENT"
     h = hashlib.sha256()
     h.update(chemin.read_bytes())
-    return h.hexdigest()[:16]
+    return h.hexdigest()[:32]
 
 
 def generer_clone_id() -> str:

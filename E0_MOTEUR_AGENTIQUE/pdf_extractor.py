@@ -121,7 +121,8 @@ def extraire_xml_facturx(xml_path: Path) -> dict:
     except ImportError:
         raise ImportError("pip install lxml")
     log.info(f"lxml Factur-X → {xml_path.name}")
-    tree = etree.parse(str(xml_path))
+    parser = etree.XMLParser(resolve_entities=False, no_network=True, load_dtd=False)
+    tree = etree.parse(str(xml_path), parser)
     root = tree.getroot()
     def strip_ns(tag):
         return re.sub(r'\{.*?\}', '', tag)
@@ -259,7 +260,15 @@ def log_system(fichier: str, action: str, detail: str):
 
 # ── PIPELINE ────────────────────────────────
 
+def _valider_chemin(chemin: Path) -> Path:
+    resolu = chemin.resolve()
+    if not str(resolu).startswith(str(BASE_DIR.resolve())):
+        raise ValueError(f"Chemin hors zone autorisée : {resolu}")
+    return resolu
+
+
 def traiter_fichier(source: Path, force_ocr: bool = False) -> Path:
+    source = _valider_chemin(source)
     if not source.exists():
         raise FileNotFoundError(f"Introuvable : {source}")
     log.info(f"═══ ETL START → {source.name} ═══")
@@ -281,7 +290,7 @@ def traiter_fichier(source: Path, force_ocr: bool = False) -> Path:
     return out
 
 def traiter_batch(dossier: Path = None, force_ocr: bool = False):
-    dossier = dossier or INPUT_DIR
+    dossier = _valider_chemin(dossier or INPUT_DIR)
     fichiers = []
     for ext in ["*.pdf", "*.xml", "*.ubl"]:
         fichiers.extend(dossier.glob(ext))

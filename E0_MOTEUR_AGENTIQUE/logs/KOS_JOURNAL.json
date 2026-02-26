@@ -468,6 +468,29 @@
     "ergo_ids_impactes": ["EXPORT_ERP"]
   },
   {
+    "id": "J_0033",
+    "timestamp": "2026-02-26T00:00:00",
+    "session": "Claude Code",
+    "type": "CORRECTION",
+    "statut": "DONE",
+    "sujet": "10 correctifs sécurité — analyse 2026-02-26",
+    "detail": "Application de 10 correctifs suite à l'analyse de sécurité complète du pipeline KOS_COMPTA. #1 XXE : lxml.etree.XMLParser durci (resolve_entities=False, no_network=True, load_dtd=False) dans pdf_extractor.py. #2 Prompt injection : instruction de cloisonnement ajoutée dans le system_prompt de analyser_avec_claude(). #3 CSV injection : fonction _sanitize_csv_field() ajoutée dans export_erp.py, appliquée sur libellé + comptes débit/crédit. #4 Path traversal : fonction _valider_chemin() ajoutée dans pdf_extractor.py, vérifie que tout chemin est relatif à BASE_DIR. #5 DoS financier : limite KOS_MAX_DOCUMENTS (défaut=20, configurable via var env) ajoutée dans agent_compliance.py. #6 Token CLI : --token retiré des args CLI de publish_report.py dans .gitlab-ci.yml, le token est lu directement via os.environ. #7 Logs sensibles : ITERATIONS_LOG.json et SYSTEM_LOG.json décommentés et actifs dans .gitignore. #8 YAML parser : remplacement du parser regex artisanal par python-frontmatter dans lire_facture(). #9 KOS_DB : ajout de KOS_DB/ dans .gitignore (ChromaDB). #10 SHA-256 : hash tronqué porté de 16 à 32 chars (128 bits) dans shadow_clone.py.",
+    "fichiers_impactes": [
+      "E0_MOTEUR_AGENTIQUE/pdf_extractor.py",
+      "E0_MOTEUR_AGENTIQUE/agent_compliance.py",
+      "E0_MOTEUR_AGENTIQUE/export_erp.py",
+      "E0_MOTEUR_AGENTIQUE/shadow_clone.py",
+      ".gitlab-ci.yml",
+      ".gitignore"
+    ],
+    "ergo_ids_impactes": [
+      "PDF_EXTRACTOR",
+      "COMPLIANCE_AGENT",
+      "EXPORT_ERP",
+      "SHADOW_CLONE"
+    ]
+  },
+  {
     "id": "J_0032",
     "timestamp": "2026-02-26T17:47:00",
     "session": "Gemini",

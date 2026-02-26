@@ -58,6 +58,25 @@ EXPORT_DIR = BASE_DIR / "E4_AUDIT_ET_ROUTAGE" / "E4.3_Imports_ERP"
 ARCHIVE_DIR = PAYLOADS_DIR / "archive"
 
 TOLERANCE_EUROS = 0.01
+_CSV_INJECTION_CHARS = ("=", "+", "-", "@", "\t", "\r")
+
+
+def _sanitize_csv_field(val: str) -> str:
+    """Neutralise les formules actives dans un champ CSV (CSV/Formula Injection).
+
+    Préfixe par une apostrophe tout champ dont le premier caractère pourrait
+    être interprété comme une formule par Excel ou LibreOffice Calc.
+
+    Args:
+        val: Valeur brute à sécuriser.
+
+    Returns:
+        Valeur sécurisée, préfixée par "'" si nécessaire.
+    """
+    val = str(val).strip()
+    if val and val[0] in _CSV_INJECTION_CHARS:
+        return f"'{val}"
+    return val
 
 
 def _extraire_depuis_ergo_pgi(data: dict, chemin_fichier: Path) -> dict | None:
@@ -266,13 +285,15 @@ def main() -> None:
                 continue
 
             date_jour = datetime.now().strftime("%d/%m/%Y")
-            libelle = f"Achat - {path.stem.replace('PAYLOAD_', '')}"
+            libelle = _sanitize_csv_field(f"Achat - {path.stem.replace('PAYLOAD_', '')}")
+            compte_debit  = _sanitize_csv_field(imputation.get("compte_debit", "62888"))
+            compte_credit = _sanitize_csv_field(imputation.get("compte_credit", "401"))
 
             if montant_ht:
                 writer.writerow([
                     date_jour,
                     "ACH",
-                    imputation.get("compte_debit", "62888"),
+                    compte_debit,
                     "D",
                     f"{montant_ht:.2f}",
                     libelle,
@@ -296,7 +317,7 @@ def main() -> None:
                 writer.writerow([
                     date_jour,
                     "ACH",
-                    imputation.get("compte_credit", "401"),
+                    compte_credit,
                     "C",
                     f"{montant_ttc:.2f}",
                     libelle,
