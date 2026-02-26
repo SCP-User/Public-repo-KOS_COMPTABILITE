@@ -426,10 +426,21 @@
     "timestamp": "2026-02-25T17:00:00",
     "session": "Claude Code",
     "type": "TACHE",
-    "statut": "TODO",
+    "statut": "DONE",
     "sujet": "Duo Flow GitLab Hackathon — wrapper agent_compliance dans le groupe officiel",
-    "detail": "Créer un fichier .yml GitLab Duo Flow dans le repo du groupe hackathon (https://gitlab.com/gitlab-ai-hackathon) qui wrappe le pipeline KOS_COMPTA existant. Trigger : @ai-kos-compliance mentionné dans une issue ou MR. Flow appelle agent_compliance.py → verdict JSON → commentaire automatique. Lire le template participant fourni dans le projet hackathon. Supprimer l'extension .template, remplacer les placeholders, commiter, créer un tag pour publication dans le catalogue public. Tester le trigger @ai- dans une issue. Prérequis : lire doc GitLab Duo Flows sur https://gitlab.devpost.com/resources",
+    "detail": "YAML agent.yml et flow.yml préparés par Claude Code. Règles KOS embedées dans system_prompt (CGI Art.289/271/236/278-0bis/39-1, PCG ANC 2014-03, Code Commerce Art.L123-14). Trigger : @ai-kos-compliance dans issue/MR. Toolset : get_issue, create_issue_note, read_file. README hackathon rédigé (pitch, architecture, table règles légales, stack). À déployer via Web IDE dans https://gitlab.com/gitlab-ai-hackathon/participants/34837699 — remplacer agent.yml.template et flow.yml.template, commiter, créer tag v1.0.0.",
     "fichiers_impactes": [],
-    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "PUBLISH_REPORT"]
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT"]
+  },
+  {
+    "id": "J_0029",
+    "timestamp": "2026-02-25T17:30:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Vidéo démo 3 min — script + enregistrement",
+    "detail": "Scénario : (1) dépôt facture champagne dans input/ → pdf_extractor.py --batch → .md Dropzone (2) mention @ai-kos-compliance dans issue GitLab → verdict REJET en commentaire (3) montrer RAPPORT JSON dans E4.1 avec articles CGI cités. Durée max 3 min. Upload YouTube ou Vimeo non listé. Mentionner explicitement l'intégration Anthropic Claude API pour le Bonus $10K.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
   }
 ]
