@@ -442,5 +442,16 @@
     "detail": "Scénario : (1) dépôt facture champagne dans input/ → pdf_extractor.py --batch → .md Dropzone (2) mention @ai-kos-compliance dans issue GitLab → verdict REJET en commentaire (3) montrer RAPPORT JSON dans E4.1 avec articles CGI cités. Durée max 3 min. Upload YouTube ou Vimeo non listé. Mentionner explicitement l'intégration Anthropic Claude API pour le Bonus $10K.",
     "fichiers_impactes": [],
     "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0030",
+    "timestamp": "2026-02-26T00:00:00",
+    "session": "Claude Code",
+    "type": "TACHE",
+    "statut": "TODO",
+    "sujet": "Module export_csv.py — PAYLOAD JSON → CSV import ERP comptable",
+    "detail": "Créer export_csv.py (ERGO_ID: EXPORT_CSV) : lit les PAYLOAD_*.json dans E4.2_Payloads_ERP/ et génère un fichier CSV d'écritures comptables importable directement dans les ERP du marché (Sage, EBP, Cegid, Pennylane). Colonnes cibles : date, journal, compte_débit, compte_crédit, libellé, montant_HT, TVA, montant_TTC, référence_facture, statut_conformité. Format universel + variantes par ERP. Extension future : lecture tickets CB (relevés bancaires DSP2 / OFX / ISO20022) → même pipeline ETL → journalisation automatique complète. Objectif final : zéro saisie manuelle du dépôt document à l'écriture ERP.",
+    "fichiers_impactes": [],
+    "ergo_ids_impactes": []
   }
 ]
