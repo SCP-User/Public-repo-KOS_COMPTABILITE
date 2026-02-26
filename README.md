@@ -85,108 +85,44 @@ Python · YAML · JSON · SQL · Markdown · ChromaDB · GraphDB · GitLab CI/CD
 
 ---
 
-## Cahier des Charges — Hackathon MVP
+## Project Status — Hackathon MVP
 
-> Toutes les tâches nécessaires pour une soumission viable et testable par le jury.  
 > **Deadline : 25 mars 2026 — 14h00 EDT**
+> Suivi détaillé dans `KOS_JOURNAL.json` (J_0001 → J_0032)
 
----
+### Components Delivered
 
-### BLOC 0 — GitLab Setup
+| Component              | Script                              | Status                                                                      |
+| ---------------------- | ----------------------------------- | --------------------------------------------------------------------------- |
+| **Agent Core**         | `agent_compliance.py`               | ✅ Pipeline 5 étapes — RAG + Claude API                                     |
+| **Document Detector**  | `detect_document_type.py`           | ✅ Identification automatique type document                                 |
+| **PDF Ingestion**      | `pdf_extractor.py`                  | ✅ ETL PDF natif + OCR + XML Factur-X                                       |
+| **RAG Vectoriel**      | `ingest_kos.py`                     | ✅ ChromaDB + multilingual-e5-base                                          |
+| **ERP Export**         | `export_erp.py`                     | ✅ JSON → CSV CEGID (3 gardes de sécurité)                                  |
+| **MR Reporter**        | `publish_report.py`                 | ✅ Commentaire automatique GitLab MR                                        |
+| **CI/CD Pipeline**     | `.gitlab-ci.yml`                    | ✅ 4 stages opérationnels                                                   |
+| **Constitutional KOS** | `Taxonomie.json` / `Agentique.json` | ✅ v1.3.0 — carte + règles agentiques                                       |
+| **Legal Corpus E1**    | 4 normes `.md`                      | ✅ TVA, PCG, CGI Art.289, cadeaux                                           |
+| **Test Cases**         | 5 factures/notes E3.1               | ✅ A102 REJET, B001 CONFORME, C001 REJET, D001 CONFORME, E001 AVERTISSEMENT |
 
-> Priorité : IMMÉDIATE
+### Traceability & Governance
 
-- [ ] Créer compte sur gitlab.com
-- [ ] Créer repo public `kos-compta`
-- [ ] Pousser l'arborescence E0→E4 complète
-- [ ] Vérifier que le repo est bien **public** (lisible sans compte)
-- [ ] Remplir formulaire accès GitLab AI Hackathon Group ([lien](https://forms.gle/EeCH2WWUewK3eGmVA))
-- [ ] Ajouter URL repo dans Devpost "Try it out"
+KOS_COMPTA intègre un système de traçabilité complet, indépendant de Git :
 
----
+| Système            | Fichier               | Rôle                                                                                                                                   |
+| ------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Shadow Clone**   | `shadow_clone.py`     | Snapshots immuables du code à chaque deploy — permet de rejouer n'importe quelle version (15 fichiers surveillés, SHA-256 par fichier) |
+| **KOS Journal**    | `KOS_JOURNAL.json`    | Journal constitutionnel horodaté de toutes les décisions et actions (J_0001 → J_0032)                                                  |
+| **ERGO Registry**  | `kos_registrar.py`    | Scan automatique des `ERGO_ID` dans chaque script — registre des composants actifs                                                     |
+| **Doc Versioning** | `doc_generator.py`    | Documentation `.md` auto-générée par composant, versionnée par SHA-256 (DOC_0001 → DOC_0011)                                           |
+| **Iteration Log**  | `ITERATIONS_LOG.json` | Dashboard Token Economy — coût LLM, tokens, durée par analyse                                                                          |
 
-### BLOC 1 — Agent Core (déjà produit, à valider)
+### Remaining
 
-> Priorité : HAUTE
-
-- [x] `agent_compliance.py` — pipeline 5 étapes (lire → RAG → Claude → router → log)
-- [x] `KOS_COMPTA_Taxonomie.json` — fichier constitutionnel
-- [x] `KOS_COMPTA_Agentique.json` — règles agentiques
-- [x] `KOS_COMPTA_Client_Log.json` — journal client
-- [x] `loi_tva_cadeaux.md` — première norme E1
-- [x] `brouillon_facture_A102.md` — cas de test
-- [x] Tester `agent_compliance.py` localement avec `ANTHROPIC_API_KEY`
-- [x] Vérifier que le rapport JSON sort bien dans E4.1
-- [x] Vérifier que `ITERATIONS_LOG.json` se crée correctement
-
----
-
-### BLOC 2 — Pipeline CI/CD GitLab
-
-> Priorité : HAUTE — c'est le cœur du hackathon
-
-- [x] Compléter `.gitlab-ci.yml` avec les 4 stages opérationnels
-- [x] Créer `detect_document_type.py` — identifie le type de document
-- [ ] Créer `load_kos.py` — charge les normes depuis E1+E2
-- [x] Créer `publish_report.py` — poste le verdict en commentaire MR
-- [ ] Tester un push → vérifier que le pipeline se déclenche sur GitLab
-- [ ] Tester une Merge Request → vérifier le commentaire automatique
-- [ ] Vérifier que le pipeline passe en moins de 2 minutes
-
----
-
-### BLOC 3 — Corpus Légal E1 (révision BTS = construction KOS)
-
-> Priorité : MOYENNE — minimum 3 normes pour la démo
-
-- [ ] `pcg_classes_1_a_4.md` — comptes capitaux, tiers, financiers
-- [ ] `pcg_classes_5_a_8.md` — comptes de stocks, charges, produits
-- [ ] `tva_regles_generales.md` — taux 5.5% / 10% / 20% + cas
-- [ ] `mentions_obligatoires_facture.md` — CGI Art.289
-- [ ] `cycle_achat_normes.md` — 5 étapes du cycle achat
-- [ ] `cycle_vente_normes.md` — 5 étapes du cycle vente
-- [ ] `normes_bilan_actif_passif.md` — ANC 2014-03
-- [ ] `principes_comptables_generaux.md` — Art. L123-14 + 9 principes
-
----
-
-### BLOC 4 — Tests & Cas Démo
-
-> Priorité : HAUTE — le jury doit voir le pipeline tourner
-
-- [x] Cas A102 — champagne 120€ TTC → REJET TVA (déjà fait)
-- [x] Cas B001 — facture conforme → CONFORME + payload ERP
-- [x] Cas C001 — facture sans numéro TVA → REJET mentions obligatoires
-- [x] Cas D001 — note de frais repas 18€ → CONFORME
-- [x] Cas E001 — note de frais repas 120€ sans justificatif → AVERTISSEMENT
-- [x] Vérifier que chaque cas produit le bon verdict + le bon fichier dans E4
-
----
-
-### BLOC 5 — Démo Vidéo 2 minutes
-
-> Priorité : HAUTE — livrable obligatoire Devpost
-
-- [ ] Script de démo écrit (ce qu'on dit + ce qu'on montre à chaque seconde)
-- [ ] Enregistrement écran : dépôt facture A102 → pipeline GitLab → verdict
-- [ ] Voix off ou sous-titres explicatifs
-- [ ] Upload YouTube / Vimeo (non-listé)
-- [ ] Lien vidéo ajouté sur Devpost
-
----
-
-### BLOC 6 — Devpost Finalisation
-
-> Priorité : HAUTE — deadline 25 mars
-
-- [x] Project name : KOS_COMPTA
-- [x] Elevator pitch
-- [x] About the project (Project Story)
-- [x] Built with
-- [ ] Try it out link (URL repo GitLab)
-- [ ] Vidéo démo uploadée
-- [ ] Image gallery (screenshot pipeline + rapport JSON)
-- [ ] Soumettre avant 25 mars 14h00 EDT (20h00 heure française)
+| Livrable                             | Statut                          |
+| ------------------------------------ | ------------------------------- |
+| Vidéo démo 2-3 min                   | 🔲 À enregistrer                |
+| Devpost : URL repo + vidéo + gallery | 🔲 À finaliser avant le 25 mars |
 
 ---
 
