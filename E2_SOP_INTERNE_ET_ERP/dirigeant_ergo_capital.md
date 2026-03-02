@@ -34,11 +34,15 @@ au prorata de l'utilisation professionnelle, conformément à CGI Art. 39.
 
 ### Règle interne de proratisation
 
-En l'absence de calcul précis de surface, appliquer un **forfait télétravail
-de 10€/mois** déductible sans justification détaillée (doctrine BOFiP —
-tolérance administrative pour les TNS en télétravail).
+La déduction est calculée au prorata de la surface professionnelle sur la
+surface totale du logement (CGI Art.39). Aucun forfait fixe applicable aux TNS
+sans justificatif — le fisc exige un calcul documenté.
 
-Au-delà, un justificatif de calcul (surface + jours) est requis.
+**Justificatif requis :** attestation surface bureau (m²) / surface totale (m²)
++ nombre de jours d'activité professionnelle à domicile sur l'exercice.
+
+> ⚠️ Tout verdict basé sur un prorata non documenté dans ce fichier doit
+> produire AVERTISSEMENT + REVUE_HUMAINE. Ne pas valider en CONFORME.
 
 ## Note pour l'agent
 
