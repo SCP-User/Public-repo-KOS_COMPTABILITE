@@ -13,9 +13,25 @@
 |---|---------|----------|----------------|
 | 1 | `facture_A102.md` | 5 coffrets champagne 120€/unit — cadeaux clients | **REJET** — CGI Art.236 |
 | 2 | `facture_B001.md` | Fournitures de bureau — facture complète | **CONFORME** |
-| 3 | `CVM-2025-012558_*.md` | Vraie facture PDF — clinique vétérinaire | **AVERTISSEMENT** |
+| 3 | Vraie facture EDF (à intégrer) | Facture d'électricité — usage mixte domicile/télétravail | **AVERTISSEMENT** — CGI Art.39 |
 
 > **Cas 3 = le moment PDF.** C'est sur cette vraie facture qu'on montre la transformation PDF → Markdown avant l'audit.
+
+---
+
+## NOTE COMPTABLE — Cas 3 : Facture d'électricité (usage mixte)
+
+> **Important à dire à l'écran / en voiceover — c'est un point comptable réel.**
+
+En comptabilité française, une facture d'électricité au domicile d'un dirigeant ou salarié en télétravail **n'est pas automatiquement déductible**. La règle (CGI Art.39) exige de **justifier et documenter la quote-part professionnelle** :
+
+- Quelle surface du logement est utilisée à titre professionnel ?
+- Combien de jours/mois en télétravail ?
+- La déduction se calcule au prorata : (surface bureau / surface totale) × (jours télétravail / 365)
+
+**Ce que le système fait :** il ne deviné pas si c'est "pro ou perso". Il lit la facture, croise avec CGI Art.271 (condition : "dépense affectée à l'activité taxée") et CGI Art.39, détecte l'absence de justification du prorata, et sort **AVERTISSEMENT + REVUE_HUMAINE** avec les corrections à apporter. C'est le comportement correct — ni rejet brutal ni validation aveugle.
+
+**Ce qu'il faut préciser à l'oral :** *"Le système ne joue pas au devin. Il applique la loi : sans justification du prorata professionnel, la TVA n'est pas déductible. C'est à l'humain de fournir le document de calcul — c'est ça la revue humaine."*
 
 ---
 

@@ -31,6 +31,7 @@ import glob
 import logging
 import re
 import sys
+import shutil
 from pathlib import Path
 from datetime import datetime
 from typing import Optional
@@ -461,6 +462,11 @@ def main() -> None:
             "verdict": verdict,
             "fichier_sorti": fichier_sorti,
         })
+
+        archive_dir = E3_DROPZONE / "archive"
+        archive_dir.mkdir(exist_ok=True)
+        shutil.move(str(chemin), str(archive_dir / chemin.name))
+        print(f"  ✓ Archivé       : archive/{chemin.name}\n")
 
     log_iteration(pipeline_id, timestamp_start, documents_resultats)
     print("  Pipeline terminé.\n")
