@@ -172,6 +172,32 @@ cat E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json | python -m json.tool | grep -E
 
 ---
 
+## NOTE — Limites du système : hallucination et RAG incomplet
+
+> **À mentionner à l'oral ou en slide — honnêteté intellectuelle = crédibilité technique.**
+
+Le système repose sur un RAG avec **4 normes E1 actuellement**. Si la norme applicable
+à un document n'est pas dans la base vectorielle, Claude raisonne avec ce qu'il a —
+et peut produire un verdict partiellement faux ou mal motivé.
+
+**Exemples concrets de risque :**
+- Taux de TVA réduit (médicaments vétérinaires → 10% au lieu de 20%) : détecté car la norme TVA générale est dans E1
+- Prorata télétravail dirigeant TNS : **non couvert par E1 actuel** → Claude extrapole depuis CGI Art.39 sans norme vectorisée spécifique → risque d'erreur ou de conseil inexact
+- Toute norme sectorielle absente de E1 (BTP, agriculture, export) → verdict générique peu fiable
+
+**Ce que le système fait pour limiter ce risque :**
+- Verdict par défaut en cas de doute : **AVERTISSEMENT + REVUE_HUMAINE** (jamais CONFORME par défaut)
+- Chaque verdict cite les articles appliqués → le reviewer humain peut vérifier la source
+- Si aucune norme trouvée → message explicite "règles générales PCG appliquées"
+
+**Ce qu'il faut dire à l'écran :**
+> *"L'IA peut se tromper si le corpus légal est incomplet. C'est pour ça que le système
+> ne valide jamais en aveugle — il cite ses sources, et l'humain a le dernier mot sur
+> les AVERTISSEMENT. Le RAG n'est pas une vérité absolue, c'est un premier filtre
+> structuré et traçable."*
+
+---
+
 ## Post-Production Checklist
 
 - [ ] Trim les silences entre commandes
