@@ -13,9 +13,11 @@ applicable_a: [note_de_frais, facture_fournisseur]
 | Champ | Valeur |
 |-------|--------|
 | Nom | Adam Pieri |
-| Fonction | Dirigeant — ERGO Capital |
-| Régime | Travailleur Non Salarié (TNS) |
+| Fonction | Président — ERGO Capital SASU |
+| SIRET société | 987 654 321 00015 |
+| Régime social | Assimilé salarié (Président de SASU) |
 | Mode de travail | Télétravail à domicile — activité principale |
+| Référence SOP complète | `ergo_capital_entreprise.md` |
 
 ## Politique Frais Domicile (Télétravail)
 
@@ -46,6 +48,7 @@ sans justificatif — le fisc exige un calcul documenté.
 
 ## Note pour l'agent
 
-Toute facture d'énergie (EDF, Engie, etc.) au nom du dirigeant Adam Pieri
-est à traiter comme frais professionnel partiel. Ne pas rejeter automatiquement.
-Appliquer : AVERTISSEMENT + demande de justification du prorata si montant > forfait 10€/mois.
+Toute facture d'énergie (EDF, Engie, ILEK, Enercoop, etc.) au nom du dirigeant Adam Pieri
+est à traiter comme frais professionnel partiel — ne pas rejeter automatiquement.
+Règle : AVERTISSEMENT + demande de justification du prorata surface (CGI art.39).
+Aucun forfait fixe — le prorata documenté est la seule base légale admise.

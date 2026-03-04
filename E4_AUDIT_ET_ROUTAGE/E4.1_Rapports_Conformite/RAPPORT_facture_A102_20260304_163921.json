@@ -1,0 +1,36 @@
+{
+  "document_source": "facture_A102.md",
+  "date_audit": "20260304_163921",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "La facture porte sur des coffrets de champagne destinés à des cadeaux clients. En application de l'article CGI Art. 236 et de l'article CGI Art. 206 IV, la TVA grevant les cadeaux est expressément exclue du droit à déduction, quelle que soit leur finalité professionnelle déclarée. La demande de déduction de 100,00 € sur le compte 44566 est donc illégale et doit être rejetée. La totalité du montant TTC (600,00 €) doit être imputée en charge.",
+    "articles_appliques": [
+      "CGI Art. 236 — TVA sur cadeaux (exclusion du droit à déduction)",
+      "CGI Art. 206 IV — Exclusions du droit à déduction",
+      "CGI Art. 271 — Droit à déduction (non applicable ici)",
+      "BOFiP TVA-DED — Doctrine fiscale déductibilité"
+    ],
+    "corrections_requises": [
+      "Supprimer la déduction de TVA de 100,00 € sur le compte 44566 : TVA non récupérable sur cadeaux clients",
+      "Comptabiliser le montant TTC intégral (600,00 €) en charge, TVA comprise, conformément à la règle de comptabilisation des achats à TVA non déductible",
+      "Imputer en compte 6234 (Cadeaux à la clientèle) ou 6238 selon plan comptable interne, pour le montant TTC de 600,00 €",
+      "Vérifier si la valeur unitaire TTC par cadeau (120,00 €) dépasse le seuil réglementaire de 73,00 € TTC par bénéficiaire et par an (seuil BOFiP 2024) — si oui, obligation de déclarer l'avantage en nature pour les bénéficiaires personnes morales assujetties"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "6234",
+      "compte_credit": "401",
+      "montant_ht": 500.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 100.0,
+      "montant_ttc": 600.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1438,
+      "output_tokens": 650,
+      "cout_estime_eur": 0.01406
+    }
+  }
+}

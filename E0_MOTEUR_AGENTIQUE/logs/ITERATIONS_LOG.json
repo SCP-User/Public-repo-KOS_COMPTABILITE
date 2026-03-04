@@ -310,5 +310,81 @@
         "fichier_sorti": "RAPPORT_FA_ILEK_domicile_Adam_20260302_235947_20260304_162720.json"
       }
     ]
+  },
+  {
+    "iteration_id": "ITER_0004",
+    "pipeline_id": "local",
+    "timestamp_start": "2026-03-04T16:38:56.272588",
+    "timestamp_end": "2026-03-04T16:39:48.737078",
+    "duration_seconds": 52.46,
+    "documents_count": 3,
+    "resume": {
+      "CONFORME": 1,
+      "REJET": 2,
+      "AVERTISSEMENT": 0,
+      "ERREUR": 0
+    },
+    "cout_total_eur": 0.04114,
+    "tokens_total_input": 5448,
+    "tokens_total_output": 1653,
+    "documents": [
+      {
+        "fichier": "facture_A102.md",
+        "type": "soumission_facture",
+        "verdict": "REJET",
+        "motif": "La facture porte sur des coffrets de champagne destinés à des cadeaux clients. En application de l'article CGI Art. 236 et de l'article CGI Art. 206 IV, la TVA grevant les cadeaux est expressément exclue du droit à déduction, quelle que soit leur finalité professionnelle déclarée. La demande de déduction de 100,00 € sur le compte 44566 est donc illégale et doit être rejetée. La totalité du montant TTC (600,00 €) doit être imputée en charge.",
+        "articles_appliques": [
+          "CGI Art. 236 — TVA sur cadeaux (exclusion du droit à déduction)",
+          "CGI Art. 206 IV — Exclusions du droit à déduction",
+          "CGI Art. 271 — Droit à déduction (non applicable ici)",
+          "BOFiP TVA-DED — Doctrine fiscale déductibilité"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1438,
+        "tokens_output": 650,
+        "cout_eur": 0.01406,
+        "fichier_sorti": "RAPPORT_facture_A102_20260304_163921.json"
+      },
+      {
+        "fichier": "facture_B001.md",
+        "type": "facture_fournisseur",
+        "verdict": "CONFORME",
+        "motif": "Facture de fournitures de bureau présentant toutes les mentions obligatoires requises par le CGI Art. 289 : numéro de facture, date, identité et numéros de TVA des deux parties, désignation et quantité des biens, prix unitaires HT, taux de TVA et montants HT/TTC. Le calcul arithmétique est cohérent (10×5 + 5×12 + 8×17,50 = 50+60+140 = 250 HT ; TVA 20% = 50 ; TTC = 300). Usage professionnel exclusif déclaré, TVA déductible à 100%. Imputation en compte 60225 Fournitures de bureau conforme au PCG.",
+        "articles_appliques": [
+          "CGI Art. 256",
+          "CGI Art. 271 (déductibilité TVA)",
+          "CGI Art. 289 (mentions obligatoires facture)",
+          "PCG ANC 2014-03 — Compte 60225 Fournitures de bureau",
+          "PCG ANC 2014-03 — Compte 44566 TVA déductible sur autres biens et services"
+        ],
+        "niveau_risque": "FAIBLE",
+        "action_erp": "INJECTER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 2167,
+        "tokens_output": 459,
+        "cout_eur": 0.01339,
+        "fichier_sorti": "PAYLOAD_facture_B001_20260304_163934.json"
+      },
+      {
+        "fichier": "FA_ILEK_domicile_Adam_20260302_235947.md",
+        "type": "facture_fournisseur",
+        "verdict": "REJET",
+        "motif": "Le document soumis n'est pas une facture commerciale mais une attestation de domicile (justificatif de domicile) émise par le fournisseur d'énergie ilek. Il ne comporte aucun montant, aucune ligne de facturation, aucune TVA, aucune date d'échéance, ni aucune mention obligatoire au sens de l'article 289 du CGI. Ce document est impropre à tout enregistrement comptable.",
+        "articles_appliques": [
+          "Article 289 CGI — mentions obligatoires des factures",
+          "Article 286 CGI — obligation de facturation",
+          "PCG ANC 2014-03 — classe 4 (comptes fournisseurs / TVA déductible)"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1843,
+        "tokens_output": 544,
+        "cout_eur": 0.01369,
+        "fichier_sorti": "RAPPORT_FA_ILEK_domicile_Adam_20260302_235947_20260304_163948.json"
+      }
+    ]
   }
 ]

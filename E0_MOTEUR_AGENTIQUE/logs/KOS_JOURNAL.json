@@ -655,5 +655,35 @@
       "E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json"
     ],
     "ergo_ids_impactes": ["COMPLIANCE_AGENT", "INGEST_KOS", "EXPORT_ERP"]
+  },
+  {
+    "id": "J_0039",
+    "timestamp": "2026-03-04T16:35:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "SOP Entreprise ERGO Capital SASU créé — contexte fiscal complet pour RAG",
+    "detail": "Création de E2_SOP_INTERNE_ET_ERP/ergo_capital_entreprise.md : SASU fictive réaliste (SIRET 987 654 321 00015, NAF 6920Z, TVA FR45 987 654 321, capital 1000€, Toulouse). Déclaration complète des charges déductibles (IT, bureau, télécoms, énergie prorata, formation, déplacements, repas < 80€, honoraires) et des dépenses non déductibles (animal personnel, cadeaux > 73€, documents non comptables, amendes). Règles TVA. Correction simultanée de dirigeant_ergo_capital.md : statut Président SASU (assimilé salarié) + suppression finale mention forfait 10€/mois. Re-ingest ChromaDB : 15 docs, 145 chunks.",
+    "fichiers_impactes": [
+      "E2_SOP_INTERNE_ET_ERP/ergo_capital_entreprise.md",
+      "E2_SOP_INTERNE_ET_ERP/dirigeant_ergo_capital.md"
+    ],
+    "ergo_ids_impactes": ["INGEST_KOS"]
+  },
+  {
+    "id": "J_0040",
+    "timestamp": "2026-03-04T16:41:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "ITER_0004 — Pipeline complet validé bout en bout avec SOP entreprise",
+    "detail": "3 documents audités avec SOP ERGO Capital SASU actif : (1) facture_A102 champagne 600€ → REJET ÉLEVÉ (CGI Art.236 cadeaux, TVA non déductible). (2) facture_B001 fournitures bureau 300€ → CONFORME FAIBLE (CGI Art.289 mentions OK, compte 60225 PCG). (3) FA_ILEK attestation → REJET ÉLEVÉ (document non comptable). export_erp.py : 1 payload B001 → IMPORT_CEGID_20260304_164106.csv (3 écritures : 60225/D 250€, 44566/D 50€, 401/C 300€). Pipeline complet validé.",
+    "fichiers_impactes": [
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_facture_A102_20260304_163921.json",
+      "E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/archive/PAYLOAD_facture_B001_20260304_163934.json",
+      "E4_AUDIT_ET_ROUTAGE/E4.3_Imports_ERP/IMPORT_CEGID_20260304_164106.csv",
+      "E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json"
+    ],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "EXPORT_ERP"]
   }
 ]
