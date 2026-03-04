@@ -626,5 +626,34 @@
       "VIDEO_SCRIPT.md"
     ],
     "ergo_ids_impactes": []
+  },
+  {
+    "id": "J_0037",
+    "timestamp": "2026-03-04T16:00:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "Intégration kos_compta.py E3.2 → suppression doublon, export_erp.py confirmé",
+    "detail": "kos_compta.py stocké temporairement dans E3.2_Requetes_Assistants était une version ancienne (sans CSV injection guard, sans format ergo_pgi_export_v1) de export_erp.py déjà présent en E0. Suppression de kos_compta.py et DOC_KOS_COMPTA.md de E3.2. EXPORT_ERP.md dans E0/docs/ est la documentation officielle auto-générée.",
+    "fichiers_impactes": [
+      "E3_INTERFACES_ACTEURS/E3.2_Requetes_Assistants/kos_compta.py",
+      "E3_INTERFACES_ACTEURS/E3.2_Requetes_Assistants/DOC_KOS_COMPTA.md"
+    ],
+    "ergo_ids_impactes": ["EXPORT_ERP"]
+  },
+  {
+    "id": "J_0038",
+    "timestamp": "2026-03-04T16:27:00",
+    "session": "Claude Code",
+    "type": "ACTION",
+    "statut": "DONE",
+    "sujet": "ITER_0003 — Audit CVM vétérinaire + ILEK attestation avec SOP Adam",
+    "detail": "Re-ingestion ChromaDB (132 chunks, incluant dirigeant_ergo_capital.md SOP E2). Audit de 2 documents réels : (1) Facture CVM-2025-012558 vétérinaire chat Eden → REJET ÉLEVÉ — dépense personnelle sans lien professionnel, pas de SIRET acheteur, CGI art.39-1 + art.271. (2) FA_ILEK attestation d'abonnement → REJET ÉLEVÉ — document non comptable (justificatif de domicile), zéro montant, CGI art.289. export_erp.py : aucun payload (les deux REJET → E4.1 uniquement). Dropzone proprement archivée.",
+    "fichiers_impactes": [
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260302_235947_20260304_162705.json",
+      "E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_FA_ILEK_domicile_Adam_20260302_235947_20260304_162720.json",
+      "E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json"
+    ],
+    "ergo_ids_impactes": ["COMPLIANCE_AGENT", "INGEST_KOS", "EXPORT_ERP"]
   }
 ]

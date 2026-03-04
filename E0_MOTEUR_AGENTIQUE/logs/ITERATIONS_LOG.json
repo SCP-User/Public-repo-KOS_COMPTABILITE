@@ -253,5 +253,62 @@
         "fichier_sorti": "RAPPORT_note_frais_E001_20260225_165436.json"
       }
     ]
+  },
+  {
+    "iteration_id": "ITER_0003",
+    "pipeline_id": "local",
+    "timestamp_start": "2026-03-04T16:26:34.882005",
+    "timestamp_end": "2026-03-04T16:27:20.058284",
+    "duration_seconds": 45.18,
+    "documents_count": 2,
+    "resume": {
+      "CONFORME": 0,
+      "REJET": 2,
+      "AVERTISSEMENT": 0,
+      "ERREUR": 0
+    },
+    "cout_total_eur": 0.0317,
+    "tokens_total_input": 4041,
+    "tokens_total_output": 1305,
+    "documents": [
+      {
+        "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260302_235947.md",
+        "type": "facture_fournisseur",
+        "verdict": "REJET",
+        "motif": "Facture de médicaments vétérinaires pour un animal de compagnie (chat 'Eden', Prednicortone et Credelio chat) émise au nom d'un particulier (M. PIERI Adam) sans lien démontrable avec une activité professionnelle ou d'entreprise. Le code NAF 7500Z correspond aux 'activités vétérinaires' côté fournisseur, mais la facture est établie à titre personnel (client particulier #53654641, adresse personnelle Toulouse). Les dépenses pour animaux de compagnie personnels ne sont pas déductibles fiscalement. De plus, la TVA à 20% appliquée sur des médicaments vétérinaires est à vérifier : des taux réduits peuvent s'appliquer selon la nature des médicaments. La facture présente également des anomalies de mise en forme (caractères doublés dans le récapitulatif TVA, suggérant une extraction PDF dégradée). Aucune mention d'un numéro SIRET/SIREN acheteur ni de raison sociale d'entreprise destinataire, rendant la déductibilité impossible.",
+        "articles_appliques": [
+          "CGI art. 39-1 (charges déductibles — lien avec l'exploitation)",
+          "CGI art. 271 (TVA déductible — affectation à des opérations imposables)",
+          "CGI art. 206 III (TVA — exclusions de déduction)",
+          "PCG ANC 2014-03 — classe 6 (charges d'exploitation)",
+          "BOFiP IS - BIC - CHG - 10-10 (conditions générales de déductibilité)"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 2198,
+        "tokens_output": 767,
+        "cout_eur": 0.0181,
+        "fichier_sorti": "RAPPORT_Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260302_235947_20260304_162705.json"
+      },
+      {
+        "fichier": "FA_ILEK_domicile_Adam_20260302_235947.md",
+        "type": "facture_fournisseur",
+        "verdict": "REJET",
+        "motif": "Le document soumis n'est pas une facture comptable mais une attestation de domicile émise par le fournisseur d'énergie ilek. Il ne comporte aucun montant facturable, aucune prestation identifiée, aucun montant HT, aucune TVA, aucune date d'échéance, et aucun numéro de facture. Ce document est sans valeur comptable et ne peut être intégré en comptabilité.",
+        "articles_appliques": [
+          "Article 289 du CGI — obligations de facturation (mentions obligatoires sur les factures)",
+          "Article L123-22 du Code de commerce — pièces justificatives comptables",
+          "PCG ANC 2014-03 — principe de justification des écritures comptables"
+        ],
+        "niveau_risque": "ELEVE",
+        "action_erp": "BLOQUER",
+        "llm": "claude-sonnet-4-6",
+        "tokens_input": 1843,
+        "tokens_output": 538,
+        "cout_eur": 0.0136,
+        "fichier_sorti": "RAPPORT_FA_ILEK_domicile_Adam_20260302_235947_20260304_162720.json"
+      }
+    ]
   }
 ]

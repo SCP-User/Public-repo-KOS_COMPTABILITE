@@ -1,0 +1,34 @@
+{
+  "document_source": "FA_ILEK_domicile_Adam_20260302_235947.md",
+  "date_audit": "20260304_162720",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "Le document soumis n'est pas une facture comptable mais une attestation de domicile émise par le fournisseur d'énergie ilek. Il ne comporte aucun montant facturable, aucune prestation identifiée, aucun montant HT, aucune TVA, aucune date d'échéance, et aucun numéro de facture. Ce document est sans valeur comptable et ne peut être intégré en comptabilité.",
+    "articles_appliques": [
+      "Article 289 du CGI — obligations de facturation (mentions obligatoires sur les factures)",
+      "Article L123-22 du Code de commerce — pièces justificatives comptables",
+      "PCG ANC 2014-03 — principe de justification des écritures comptables"
+    ],
+    "corrections_requises": [
+      "Obtenir une facture en bonne et due forme auprès d'ilek comportant : numéro de facture, date de facture, désignation de la prestation, montant HT, taux et montant de TVA, montant TTC, numéro de TVA intracommunautaire du prestataire",
+      "Ne pas imputer ce document en comptabilité — il s'agit uniquement d'un justificatif de domicile à usage administratif",
+      "Si ce document est soumis pour justifier des frais professionnels (énergie domicile / télétravail), vérifier l'éligibilité à la déductibilité fiscale et obtenir la facture correspondante"
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "N/A",
+      "compte_credit": "N/A",
+      "montant_ht": 0.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 0.0,
+      "montant_ttc": 0.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1843,
+      "output_tokens": 538,
+      "cout_estime_eur": 0.0136
+    }
+  }
+}

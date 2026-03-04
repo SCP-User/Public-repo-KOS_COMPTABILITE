@@ -199,6 +199,98 @@ E4_AUDIT_ET_ROUTAGE/
 
 ---
 
+## Mode Opératoire de Travail (MOT)
+
+> How an accounting team uses this pipeline daily.
+
+```
+RÉCEPTION D'UN DOCUMENT COMPTABLE
+────────────────────────────────────────────────────────────────────────
+Facture PDF / XML / note de frais reçue par email ou scan
+                          │
+                          ▼
+        ┌─────────────────────────────┐
+        │  ÉTAPE 1 — DÉPÔT           │
+        │  Copier le PDF dans        │
+        │  E3.1_Dropzone/input/      │
+        └──────────────┬──────────────┘
+                       │
+                       ▼
+        ┌─────────────────────────────┐
+        │  ÉTAPE 2 — CONVERSION ETL  │
+        │  python pdf_extractor.py   │
+        │  --batch                   │
+        │                            │
+        │  Output : facture_XXX.md   │
+        │  (frontmatter + tableau)   │
+        └──────────────┬──────────────┘
+                       │
+                       ▼
+        ┌─────────────────────────────┐
+        │  ÉTAPE 3 — AUDIT IA        │
+        │  python agent_compliance.py│
+        │                            │
+        │  Claude lit le document,   │
+        │  interroge le RAG (E1+E2), │
+        │  produit un verdict JSON   │
+        └──────────────┬──────────────┘
+                       │
+            ┌──────────┴──────────┐
+            │                     │
+            ▼                     ▼
+   ┌────────────────┐   ┌────────────────────┐
+   │  CONFORME      │   │  REJET /           │
+   │  ──────────    │   │  AVERTISSEMENT     │
+   │  E4.2 Payload  │   │  ──────────────    │
+   │  JSON → ERP    │   │  E4.1 Rapport      │
+   └───────┬────────┘   │  → Comptable       │
+           │            │    pour review     │
+           ▼            └────────────────────┘
+   ┌────────────────┐
+   │  ÉTAPE 4 — ERP │
+   │  python        │
+   │  export_erp.py │
+   │                │
+   │  Output :      │
+   │  IMPORT_CEGID  │
+   │  _YYYYMMDD.csv │
+   └───────┬────────┘
+           │
+           ▼
+   ┌────────────────────────────────┐
+   │  IMPORT DANS L'ERP            │
+   │  (CEGID / Sage / Pennylane)   │
+   │                               │
+   │  Écritures comptables prêtes  │
+   │  en partie double :           │
+   │  Débit charge + TVA / Crédit  │
+   │  fournisseur                  │
+   └────────────────────────────────┘
+```
+
+### Typical Verdicts by Document Type
+
+| Document | Expected Verdict | Reason |
+|----------|-----------------|--------|
+| Facture fournisseur conforme (SIRET, TVA, montants) | ✅ CONFORME | All mandatory fields present — CGI Art.289 |
+| Cadeau client > 73€ TTC | 🚫 REJET | Above deduction ceiling — CGI Art.236 |
+| Note de frais sans justificatif | ⚠️ AVERTISSEMENT | Missing proof — REVUE_HUMAINE required |
+| Document non comptable (attestation…) | 🚫 REJET | Not an invoice — CGI Art.289, L123-22 |
+| Dépense personnelle (animal, loisir…) | 🚫 REJET | No professional link — CGI Art.39-1 |
+| Facture énergie usage mixte (télétravail TNS) | ⚠️ AVERTISSEMENT | Pro/perso ratio required — CGI Art.39 |
+
+### Economics (per 1,000 documents/month)
+
+| Solution | Monthly Cost |
+|---------|-------------|
+| Human accounting assistant | €2,000 – €3,500 |
+| **KOS_COMPTA (Claude API)** | **~€20** |
+| Savings | **~€3,000 / month** |
+
+> Cost estimate: ~11 documents = €0.21 → ~€19/1,000 docs. First-pass triage only — human accountant reviews flagged documents.
+
+---
+
 ## Author
 
 **ERGO Capital — Adam**

@@ -231,5 +231,41 @@
     "detail": "methode=pdfplumber | output=Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260225_163737.md",
     "auteur": "pdf_extractor",
     "ergo_id": "ERGO_0027"
+  },
+  {
+    "iteration": 28,
+    "timestamp": "2026-03-02T23:59:23.717471",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "FAILED",
+    "detail": "Unable to get page count. Is poppler installed and in PATH?",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0028"
+  },
+  {
+    "iteration": 29,
+    "timestamp": "2026-03-02T23:59:23.745291",
+    "fichier": "FA_ILEK_domicile_Adam.pdf",
+    "action": "FAILED",
+    "detail": "Unable to get page count. Is poppler installed and in PATH?",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0029"
+  },
+  {
+    "iteration": 30,
+    "timestamp": "2026-03-02T23:59:47.217834",
+    "fichier": "Facture_-_CVM-2025-012558_-_M_PIERI_Adam.pdf",
+    "action": "EXTRACTED",
+    "detail": "methode=pdfplumber | output=Facture_-_CVM-2025-012558_-_M_PIERI_Adam_20260302_235947.md",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0030"
+  },
+  {
+    "iteration": 31,
+    "timestamp": "2026-03-02T23:59:47.513189",
+    "fichier": "FA_ILEK_domicile_Adam.pdf",
+    "action": "EXTRACTED",
+    "detail": "methode=pdfplumber | output=FA_ILEK_domicile_Adam_20260302_235947.md",
+    "auteur": "pdf_extractor",
+    "ergo_id": "ERGO_0031"
   }
 ]
