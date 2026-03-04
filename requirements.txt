@@ -1,12 +1,21 @@
+# KOS_COMPTA — Dépendances
+
+# Core — audit pipeline (local + CI)
 anthropic>=0.40.0
 chromadb>=0.5.0
-ollama>=0.3.0
-rich>=13.0.0
-pyyaml>=6.0.0
+sentence-transformers>=3.0.0
+langchain-text-splitters>=0.3.0
 python-frontmatter>=1.1.0
-fastapi>=0.115.0
+pyyaml>=6.0.0
+requests
+rich>=13.0.0
+
+# ETL PDF (local uniquement)
 pdfplumber>=0.11.0
 pytesseract>=0.3.10
 pdf2image>=1.17.0
 Pillow>=10.0.0
 lxml>=5.0.0
+
+# Post-hackathon
+# fastapi>=0.115.0

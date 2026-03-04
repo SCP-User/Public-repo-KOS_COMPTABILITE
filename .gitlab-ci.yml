@@ -13,30 +13,26 @@ variables:
   KOS_PATH: "$CI_PROJECT_DIR"
 
 cache:
+  key: pip-cache-v1
   paths:
     - .cache/pip
 
 # ─────────────────────────────────────────────
 # STAGE 1 — SETUP
-# Bootstrap + Shadow Clone (snapshot du code avant run)
 # ─────────────────────────────────────────────
 bootstrap:
   stage: setup
   image: python:3.11-slim
   script:
     - pip install --quiet --upgrade pip
-    - pip install --quiet anthropic python-frontmatter pyyaml requests
-    # Infrastructure
+    - pip install --quiet anthropic python-frontmatter pyyaml requests rich
     - python E0_MOTEUR_AGENTIQUE/ergo_core_system.py
-    # Shadow Clone — snapshot immuable du code au démarrage du pipeline
     - python E0_MOTEUR_AGENTIQUE/shadow_clone.py
         --action create
         --label "pipeline-start $CI_PIPELINE_ID"
         --auteur "gitlab-ci"
         --pipeline-id "$CI_PIPELINE_ID"
-    # Traçabilité
     - python E0_MOTEUR_AGENTIQUE/kos_registrar.py
-    # Documentation — génère/met à jour les .md versionnés + DOC_INDEX.json
     - python E0_MOTEUR_AGENTIQUE/doc_generator.py
     - python E0_MOTEUR_AGENTIQUE/system_code_register.py
         --fichier "ergo_core_system.py"
@@ -58,7 +54,6 @@ bootstrap:
 
 # ─────────────────────────────────────────────
 # STAGE 2 — DETECT
-# Identifie le type de document entrant dans E3.1
 # ─────────────────────────────────────────────
 detect_document:
   stage: detect
@@ -89,21 +84,22 @@ detect_document:
 
 # ─────────────────────────────────────────────
 # STAGE 3 — AUDIT
-# RAG sur E1+E2 + analyse via Claude API
+# Claude API — fallback substring (sans ChromaDB)
+# Variable requise : ANTHROPIC_API_KEY
 # ─────────────────────────────────────────────
 compliance_audit:
   stage: audit
   image: python:3.11-slim
   needs: [detect_document]
   script:
-    - pip install --quiet anthropic python-frontmatter pyyaml
+    - pip install --quiet anthropic python-frontmatter pyyaml requests rich
     - python E0_MOTEUR_AGENTIQUE/agent_compliance.py
     - python E0_MOTEUR_AGENTIQUE/system_code_register.py
         --fichier "agent_compliance.py"
         --action DEPLOYED
-        --detail "Audit compliance run $CI_PIPELINE_ID — verdict dans E4"
+        --detail "Audit compliance run $CI_PIPELINE_ID"
         --auteur "gitlab-ci"
-    - echo "=== RAPPORTS GÉNÉRÉS ==="
+    - echo "=== RAPPORTS ==="
     - ls E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/ 2>/dev/null || echo "(aucun rejet)"
     - ls E4_AUDIT_ET_ROUTAGE/E4.2_Payloads_ERP/ 2>/dev/null || echo "(aucun payload conforme)"
   artifacts:
@@ -120,7 +116,7 @@ compliance_audit:
 
 # ─────────────────────────────────────────────
 # STAGE 4 — REPORT
-# Publie le verdict en commentaire sur la Merge Request
+# Variable requise : GITLAB_TOKEN
 # ─────────────────────────────────────────────
 publish_report:
   stage: report
