@@ -7,41 +7,47 @@
 
 ---
 
-## Les 3 Factures de Démo
+## ÉTAT INITIAL À L'ÉCRAN (avant REC)
 
-| # | Fichier | Contexte | Verdict attendu |
-|---|---------|----------|----------------|
-| 1 | `facture_A102.md` | 5 coffrets champagne 120€/unit — cadeaux clients | **REJET** — CGI Art.236 |
-| 2 | `facture_B001.md` | Fournitures de bureau — facture complète | **CONFORME** |
-| 3 | Vraie facture EDF (à intégrer) | Facture d'électricité — usage mixte domicile/télétravail | **AVERTISSEMENT** — CGI Art.39 |
+```
+E3.1_Dropzone_Factures/
+├── input/
+│   ├── FA_ILEK_domicile_Adam.pdf          ← vrai PDF
+│   └── Facture_-_CVM-2025-012558_*.pdf    ← vrai PDF
+├── facture_A102.md                        ← champagne REJET
+└── facture_B001.md                        ← fournitures CONFORME
 
-> **Cas 3 = le moment PDF.** C'est sur cette vraie facture qu'on montre la transformation PDF → Markdown avant l'audit.
+archive/  ← vide
+```
 
----
-
-## NOTE COMPTABLE — Cas 3 : Facture d'électricité (usage mixte)
-
-> **Important à dire à l'écran / en voiceover — c'est un point comptable réel.**
-
-En comptabilité française, une facture d'électricité au domicile d'un dirigeant ou salarié en télétravail **n'est pas automatiquement déductible**. La règle (CGI Art.39) exige de **justifier et documenter la quote-part professionnelle** :
-
-- Quelle surface du logement est utilisée à titre professionnel ?
-- Combien de jours/mois en télétravail ?
-- La déduction se calcule au prorata : (surface bureau / surface totale) × (jours télétravail / 365)
-
-**Ce que le système fait :** il ne deviné pas si c'est "pro ou perso". Il lit la facture, croise avec CGI Art.271 (condition : "dépense affectée à l'activité taxée") et CGI Art.39, détecte l'absence de justification du prorata, et sort **AVERTISSEMENT + REVUE_HUMAINE** avec les corrections à apporter. C'est le comportement correct — ni rejet brutal ni validation aveugle.
-
-**Ce qu'il faut préciser à l'oral :** *"Le système ne joue pas au devin. Il applique la loi : sans justification du prorata professionnel, la TVA n'est pas déductible. C'est à l'humain de fournir le document de calcul — c'est ça la revue humaine."*
+> Terminal font ≥ 14pt · Dark theme · Fenêtre plein écran
 
 ---
 
-## Technical Setup (before recording)
+## Les 3 Cas de Démo
 
-- Terminal font size: **14pt minimum**
-- Theme: dark background
-- Pré-charger les 3 factures dans `E3.1_Dropzone_Factures/`
-- Avoir le PDF original de la facture vétérinaire dans `E3.1_Dropzone_Factures/input/`
-- Faire un run test complet avant l'enregistrement
+| # | Document | Nature | Verdict attendu | Accroche |
+|---|----------|--------|----------------|----------|
+| 1 | `facture_A102.md` | Champagne 120€/coffret × 5 | **REJET** CGI Art.236 | La TVA est non-déductible au-dessus de 73€ — même si c'est "pour les clients" |
+| 2 | `facture_B001.md` | Fournitures bureau | **CONFORME** → ERP | 3 écritures comptables générées, zéro humain |
+| 3 | `FA_ILEK_domicile_Adam.pdf` | Attestation d'abonnement (faux document) | **REJET** CGI Art.289 | Le système reconnaît que ce n'est pas une facture |
+
+> Cas 3 = moment clé : montrer que l'agent ne se laisse pas tromper par un document qui "ressemble" à quelque chose de comptable.
+
+---
+
+## Séquence Exacte (3 commandes)
+
+```bash
+# 1. ETL — PDF → Markdown structuré
+python E0_MOTEUR_AGENTIQUE/pdf_extractor.py --batch
+
+# 2. Audit IA — Claude + RAG ChromaDB
+python E0_MOTEUR_AGENTIQUE/agent_compliance.py
+
+# 3. Export ERP — CONFORME → CSV CEGID
+python E0_MOTEUR_AGENTIQUE/export_erp.py
+```
 
 ---
 
@@ -51,171 +57,238 @@ En comptabilité française, une facture d'électricité au domicile d'un dirige
 
 ### [0:00 — 0:20] HOOK (20 sec)
 
-**Screen:** Terminal — afficher le verdict REJET de facture_A102
+**Screen :** Terminal — afficher le verdict REJET de A102 déjà calculé.
 
 ```bash
 cat E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_facture_A102_*.json
 ```
 
-Montrer à l'écran :
-```
-"verdict": "REJET"
-"action_erp": "BLOQUER"
-"articles_appliques": ["CGI Art. 236 ..."]
+Zoomer sur :
+```json
+"verdict": "REJET",
+"action_erp": "BLOQUER",
+"articles_appliques": ["CGI Art. 236"]
 ```
 
 **Voiceover :**
-> "Voilà ce que KOS_COMPTA produit. Une facture entre. Le système l'analyse. Et il répond : REJET — avec les articles de loi cités, les corrections requises, et l'instruction ERP : BLOQUER. Aucune intervention humaine."
+> "Voilà ce que KOS_COMPTA produit. Une facture entre. Le système l'analyse. Et il répond : **REJET** — avec les articles de loi, les corrections requises, et l'instruction ERP : BLOQUER. Zéro intervention humaine."
+
+**Accroche à dire :**
+> *"Ce n'est pas de l'IA qui devine. C'est de l'IA qui lit le Code Général des Impôts."*
 
 ---
 
 ### [0:20 — 0:50] PROBLÈME (30 sec)
 
-**Screen :** Rester sur le terminal, scroller le rapport REJET.
+**Screen :** Rester sur terminal, scroller lentement le rapport.
 
 **Voiceover :**
-> "Le problème est réel. En France, le Code de Commerce Art. L123-14 impose que chaque document entrant en comptabilité respecte trois principes : régularité, sincérité, image fidèle. Aujourd'hui cet audit est manuel — et une facture non conforme qui passe, c'est un risque de redressement fiscal. KOS_COMPTA automatise cet audit, à chaque commit, dans le pipeline GitLab CI/CD."
+> "Le problème est réel. En France, une facture non conforme qui passe en comptabilité, c'est un risque de redressement fiscal. Le Code de Commerce Art. L123-14 impose : régularité, sincérité, image fidèle. Aujourd'hui, cet audit est manuel — un comptable vérifie à l'œil. KOS_COMPTA l'automatise, à chaque commit, dans le pipeline GitLab CI/CD."
+
+**Accroche à dire :**
+> *"Une facture de champagne à 120€ soumise comme 'cadeau client professionnel' — un comptable pressé valide. Claude, lui, connaît CGI Art.236 : 73€ maximum. REJET."*
 
 ---
 
 ### [0:50 — 1:20] ARCHITECTURE (30 sec)
 
-**Screen :** Arborescence du projet en terminal.
+**Screen :** Arborescence du projet.
 
 ```bash
-ls -la
+ls -1
 ls E0_MOTEUR_AGENTIQUE/
 ls E1_CORPUS_LEGAL_ETAT/
-ls E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/
 ```
 
 **Voiceover :**
-> "L'architecture est en 5 couches. E0 : le moteur agentique — les scripts Python. E1 : le corpus légal — CGI, PCG, BOFiP vectorisés dans ChromaDB. E3 : la dropzone des documents entrants. E4 : les sorties — rapports de rejet et payloads ERP. Le cerveau : Claude Sonnet 4.6. Le tribunal : le pipeline GitLab en 4 stages."
+> "L'architecture en 5 couches. E0 : le moteur — les scripts Python. E1 : le corpus légal — CGI, PCG, BOFiP vectorisés dans ChromaDB. E2 : les procédures internes de l'entreprise cliente. E3 : la dropzone des documents entrants. E4 : les sorties — rapports de rejet et payloads ERP. Cerveau : Claude Sonnet 4.6. Tribunal : pipeline GitLab 4 stages."
+
+**Accroche à dire :**
+> *"Le KOS est le législateur. Le LLM est l'exécuteur. Le CI/CD est le tribunal."*
 
 ---
 
-### [1:20 — 3:00] DEMO LIVE — 3 Factures (100 sec)
+### [1:20 — 3:00] DEMO LIVE (100 sec)
 
-#### 1. PDF → Markdown (20 sec)
-
-**Screen :** Montrer le PDF dans `input/`, lancer l'extraction.
+#### Commande 1 — ETL : PDF → Markdown (25 sec)
 
 ```bash
 ls E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/input/
 python E0_MOTEUR_AGENTIQUE/pdf_extractor.py --batch
-cat E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/Facture_-_CVM-2025-012558_*.md | head -30
 ```
 
 **Voiceover :**
-> "D'abord, un vrai PDF de facture — ici une facture de clinique vétérinaire. L'ETL le transforme automatiquement en Markdown structuré avec frontmatter YAML. C'est cette structure que Claude va auditer."
+> "Deux vrais PDFs dans le dossier input. L'ETL les transforme automatiquement en Markdown structuré — frontmatter YAML avec type, montants, date — prêt pour le LLM."
 
-#### 2. Charger le KOS (10 sec)
-
+Montrer la sortie du fichier converti :
 ```bash
-python E0_MOTEUR_AGENTIQUE/ingest_kos.py
+head -25 "E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/FA_ILEK_domicile_Adam_*.md"
 ```
 
-**Voiceover :**
-> "Les 4 normes légales sont vectorisées dans ChromaDB. Le RAG est prêt."
+---
 
-#### 3. Lancer l'audit sur les 3 factures (70 sec)
+#### Commande 2 — Audit IA (50 sec)
 
 ```bash
 python E0_MOTEUR_AGENTIQUE/agent_compliance.py
 ```
 
-**Voiceover (au fil des verdicts qui apparaissent) :**
+**Voiceover au fil des verdicts :**
 
-*(Facture A102)*
-> "Facture A102 — coffrets champagne, 120€ l'unité. Le seuil légal CGI Art.236 est 73€. REJET. La TVA 100€ n'est pas déductible. Action ERP : BLOQUER."
+*(A102 — champagne)*
+> "Facture A102. Coffrets champagne, 120€ l'unité. Seuil légal : 73€. **REJET**. La TVA 100€ est non déductible. ERP : BLOQUER."
 
-*(Facture B001)*
-> "Facture B001 — fournitures de bureau. Mentions obligatoires présentes, TVA 20% déductible, montants corrects. CONFORME. Payload ERP généré."
+*(B001 — fournitures)*
+> "Facture B001. Fournitures de bureau. Mentions obligatoires présentes, calcul cohérent, TVA 20% déductible. **CONFORME**. Payload ERP généré — compte 60225."
 
-*(Facture vétérinaire — vraie facture)*
-> "Facture clinique vétérinaire. Taux TVA 20% appliqué — mais les médicaments vétérinaires sont à 10% en France, CGI art.278-0 bis. Anomalie détectée. Plus : le document est au nom d'un particulier, lien professionnel non démontré. AVERTISSEMENT — REVUE HUMAINE requise."
+*(ILEK — attestation)*
+> "Document ILEK. Et là, le moment intéressant : c'est une attestation de domicile, pas une facture. Aucun montant, aucun numéro de facture. L'agent le détecte immédiatement — **REJET**, CGI Art.289, document non comptable."
+
+**Accroche à dire sur le cas ILEK :**
+> *"On aurait pu soumettre n'importe quel document PDF. Le système reconnaît que ce n'est pas une pièce comptable — et le bloque. C'est ça la robustesse."*
 
 ---
 
-### [3:00 — 3:30] ZOOM — Ce que Claude voit et l'œil humain manque (30 sec)
-
-**Screen :** Afficher le rapport REJET de A102 en entier.
+#### Commande 3 — Export ERP (25 sec)
 
 ```bash
-cat E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_facture_A102_*.json
+python E0_MOTEUR_AGENTIQUE/export_erp.py
+cat E4_AUDIT_ET_ROUTAGE/E4.3_Imports_ERP/IMPORT_CEGID_*.csv
+```
+
+Montrer le CSV :
+```
+DATE;JOURNAL;COMPTE;SENS;MONTANT;LIBELLE;STATUT_KOS
+04/03/2026;ACH;60225;D;250.00;Achat - facture_B001;CONFORME
+04/03/2026;ACH;44566;D;50.00;Achat - facture_B001;CONFORME
+04/03/2026;ACH;401;C;300.00;Achat - facture_B001;CONFORME
 ```
 
 **Voiceover :**
-> "Ce cas est parlant. La facture champagne a été soumise avec la mention 'usage professionnel — cadeaux clients'. Un comptable pressé pourrait valider. Claude, lui, croise avec CGI Art.236 : seuil 73€ TTC. 120€ > 73€. TVA non déductible. Rejet automatique avec corrections précises. C'est ça le KOS : la loi prime toujours sur l'intention déclarée."
+> "La facture CONFORME est automatiquement transformée en écriture comptable en partie double — prête à importer dans CEGID, Sage ou Pennylane. Trois lignes : la charge, la TVA déductible, le fournisseur. La règle HT + TVA = TTC est vérifiée mathématiquement avant tout export."
+
+**Accroche à dire :**
+> *"De la dropzone au fichier ERP : zéro clic humain pour les documents conformes."*
+
+---
+
+### [3:00 — 3:30] ZOOM — Ce que l'œil humain manque (30 sec)
+
+**Screen :** Rapport REJET A102 en entier.
+
+```bash
+cat E4_AUDIT_ET_ROUTAGE/E4.1_Rapports_Conformite/RAPPORT_facture_A102_*.json | python -m json.tool
+```
+
+**Voiceover :**
+> "Ce cas est parlant. La facture champagne était présentée comme 'cadeaux clients professionnels'. Un comptable pressé pourrait valider. Claude, lui, connaît CGI Art.236 : 73€ TTC maximum par bénéficiaire et par an. 120€ > 73€. REJET avec corrections précises. La loi prime toujours sur l'intention déclarée."
 
 ---
 
 ### [3:30 — 4:00] ÉCONOMIE (30 sec)
 
-**Screen :** `ITERATIONS_LOG.json` — les chiffres réels.
+**Screen :** ITERATIONS_LOG — chiffres réels.
 
 ```bash
-cat E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json | python -m json.tool | grep -E "documents_count|cout_total_eur"
+python -c "
+import json
+log = json.load(open('E0_MOTEUR_AGENTIQUE/logs/ITERATIONS_LOG.json'))
+total_docs = sum(i['documents_count'] for i in log)
+total_cost = sum(i['cout_total_eur'] for i in log)
+print(f'{total_docs} documents — coût total : {total_cost:.4f} EUR')
+print(f'Soit {total_cost/total_docs*100:.2f} centimes/doc')
+"
 ```
 
 **Voiceover :**
-> "11 documents audités. Coût LLM total : 21 centimes. Soit environ 2 centimes par facture. À 1 000 factures par mois : 19€ de coût LLM. Un assistant comptable en France : 2 000 à 3 500€ par mois. À partir de 500 factures par mois, KOS_COMPTA est moins cher qu'une heure de prestation comptable — et il tourne 24h/24, cite les articles de loi, et ne fait jamais d'erreur de fatigue."
+> "13 documents audités. Coût LLM total : 21 centimes. 2 centimes par facture. À 1 000 documents par mois : moins de 20€. Un assistant comptable en France : 2 000 à 3 500€ par mois. À partir de 500 factures, KOS_COMPTA est moins cher qu'une heure de prestation — et il tourne 24h/24, cite les articles, et ne fait jamais d'erreur de fatigue."
 
----
-
-### [3:50 — 4:00] CLÔTURE (10 sec)
+**Accroche finale :**
+> *"L'IA ne remplace pas le comptable. Elle lui supprime le travail répétitif — pour qu'il se concentre sur les cas complexes que la machine a marqués AVERTISSEMENT."*
 
 **Screen :** Laisser le terminal avec les verdicts visibles.
 
-**Voiceover :**
-> "Claude API est le juge. Le KOS est la loi. Le CI/CD est le tribunal. Aucun document non conforme n'entre en comptabilité."
+---
+
+## NOTE — Limites du système (honnêteté intellectuelle)
+
+> Mentionner brièvement — ça renforce la crédibilité technique.
+
+Avec 4 normes E1 actuellement dans ChromaDB, si la norme applicable n'est pas vectorisée, Claude extrapole — et peut produire un verdict partiellement incorrect.
+
+**Garde-fou système :** AVERTISSEMENT par défaut si doute, jamais CONFORME en aveugle. Chaque verdict cite les articles → le reviewer humain vérifie la source.
+
+**Ce qu'il faut dire :**
+> *"Le RAG n'est pas une vérité absolue. C'est un premier filtre structuré et traçable. L'humain a toujours le dernier mot sur les AVERTISSEMENT."*
 
 ---
 
-## NOTE — Limites du système : hallucination et RAG incomplet
+## POUR S'ENTRAÎNER — Compta expliquée aux devs
 
-> **À mentionner à l'oral ou en slide — honnêteté intellectuelle = crédibilité technique.**
+> Ce que tu dois pouvoir expliquer simplement à un jury de devs/DevOps.
 
-Le système repose sur un RAG avec **4 normes E1 actuellement**. Si la norme applicable
-à un document n'est pas dans la base vectorielle, Claude raisonne avec ce qu'il a —
-et peut produire un verdict partiellement faux ou mal motivé.
+### 1. La partie double
+Chaque opération = un débit + un crédit. Toujours équilibré.
+**Pour un dev :** c'est comme un commit atomique en DB — tu ne peux pas écrire sur un compte sans contre-passer sur un autre.
+```
+Débit  60225 (Charge fournitures)  250€
+Débit  44566 (TVA déductible)       50€
+──────────────────────────────────────
+Crédit   401 (Fournisseur)         300€   ← HT + TVA = TTC ✓
+```
 
-**Exemples concrets de risque :**
-- Taux de TVA réduit (médicaments vétérinaires → 10% au lieu de 20%) : détecté car la norme TVA générale est dans E1
-- Prorata télétravail dirigeant TNS : **non couvert par E1 actuel** → Claude extrapole depuis CGI Art.39 sans norme vectorisée spécifique → risque d'erreur ou de conseil inexact
-- Toute norme sectorielle absente de E1 (BTP, agriculture, export) → verdict générique peu fiable
+### 2. Le PCG — Plan Comptable Général
+C'est le namespace officiel des comptes comptables français.
+- **Classe 4** → Tiers (fournisseurs = 401, clients = 411, TVA = 44566)
+- **Classe 6** → Charges (fournitures 60225, téléphone 6261, honoraires 6221)
+- **Classe 7** → Produits (ventes, prestations)
+**Pour un dev :** c'est une enum obligatoire définie par l'État, version 2025. L'agent recommande le bon compte PCG dans chaque verdict.
 
-**Ce que le système fait pour limiter ce risque :**
-- Verdict par défaut en cas de doute : **AVERTISSEMENT + REVUE_HUMAINE** (jamais CONFORME par défaut)
-- Chaque verdict cite les articles appliqués → le reviewer humain peut vérifier la source
-- Si aucune norme trouvée → message explicite "règles générales PCG appliquées"
+### 3. La TVA déductible
+Quand ton entreprise achète quelque chose pour son activité, elle peut récupérer la TVA qu'elle a payée — à condition que la dépense soit "affectée à des opérations taxées" (CGI Art.271).
+**Si la dépense est personnelle → TVA non déductible.**
+**Si le cadeau dépasse 73€ → TVA non déductible** (CGI Art.236).
+**Pour un dev :** c'est un flag booléen sur chaque dépense. KOS_COMPTA le calcule.
 
-**Ce qu'il faut dire à l'écran :**
-> *"L'IA peut se tromper si le corpus légal est incomplet. C'est pour ça que le système
-> ne valide jamais en aveugle — il cite ses sources, et l'humain a le dernier mot sur
-> les AVERTISSEMENT. Le RAG n'est pas une vérité absolue, c'est un premier filtre
-> structuré et traçable."*
+### 4. Les mentions obligatoires (CGI Art.289)
+Une facture sans ces champs = pièce comptable invalide :
+- Numéro de facture (séquentiel, non réutilisable)
+- Date d'émission
+- SIRET/numéro TVA du vendeur ET de l'acheteur
+- Désignation + quantité des biens/services
+- Prix HT, taux TVA, montant TVA, montant TTC
+**Pour un dev :** c'est un schéma de validation avec des champs requis. Le système vérifie chaque champ.
+
+### 5. REJET vs AVERTISSEMENT vs CONFORME
+- **CONFORME** = toutes les règles passent → injection ERP automatique
+- **AVERTISSEMENT** = règle ambiguë, information manquante → revue humaine requise
+- **REJET** = violation légale claire → blocage ERP, rapport motivé
+**Pour un dev :** c'est un enum de statut de validation, avec un circuit de routage différent pour chaque valeur.
+
+### 6. Accroche pour expliquer l'intérêt à un dev
+> "Imagine que ton CI/CD empêche le merge si une dépense viole le Code des Impôts. C'est exactement ce que fait KOS_COMPTA — mais pour la comptabilité de l'entreprise."
 
 ---
 
 ## Post-Production Checklist
 
-- [ ] Trim les silences entre commandes
-- [ ] Title card au début : "KOS_COMPTA — GitLab AI Hackathon 2026"
+- [ ] Trim les silences entre commandes (> 2 sec)
+- [ ] Title card : "KOS_COMPTA — GitLab AI Hackathon 2026"
+- [ ] Zoom x1.2 sur les verdicts JSON
 - [ ] Export : 1080p, MP4
-- [ ] Upload YouTube (non-listé) ou Vimeo
-- [ ] Lien dans la soumission Devpost
+- [ ] Upload YouTube (non-listé) ou Vimeo → lien Devpost
 
 ---
 
 ## Messages clés pour les juges
 
 1. **Ça tourne vraiment** — terminal live, pas de mock
-2. **Claude API = moteur de conformité** — chaque verdict cite les articles que Claude a identifiés via RAG
-3. **Vrai PDF traité** — pas que du Markdown manuel
+2. **Claude API = moteur de conformité légale** — verdict cité avec articles de loi via RAG
+3. **Vrai PDF traité** — ETL inclus dans la démo
 4. **Vrai droit français** — CGI, PCG, BOFiP, ANC 2014-03
-5. **Économie réelle** — 2 centimes/doc vs 2000€/mois d'assistant
+5. **Pipeline complet** — PDF → md → audit → ERP CSV en 3 commandes
+6. **Économie réelle** — ~2 centimes/doc vs 2 000€/mois d'assistant
 
 ---
 
-*Script mis à jour le 2 mars 2026 — ERGO Capital / Adam*
+*Script mis à jour le 4 mars 2026 — ERGO Capital / Adam*
