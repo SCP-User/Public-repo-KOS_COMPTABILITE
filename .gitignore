@@ -39,3 +39,6 @@ E3_INTERFACES_ACTEURS/E3.1_Dropzone_Factures/input/*.xml
 RAPPORT_*_CVM*
 RAPPORT_*_ILEK*
 RAPPORT_*_Adam*
+
+# Claude Code
+.claude/

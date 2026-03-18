@@ -1,0 +1,36 @@
+{
+  "document_source": "facture_A102.md",
+  "date_audit": "20260318_183739",
+  "verdict": {
+    "verdict": "REJET",
+    "motif": "La facture porte sur des coffrets de champagne destinés à des cadeaux clients. En application de CGI Art. 236 et BOFiP TVA-DED, la TVA sur les cadeaux est exclue du droit à déduction, quelle que soit leur finalité professionnelle déclarée. La TVA de 100,00 € n'est pas récupérable et doit être incorporée dans le coût de la charge.",
+    "articles_appliques": [
+      "CGI Art. 236 — TVA sur cadeaux : exclusion du droit à déduction",
+      "CGI Art. 271 — Droit à déduction (non applicable ici)",
+      "CGI Art. 206 IV — Exclusions du droit à déduction",
+      "BOFiP TVA-DED — Doctrine fiscale déductibilité"
+    ],
+    "corrections_requises": [
+      "Ne pas imputer la TVA de 100,00 € sur le compte 44566 (TVA déductible sur autres biens et services) : cette déduction est interdite.",
+      "Comptabiliser le montant TTC intégral (600,00 €) en charge, la TVA étant non récupérable et incorporée au coût.",
+      "Utiliser le compte de charge approprié pour cadeaux clients (ex. 6234 — Cadeaux à la clientèle) pour le montant TTC complet.",
+      "Vérifier si la TVA collectée est applicable sur la remise de cadeaux (livraison à soi-même) selon CGI Art. 257 si la valeur unitaire TTC dépasse 73 € par bénéficiaire et par an — ici PU TTC = 120 € > 73 € : risque de TVA collectée à déclarer sur chaque coffret remis."
+    ],
+    "imputation_recommandee": {
+      "compte_debit": "6234",
+      "compte_credit": "401",
+      "montant_ht": 500.0,
+      "tva_deductible": 0.0,
+      "tva_non_deductible": 100.0,
+      "montant_ttc": 600.0
+    },
+    "niveau_risque": "ELEVE",
+    "action_erp": "BLOQUER",
+    "_meta": {
+      "llm": "claude-sonnet-4-6",
+      "input_tokens": 1438,
+      "output_tokens": 608,
+      "cout_estime_eur": 0.01343
+    }
+  }
+}
